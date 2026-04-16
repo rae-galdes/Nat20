@@ -8,42 +8,74 @@
   --cr:#8b1a1a;--crl:#b52828;--ink:#f0e8d8;--im:#a89878;--if:#6b5c45;
   --bg:rgba(201,168,76,0.3);--bgb:rgba(201,168,76,0.6);
 }
-body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink);margin:0;padding:0;}
-.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--p);}
 
-.header{text-align:center;padding:20px 16px 14px;border-bottom:1px solid var(--bg);position:relative;}
-.header::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(to right,transparent,var(--gd),transparent);}
-.h-title{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--gl);letter-spacing:0.06em;margin-bottom:2px;}
-.h-sub{font-family:'EB Garamond',serif;font-size:12px;color:var(--im);font-style:italic;}
+body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink);margin:0;}
 
+.app{background:var(--p);min-height:100vh;}
+
+/* ── DESKTOP LAYOUT ── */
+.desktop-shell{display:none;height:100vh;overflow:hidden;}
+.ds-left{width:280px;flex-shrink:0;border-right:1px solid var(--bg);display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.ds-main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.ds-top{padding:20px 24px 16px;border-bottom:1px solid var(--bg);flex-shrink:0;}
+.ds-title{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:700;color:var(--gl);letter-spacing:0.06em;margin-bottom:2px;}
+.ds-sub{font-family:'EB Garamond',serif;font-size:13px;color:var(--im);font-style:italic;}
+.ds-currency{padding:14px 16px;border-bottom:1px solid var(--bg);flex-shrink:0;}
+.cur-label-sm{font-family:'Cinzel',serif;font-size:9px;color:var(--gd);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+.cur-list{display:flex;flex-direction:column;gap:4px;}
+.cur-row{font-family:'EB Garamond',serif;font-size:13px;color:var(--im);display:flex;align-items:center;gap:6px;}
+.cur-name{color:var(--gl);font-family:'Cinzel',serif;font-size:11px;font-weight:600;min-width:90px;}
+.ds-cats{padding:14px 16px;flex:1;overflow-y:auto;}
+.ds-cats::-webkit-scrollbar{width:3px;}
+.ds-cats::-webkit-scrollbar-thumb{background:var(--gd);}
+.cat-list-btn{width:100%;text-align:left;padding:8px 12px;font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--im);background:none;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.15s;-webkit-tap-highlight-color:transparent;margin-bottom:2px;}
+.cat-list-btn:hover{background:var(--pm);color:var(--gl);}
+.cat-list-btn.active{background:var(--gg);border:1px solid var(--bg);color:var(--gl);}
+.ds-content{flex:1;display:flex;gap:0;overflow:hidden;}
+.ds-search-panel{width:320px;flex-shrink:0;border-right:1px solid var(--bg);display:flex;flex-direction:column;overflow:hidden;}
+.ds-search-head{padding:16px 20px 12px;border-bottom:1px solid var(--bg);flex-shrink:0;}
+.ds-search-input{width:100%;padding:10px 14px;font-family:'EB Garamond',serif;font-size:15px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;}
+.ds-search-input::placeholder{color:var(--if);font-style:italic;}
+.ds-search-input:focus{border-color:var(--gold);}
+.ds-results-list{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gd) var(--pm);}
+.ds-drop-item{padding:10px 20px;font-family:'EB Garamond',serif;font-size:14px;cursor:pointer;color:var(--im);border-bottom:1px solid rgba(201,168,76,0.08);display:flex;justify-content:space-between;align-items:center;gap:8px;transition:background 0.1s;}
+.ds-drop-item:hover,.ds-drop-item.sel{background:var(--ph);color:var(--ink);}
+.ds-drop-item .dn{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ds-drop-item .dm{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.ds-detail-panel{flex:1;overflow-y:auto;padding:24px;scrollbar-width:thin;scrollbar-color:var(--gd) var(--pm);}
+.ds-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--if);font-style:italic;font-size:16px;text-align:center;padding:40px;}
+
+/* ── MOBILE LAYOUT ── */
+.mobile-shell{display:block;}
+.mob-header{text-align:center;padding:18px 16px 14px;border-bottom:1px solid var(--bg);position:relative;}
+.mob-header::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(to right,transparent,var(--gd),transparent);}
+.mob-title{font-family:'Cinzel Decorative',serif;font-size:19px;font-weight:700;color:var(--gl);letter-spacing:0.06em;margin-bottom:2px;}
+.mob-sub{font-family:'EB Garamond',serif;font-size:12px;color:var(--im);font-style:italic;}
 .currency-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:10px 14px;border-bottom:1px solid var(--bg);}
 .cur-chip{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:5px 8px;font-family:'Cinzel',serif;font-size:10px;color:var(--im);letter-spacing:0.03em;display:flex;align-items:center;gap:5px;}
 .cur-chip:last-child{grid-column:1/-1;}
-.cur-label{color:var(--gl);font-weight:600;}
-
-.body{padding:14px;}
-
-.sec-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--gd);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;}
-
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:16px;}
-.cat-btn{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:8px 6px;font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);cursor:pointer;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.2s;-webkit-tap-highlight-color:transparent;text-align:center;line-height:1.3;}
+.cname{color:var(--gl);font-weight:600;}
+.mob-body{padding:14px;}
+.cat-wrap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:16px;}
+.cat-btn{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:8px 6px;font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);cursor:pointer;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.15s;-webkit-tap-highlight-color:transparent;text-align:center;line-height:1.3;}
 .cat-btn.active{background:var(--gg);border-color:var(--gold);color:var(--gl);}
 .cat-btn:active{transform:scale(0.96);}
 
-.search-wrap{position:relative;margin-bottom:16px;}
+/* ── SHARED COMPONENTS ── */
+.sec-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--gd);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;}
+.search-wrap{position:relative;margin-bottom:14px;}
 .search-input{width:100%;padding:12px 16px;font-family:'EB Garamond',serif;font-size:16px;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--ink);outline:none;-webkit-appearance:none;}
 .search-input::placeholder{color:var(--if);font-style:italic;}
 .search-input:focus{border-color:var(--gold);}
-
-.dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--pc);border:1px solid var(--bg);border-radius:8px;max-height:280px;overflow-y:auto;z-index:20;display:none;scrollbar-width:thin;scrollbar-color:var(--gd) var(--pm);}
+.dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--pc);border:1px solid var(--bg);border-radius:8px;max-height:260px;overflow-y:auto;z-index:20;display:none;}
 .dropdown.open{display:block;}
-.drop-item{padding:11px 16px;font-family:'EB Garamond',serif;font-size:15px;cursor:pointer;color:var(--im);border-bottom:1px solid rgba(201,168,76,0.08);display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-tap-highlight-color:transparent;}
+.drop-item{padding:10px 16px;font-family:'EB Garamond',serif;font-size:15px;cursor:pointer;color:var(--im);border-bottom:1px solid rgba(201,168,76,0.08);display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-tap-highlight-color:transparent;}
 .drop-item:last-child{border-bottom:none;}
 .drop-item:active{background:var(--ph);}
 .drop-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .no-results{padding:14px 16px;font-size:14px;color:var(--if);font-style:italic;text-align:center;}
 
-.rbadge{font-family:'Cinzel',serif;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:0.05em;text-transform:uppercase;}
+.rbadge{font-family:'Cinzel',serif;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:0.04em;text-transform:uppercase;}
 .r-common{background:#2a2a25;color:#aaa89a;border:1px solid #4a4a40;}
 .r-uncommon{background:#1a2a1a;color:#7ab87a;border:1px solid #3a6a3a;}
 .r-rare{background:#1a1f2e;color:#7a9ad4;border:1px solid #3a4a7a;}
@@ -51,162 +83,143 @@ body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink
 .r-legendary{background:#2e2010;color:#d4a050;border:1px solid #7a5020;}
 .r-artifact{background:#2e1010;color:#dc7a7a;border:1px solid #7a3030;}
 
-.card{background:var(--pc);border:1px solid var(--bg);border-radius:8px;padding:16px;margin-bottom:16px;display:none;position:relative;}
-.card::before,.card::after{content:'';position:absolute;width:10px;height:10px;border-color:var(--gd);border-style:solid;}
-.card::before{top:5px;left:5px;border-width:1px 0 0 1px;}
-.card::after{bottom:5px;right:5px;border-width:0 1px 1px 0;}
-.card.show{display:block;}
-
+.item-card{background:var(--pc);border:1px solid var(--bg);border-radius:8px;padding:20px;position:relative;}
+.item-card::before,.item-card::after{content:'';position:absolute;width:10px;height:10px;border-color:var(--gd);border-style:solid;}
+.item-card::before{top:6px;left:6px;border-width:1px 0 0 1px;}
+.item-card::after{bottom:6px;right:6px;border-width:0 1px 1px 0;}
 .item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:2px;}
-.item-name{font-family:'Cinzel',serif;font-size:17px;font-weight:600;color:var(--gl);letter-spacing:0.03em;line-height:1.3;}
+.item-name{font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--gl);letter-spacing:0.03em;line-height:1.3;}
 .item-cat{font-family:'Cinzel',serif;font-size:9px;color:var(--if);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
-.cost-row{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
-.cost-big{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--gl);}
-.cost-note{font-size:12px;color:var(--im);font-style:italic;}
-
-.details-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-bottom:12px;}
+.cost-row{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
+.cost-big{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--gl);}
+.cost-note{font-size:13px;color:var(--im);font-style:italic;}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-bottom:14px;}
 .detail-cell{background:var(--pm);border:1px solid rgba(201,168,76,0.12);border-radius:6px;padding:8px 10px;}
 .detail-label{font-family:'Cinzel',serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
 .detail-val{font-family:'EB Garamond',serif;font-size:13px;color:var(--ink);}
-
-.craft-box{background:var(--pm);border:1px solid rgba(139,26,26,0.35);border-radius:6px;padding:10px 12px;margin-bottom:12px;}
+.craft-box{background:var(--pm);border:1px solid rgba(139,26,26,0.35);border-radius:6px;padding:10px 12px;margin-bottom:14px;}
 .craft-title{font-family:'Cinzel',serif;font-size:9px;color:var(--crl);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
 .craft-row{display:flex;flex-wrap:wrap;gap:10px;}
 .craft-stat{font-size:13px;color:var(--im);font-style:italic;}
 .craft-stat span{font-style:normal;color:var(--ink);}
-
-.divider{border:none;border-top:1px solid var(--bg);margin:14px 0;position:relative;}
+.divider{border:none;border-top:1px solid var(--bg);margin:16px 0;position:relative;}
 .divider::after{content:'✦';position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--pc);padding:0 8px;color:var(--gd);font-size:11px;}
-
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
 .field-group{display:flex;flex-direction:column;gap:5px;}
 .field-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.08em;}
-.field-input{padding:10px 12px;font-family:'EB Garamond',serif;font-size:16px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;width:100%;-webkit-appearance:none;}
+.field-input{padding:10px 12px;font-family:'EB Garamond',serif;font-size:15px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;width:100%;-webkit-appearance:none;}
 .field-input:focus{border-color:var(--gold);}
-
-.roll-section{margin-bottom:14px;}
 .roll-btns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;align-items:center;}
-.roll-btn{padding:13px 16px;font-family:'Cinzel',serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--pm);border:1px solid var(--gd);border-radius:8px;cursor:pointer;color:var(--gl);transition:all 0.15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
-.roll-btn:active{background:var(--gg);transform:scale(0.97);}
-.roll-manual{width:64px;padding:13px 10px;font-family:'Cinzel',serif;font-size:18px;font-weight:600;text-align:center;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--gl);outline:none;-webkit-appearance:none;}
+.roll-btn{padding:11px 16px;font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--pm);border:1px solid var(--gd);border-radius:8px;cursor:pointer;color:var(--gl);transition:all 0.15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
+.roll-btn:hover{background:var(--gg);}
+.roll-btn:active{transform:scale(0.97);}
+.roll-manual{width:62px;padding:11px 8px;font-family:'Cinzel',serif;font-size:17px;font-weight:600;text-align:center;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--gl);outline:none;-webkit-appearance:none;}
 .roll-manual:focus{border-color:var(--gold);}
-
-.rep-display{border-radius:8px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;border:1px solid rgba(201,168,76,0.18);display:none;}
+.rep-display{border-radius:8px;padding:12px 14px;display:none;align-items:center;justify-content:space-between;margin-bottom:10px;border:1px solid rgba(201,168,76,0.18);}
 .rep-name{font-family:'Cinzel',serif;font-size:14px;font-weight:600;letter-spacing:0.03em;}
 .rep-desc{font-size:12px;margin-top:2px;font-style:italic;}
 .rep-mod{font-family:'Cinzel',serif;font-size:18px;font-weight:700;flex-shrink:0;margin-left:12px;}
-
-.total-row{background:var(--pm);border:1px solid var(--bgb);border-radius:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:relative;}
+.total-row{background:var(--pm);border:1px solid var(--bgb);border-radius:8px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:relative;}
 .total-row::before,.total-row::after{content:'';position:absolute;width:7px;height:7px;border-color:var(--gold);border-style:solid;}
 .total-row::before{top:4px;left:4px;border-width:1px 0 0 1px;}
 .total-row::after{bottom:4px;right:4px;border-width:0 1px 1px 0;}
 .total-label{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.1em;}
 .total-sub{font-size:11px;color:var(--if);font-style:italic;margin-top:3px;}
-.total-val{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--gl);text-align:right;}
+.total-val{font-family:'Cinzel',serif;font-size:24px;font-weight:700;color:var(--gl);text-align:right;}
 
-.dice{display:inline-block;font-size:18px;}
 @keyframes dr{0%{transform:rotate(0) scale(1.3);}50%{transform:rotate(180deg) scale(0.8);}100%{transform:rotate(360deg) scale(1);}}
 .spin{animation:dr 0.4s ease-out;}
+
+/* ── RESPONSIVE BREAKPOINT ── */
+@media(min-width:780px){
+  .mobile-shell{display:none;}
+  .desktop-shell{display:flex;}
+}
 </style>
 
+<!-- DESKTOP -->
 <div class="app">
-  <div class="header">
-    <div class="h-title">Merchant's Ledger</div>
-    <div class="h-sub">D&D 5e · Item Pricing & Bartering</div>
-  </div>
-
-  <div class="currency-grid">
-    <div class="cur-chip"><span>🟤</span><span><span class="cur-label">Copper (cp)</span> · 100 = 1 gp</span></div>
-    <div class="cur-chip"><span>⚪</span><span><span class="cur-label">Silver (sp)</span> · 10 = 1 gp</span></div>
-    <div class="cur-chip"><span>🟡</span><span><span class="cur-label">Electrum (ep)</span> · 2 = 1 gp</span></div>
-    <div class="cur-chip"><span>🟠</span><span><span class="cur-label">Gold (gp)</span> · base unit</span></div>
-    <div class="cur-chip"><span>🔵</span><span><span class="cur-label">Platinum (pp)</span> · 1 pp = 10 gp</span></div>
-  </div>
-
-  <div class="body">
-    <div class="sec-label">Browse by category</div>
-    <div class="cat-grid" id="catGrid"></div>
-
-    <div id="searchArea" style="display:none;">
-      <div class="search-wrap">
-        <input type="text" class="search-input" id="searchInput" placeholder="Search the merchant's wares..." autocomplete="off" autocorrect="off" autocapitalize="off"/>
-        <div class="dropdown" id="dropdown"></div>
+<div class="desktop-shell" id="desktopShell">
+  <div class="ds-left">
+    <div class="ds-top">
+      <div class="ds-title">Merchant's Ledger</div>
+      <div class="ds-sub">D&D 5e · Item Pricing & Bartering</div>
+    </div>
+    <div class="ds-currency">
+      <div class="cur-label-sm">Currency key</div>
+      <div class="cur-list">
+        <div class="cur-row"><span class="cur-name">Copper (cp)</span><span>100 cp = 1 gp</span></div>
+        <div class="cur-row"><span class="cur-name">Silver (sp)</span><span>10 sp = 1 gp</span></div>
+        <div class="cur-row"><span class="cur-name">Electrum (ep)</span><span>2 ep = 1 gp</span></div>
+        <div class="cur-row"><span class="cur-name">Gold (gp)</span><span>base unit</span></div>
+        <div class="cur-row"><span class="cur-name">Platinum (pp)</span><span>1 pp = 10 gp</span></div>
       </div>
     </div>
-
-    <div class="card" id="resultCard">
-      <div class="item-top">
-        <div class="item-name" id="rName"></div>
-        <div id="rBadge"></div>
-      </div>
-      <div class="item-cat" id="rCat"></div>
-      <div class="cost-row">
-        <span class="cost-big" id="rCost"></span>
-        <span class="cost-note" id="rNote"></span>
-      </div>
-      <div class="details-grid" id="rDetails"></div>
-      <div class="craft-box" id="craftBox" style="display:none;">
-        <div class="craft-title">⚗ Crafting — DMG rules</div>
-        <div class="craft-row" id="craftRow"></div>
-      </div>
-
-      <div class="divider"></div>
-      <div class="sec-label">Calculate price</div>
-      <div class="calc-grid">
-        <div class="field-group">
-          <span class="field-label">Quantity</span>
-          <input type="number" class="field-input" id="qtyInput" value="1" min="1" inputmode="numeric"/>
+    <div class="ds-cats">
+      <div class="cur-label-sm" style="margin-bottom:10px;">Categories</div>
+      <div id="dsCatList"></div>
+    </div>
+  </div>
+  <div class="ds-main">
+    <div class="ds-content">
+      <div class="ds-search-panel">
+        <div class="ds-search-head">
+          <div class="cur-label-sm" style="margin-bottom:8px;" id="dsCatLabel">All items</div>
+          <input type="text" class="ds-search-input" id="dsSearchInput" placeholder="Search the merchant's wares..." autocomplete="off" autocorrect="off"/>
         </div>
-        <div class="field-group">
-          <span class="field-label">CHA modifier</span>
-          <input type="number" class="field-input" id="chaMod" value="0" min="-5" max="10" inputmode="numeric"/>
-        </div>
+        <div class="ds-results-list" id="dsResultsList"></div>
       </div>
-
-      <div class="roll-section">
-        <div class="sec-label">Reputation & bartering</div>
-        <div class="roll-btns">
-          <button class="roll-btn" id="rollBtn"><span class="dice" id="diceIcon">🎲</span> Roll d20</button>
-          <input type="number" class="roll-manual" id="rollManual" min="1" max="20" placeholder="—" inputmode="numeric"/>
-        </div>
-        <div class="rep-display" id="repDisplay">
-          <div>
-            <div class="rep-name" id="repName"></div>
-            <div class="rep-desc" id="repDesc"></div>
-          </div>
-          <div class="rep-mod" id="repMod"></div>
-        </div>
-      </div>
-
-      <div class="total-row">
-        <div>
-          <div class="total-label">Final price</div>
-          <div class="total-sub" id="totalSub"></div>
-        </div>
-        <div class="total-val" id="totalVal">—</div>
+      <div class="ds-detail-panel" id="dsDetailPanel">
+        <div class="ds-empty" id="dsEmpty">Select an item from the list to view details and calculate its price.</div>
+        <div id="dsItemCard" style="display:none;"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- MOBILE -->
+<div class="mobile-shell" id="mobileShell">
+  <div class="mob-header">
+    <div class="mob-title">Merchant's Ledger</div>
+    <div class="mob-sub">D&D 5e · Item Pricing & Bartering</div>
+  </div>
+  <div class="currency-grid">
+    <div class="cur-chip"><span class="cname">Copper (cp)</span> · 100 = 1 gp</div>
+    <div class="cur-chip"><span class="cname">Silver (sp)</span> · 10 = 1 gp</div>
+    <div class="cur-chip"><span class="cname">Electrum (ep)</span> · 2 = 1 gp</div>
+    <div class="cur-chip"><span class="cname">Gold (gp)</span> · base unit</div>
+    <div class="cur-chip"><span class="cname">Platinum (pp)</span> · 1 pp = 10 gp</div>
+  </div>
+  <div class="mob-body">
+    <div class="sec-label">Browse by category</div>
+    <div class="cat-wrap-grid" id="mobCatGrid"></div>
+    <div id="mobSearchArea" style="display:none;">
+      <div class="search-wrap">
+        <input type="text" class="search-input" id="mobSearchInput" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off"/>
+        <div class="dropdown" id="mobDropdown"></div>
+      </div>
+    </div>
+    <div id="mobItemCard" style="display:none;"></div>
+  </div>
+</div>
+</div>
+
 <script>
-const RARITY_BADGE={Common:'r-common',Uncommon:'r-uncommon',Rare:'r-rare','Very Rare':'r-very-rare',Legendary:'r-legendary',Artifact:'r-artifact'};
+const RB={Common:'r-common',Uncommon:'r-uncommon',Rare:'r-rare','Very Rare':'r-very-rare',Legendary:'r-legendary',Artifact:'r-artifact'};
 const CRAFT={Common:{days:5,cost:'50 gp'},Uncommon:{days:10,cost:'200 gp'},Rare:{days:50,cost:'2,000 gp'},'Very Rare':{days:125,cost:'20,000 gp'},Legendary:{days:250,cost:'100,000 gp'}};
 const REP=[
   {min:1,max:1,name:'Enemy',desc:'They despise you',mult:4.0,bg:'rgba(139,26,26,0.35)',nc:'#e87a7a',dc:'#a86060',ml:'+300%'},
   {min:2,max:5,name:'Unfriendly',desc:'Suspicion colours the deal',mult:2.0,bg:'rgba(120,80,20,0.35)',nc:'#d4a050',dc:'#a07840',ml:'+100%'},
   {min:6,max:10,name:'Acquaintance',desc:'Neutral — just business',mult:1.5,bg:'rgba(80,80,80,0.3)',nc:'#c8c0b0',dc:'#908880',ml:'+50%'},
-  {min:11,max:15,name:'Friend',desc:'Standard pricing — mutual respect',mult:1.0,bg:'rgba(30,80,30,0.3)',nc:'#7ad47a',dc:'#50a050',ml:'Standard'},
+  {min:11,max:15,name:'Friend',desc:'Standard pricing',mult:1.0,bg:'rgba(30,80,30,0.3)',nc:'#7ad47a',dc:'#50a050',ml:'Standard'},
   {min:16,max:19,name:'Trusted Ally',desc:'They would give you the world',mult:0.75,bg:'rgba(20,60,90,0.4)',nc:'#7ab8e8',dc:'#4a88b8',ml:'-25%'},
   {min:20,max:20,name:'Natural 20 — Adored!',desc:'Legends are told of your name',mult:0.5,bg:'rgba(80,40,120,0.4)',nc:'#c8a0f8',dc:'#9070c8',ml:'-50%'},
 ];
 function getTier(r){return REP.find(t=>r>=t.min&&r<=t.max)||REP[2];}
-
-function ing(name,rarity,costCp){
-  const costStr={500:'5 gp',1000:'10 gp',5000:'50 gp',15000:'150 gp',50000:'500 gp'}[costCp]||costCp+' cp';
-  return{name,cost:costStr,baseCost:costCp,note:'',rarity,details:{Rarity:rarity,Type:'Ingredient',Use:'Alchemy / crafting'}};
+function ing(name,rarity,cp){
+  const cs={500:'5 gp',1000:'10 gp',5000:'50 gp',15000:'150 gp',50000:'500 gp'}[cp]||cp+' cp';
+  return{name,cost:cs,baseCost:cp,note:'',rarity,details:{Rarity:rarity,Type:'Ingredient',Use:'Alchemy / crafting'}};
 }
-
 const data={
 "Ingredients":[
   ing('Bittergreen Leaf','Common',500),ing('Sageroot','Common',500),ing('Fennel Silk','Common',500),ing('Lavender Sprig','Common',500),
@@ -324,7 +337,7 @@ const data={
   {name:"Flame tongue",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon (sword)",Attunement:"Yes",Effect:"2d6 extra fire dmg"}},
   {name:"Holy avenger",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (sword)",Attunement:"Yes (paladin)",Effect:"+3, radiant vs undead"}},
   {name:"Luck blade",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (sword)",Attunement:"Yes",Effect:"+1, luck, wish"}},
-  {name:"Pearl of power",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes (caster)",Effect:"Recover spell slot ≤3rd"}},
+  {name:"Pearl of power",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes (caster)",Effect:"Recover slot ≤3rd"}},
   {name:"Ring of feather falling",cost:"400 gp",baseCost:40000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Effect:"Always Feather Fall"}},
   {name:"Ring of regeneration",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Ring",Attunement:"Yes",Effect:"1d6 HP / 10 min"}},
   {name:"Ring of spell storing",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Capacity:"≤5 spell levels"}},
@@ -333,7 +346,7 @@ const data={
   {name:"Vorpal sword",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (slashing)",Attunement:"Yes",Effect:"+3, decapitate on 20"}},
   {name:"Sun blade",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon (longsword)",Attunement:"Yes",Effect:"+2, radiant, sunlight"}},
   {name:"Wand of orcus",cost:"Priceless",baseCost:null,note:"",rarity:"Artifact",details:{Rarity:"Artifact",Type:"Wand",Attunement:"Yes",Effect:"Raise undead"}},
-  {name:"Winged boots",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"Fly = walk speed, 4hr/day"}},
+  {name:"Winged boots",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"Fly = walk, 4hr/day"}},
   {name:"Boots of speed",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous",Attunement:"Yes",Effect:"Double speed, bonus action"}},
   {name:"Cloak of displacement",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous",Attunement:"Yes",Effect:"Disadv. on attacks vs you"}},
   {name:"Amulet of health",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous",Attunement:"Yes",Effect:"CON = 19"}},
@@ -361,8 +374,6 @@ const data={
 "Tools":[
   {name:"Alchemist's supplies",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
   {name:"Brewer's supplies",cost:"20 gp",baseCost:2000,note:"",details:{Type:"Artisan's tools",Weight:"9 lb"}},
-  {name:"Calligrapher's supplies",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Artisan's tools",Weight:"5 lb"}},
-  {name:"Carpenter's tools",cost:"8 gp",baseCost:800,note:"",details:{Type:"Artisan's tools",Weight:"6 lb"}},
   {name:"Herbalism kit",cost:"5 gp",baseCost:500,note:"",details:{Weight:"3 lb"}},
   {name:"Navigator's tools",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"2 lb"}},
   {name:"Poisoner's kit",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"2 lb"}},
@@ -408,7 +419,6 @@ const data={
   {name:"Backpack",cost:"2 gp",baseCost:200,note:"",details:{Weight:"5 lb"}},
   {name:"Bedroll",cost:"1 gp",baseCost:100,note:"",details:{Weight:"7 lb"}},
   {name:"Blanket",cost:"5 sp",baseCost:50,note:"",details:{Weight:"3 lb"}},
-  {name:"Book (common)",cost:"20 gp",baseCost:2000,note:"",details:{Weight:"5 lb"}},
   {name:"Climber's kit",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"12 lb"}},
   {name:"Clothes, common",cost:"5 sp",baseCost:50,note:"",details:{Weight:"3 lb"}},
   {name:"Clothes, fine",cost:"15 gp",baseCost:1500,note:"",details:{Weight:"6 lb"}},
@@ -439,7 +449,6 @@ const data={
 
 function cpToDisplay(cp){
   if(!cp)return'—';
-  if(cp>=1000000&&cp%1000000===0)return(cp/100000).toLocaleString()+' gp';
   if(cp>=100000&&cp%100000===0)return(cp/100000).toLocaleString()+' pp';
   if(cp>=1000&&cp%1000===0)return(cp/1000).toLocaleString()+' gp';
   if(cp>=100&&cp%100===0)return(cp/100).toLocaleString()+' gp';
@@ -449,149 +458,210 @@ function cpToDisplay(cp){
   return cp+' cp';
 }
 
-const allCats=['All','Ingredients',...Object.keys(data).filter(k=>k!=='Ingredients')];
-let activeCat='All';let curItem=null;let curRoll=null;let filtered=[];let focusIdx=-1;
+function badgeHtml(rarity,big){
+  if(!rarity)return'';
+  const cls=RB[rarity]||'r-common';
+  return'<span class="rbadge '+cls+'"'+(big?' style="padding:3px 10px;font-size:10px;"':'')+'>'+rarity+'</span>';
+}
 
-const catGrid=document.getElementById('catGrid');
-const searchArea=document.getElementById('searchArea');
-const searchInput=document.getElementById('searchInput');
-const dropdown=document.getElementById('dropdown');
-const resultCard=document.getElementById('resultCard');
-const qtyInput=document.getElementById('qtyInput');
-const chaMod=document.getElementById('chaMod');
-const rollBtn=document.getElementById('rollBtn');
-const rollManual=document.getElementById('rollManual');
+function buildItemCardHtml(item,idSuffix){
+  const s=idSuffix||'';
+  let craftHtml='';
+  if(item.rarity&&CRAFT[item.rarity]){
+    const c=CRAFT[item.rarity];
+    craftHtml=`<div class="craft-box"><div class="craft-title">⚗ Crafting — DMG rules</div><div class="craft-row"><span class="craft-stat">Time: <span>${c.days} days</span></span><span class="craft-stat">Materials: <span>${c.cost}</span></span><span class="craft-stat">Needs: <span>Arcana prof.</span></span></div></div>`;
+  } else if(item.rarity==='Artifact'){
+    craftHtml=`<div class="craft-box"><div class="craft-title">⚗ Crafting</div><div class="craft-row"><span class="craft-stat">Artifacts cannot be crafted — ancient and unique.</span></div></div>`;
+  }
+  let detHtml=Object.entries(item.details).map(([k,v])=>`<div class="detail-cell"><div class="detail-label">${k}</div><div class="detail-val">${v}</div></div>`).join('');
+  return`<div class="item-card">
+    <div class="item-top"><div class="item-name">${item.name}</div>${badgeHtml(item.rarity,true)}</div>
+    <div class="item-cat">✦ ${item._cat||''} ✦</div>
+    <div class="cost-row"><span class="cost-big">${item.cost}</span><span class="cost-note">${item.note||''}</span></div>
+    ${detHtml?'<div class="details-grid">'+detHtml+'</div>':''}
+    ${craftHtml}
+    <div class="divider"></div>
+    <div class="sec-label">Calculate price</div>
+    <div class="calc-grid">
+      <div class="field-group"><span class="field-label">Quantity</span><input type="number" class="field-input" id="qty${s}" value="1" min="1" inputmode="numeric"/></div>
+      <div class="field-group"><span class="field-label">CHA modifier</span><input type="number" class="field-input" id="cha${s}" value="0" min="-5" max="10" inputmode="numeric"/></div>
+    </div>
+    <div class="sec-label">Reputation & bartering</div>
+    <div class="roll-btns">
+      <button class="roll-btn" id="rollBtn${s}"><span id="dice${s}" style="font-size:16px;">🎲</span> Roll d20</button>
+      <input type="number" class="roll-manual" id="manual${s}" min="1" max="20" placeholder="—" inputmode="numeric"/>
+    </div>
+    <div class="rep-display" id="rep${s}">
+      <div><div class="rep-name" id="repName${s}"></div><div class="rep-desc" id="repDesc${s}"></div></div>
+      <div class="rep-mod" id="repMod${s}"></div>
+    </div>
+    <div class="total-row">
+      <div><div class="total-label">Final price</div><div class="total-sub" id="tsub${s}"></div></div>
+      <div class="total-val" id="tval${s}">—</div>
+    </div>
+  </div>`;
+}
+
+function wireCard(item,s){
+  let curRoll=null;
+  function upd(){
+    const qty=Math.max(1,parseInt(document.getElementById('qty'+s).value)||1);
+    const tv=document.getElementById('tval'+s);
+    const ts=document.getElementById('tsub'+s);
+    if(item.baseCost===null||item.baseCost===undefined){tv.textContent=item.cost;ts.textContent='';return;}
+    const mult=curRoll!==null?getTier(curRoll).mult:1.0;
+    const fin=Math.round(item.baseCost*qty*mult);
+    tv.textContent=cpToDisplay(fin);
+    const p=[];if(qty>1)p.push(qty+'× base');if(mult!==1.0)p.push((mult>1?'+':'')+Math.round((mult-1)*100)+'% reputation');
+    ts.textContent=p.join(' · ');
+  }
+  function applyRoll(raw){
+    const mod=parseInt(document.getElementById('cha'+s).value)||0;
+    const eff=Math.max(1,Math.min(20,raw+mod));
+    curRoll=eff;
+    const t=getTier(eff);
+    const rd=document.getElementById('rep'+s);
+    rd.style.display='flex';rd.style.background=t.bg;rd.style.borderColor='rgba(201,168,76,0.2)';
+    const rn=document.getElementById('repName'+s);rn.textContent=t.name;rn.style.color=t.nc;
+    const rdesc=document.getElementById('repDesc'+s);
+    rdesc.textContent='Roll: '+raw+(mod!==0?' ('+raw+(mod>=0?'+':'')+mod+'='+eff+')':'')+' — '+t.desc;
+    rdesc.style.color=t.dc;
+    const rm=document.getElementById('repMod'+s);rm.textContent=t.ml;rm.style.color=t.nc;
+    upd();
+  }
+  document.getElementById('rollBtn'+s).addEventListener('click',()=>{
+    const raw=Math.ceil(Math.random()*20);
+    const ic=document.getElementById('dice'+s);
+    ic.classList.remove('spin');void ic.offsetWidth;ic.classList.add('spin');
+    setTimeout(()=>ic.classList.remove('spin'),400);
+    document.getElementById('manual'+s).value=raw;applyRoll(raw);
+  });
+  document.getElementById('manual'+s).addEventListener('input',()=>{const v=parseInt(document.getElementById('manual'+s).value);if(v>=1&&v<=20)applyRoll(v);});
+  document.getElementById('cha'+s).addEventListener('input',()=>{if(document.getElementById('manual'+s).value)applyRoll(parseInt(document.getElementById('manual'+s).value)||1);});
+  document.getElementById('qty'+s).addEventListener('input',upd);
+  upd();
+}
+
+const allCats=['All','Ingredients',...Object.keys(data).filter(k=>k!=='Ingredients')];
+function getAllItems(){const a=[];Object.entries(data).forEach(([c,items])=>items.forEach(i=>a.push({...i,_cat:c})));return a;}
+function getItems(cat){return cat==='All'?getAllItems():data[cat].map(i=>({...i,_cat:cat}));}
+
+/* ── DESKTOP LOGIC ── */
+let dsActiveCat='All';let dsSelItem=null;
+const dsCatList=document.getElementById('dsCatList');
+const dsCatLabel=document.getElementById('dsCatLabel');
+const dsSearchInput=document.getElementById('dsSearchInput');
+const dsResultsList=document.getElementById('dsResultsList');
+const dsDetailPanel=document.getElementById('dsDetailPanel');
+const dsEmpty=document.getElementById('dsEmpty');
+const dsItemCard=document.getElementById('dsItemCard');
+
+allCats.forEach(cat=>{
+  const btn=document.createElement('button');
+  btn.className='cat-list-btn'+(cat==='All'?' active':'');
+  btn.textContent=cat;
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-list-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    dsActiveCat=cat;
+    dsCatLabel.textContent=cat==='All'?'All items':cat;
+    dsSearchInput.value='';
+    dsSearchInput.placeholder=cat==='All'?'Search all items...':'Search '+cat.toLowerCase()+'...';
+    dsRenderList('');
+    dsClearDetail();
+  });
+  dsCatList.appendChild(btn);
+});
+
+function dsRenderList(q){
+  const items=getItems(dsActiveCat);
+  const filtered=q?items.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())):items;
+  dsResultsList.innerHTML='';
+  if(!filtered.length){dsResultsList.innerHTML='<div class="no-results">No items found.</div>';return;}
+  filtered.forEach(item=>{
+    const div=document.createElement('div');div.className='ds-drop-item';
+    let badge=item.rarity?badgeHtml(item.rarity,false):'';
+    const catTag=dsActiveCat==='All'?'<span style="font-family:Cinzel,serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.05em;">'+item._cat+'</span>':'';
+    div.innerHTML='<span class="dn">'+item.name+'</span><span class="dm"><span style="font-size:12px;color:var(--gd);font-style:italic;">'+item.cost+'</span>'+catTag+badge+'</span>';
+    div.addEventListener('click',()=>dsSelectItem(item,div));
+    dsResultsList.appendChild(div);
+  });
+}
+
+function dsSelectItem(item,el){
+  document.querySelectorAll('.ds-drop-item').forEach(d=>d.classList.remove('sel'));
+  if(el)el.classList.add('sel');
+  dsSelItem=item;
+  dsEmpty.style.display='none';
+  dsItemCard.style.display='block';
+  dsItemCard.innerHTML=buildItemCardHtml(item,'_ds');
+  wireCard(item,'_ds');
+  dsDetailPanel.scrollTop=0;
+}
+
+function dsClearDetail(){
+  dsSelItem=null;dsEmpty.style.display='flex';dsItemCard.style.display='none';dsItemCard.innerHTML='';
+}
+
+dsSearchInput.addEventListener('input',e=>dsRenderList(e.target.value));
+dsRenderList('');
+
+/* ── MOBILE LOGIC ── */
+let mobActiveCat='All';let mobFiltered=[];
+const mobCatGrid=document.getElementById('mobCatGrid');
+const mobSearchArea=document.getElementById('mobSearchArea');
+const mobSearchInput=document.getElementById('mobSearchInput');
+const mobDropdown=document.getElementById('mobDropdown');
+const mobItemCard=document.getElementById('mobItemCard');
 
 allCats.forEach(cat=>{
   const btn=document.createElement('button');
   btn.className='cat-btn'+(cat==='All'?' active':'');
   btn.textContent=cat;
-  btn.addEventListener('click',()=>selCat(cat,btn));
-  catGrid.appendChild(btn);
-});
-
-function getAllItems(){const a=[];Object.entries(data).forEach(([c,items])=>items.forEach(i=>a.push({...i,_cat:c})));return a;}
-function getItems(){return activeCat==='All'?getAllItems():data[activeCat].map(i=>({...i,_cat:activeCat}));}
-
-function selCat(cat,btn){
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  activeCat=cat;
-  searchArea.style.display='block';
-  searchInput.value='';
-  searchInput.placeholder=cat==='All'?'Search the merchant\'s wares...':'Search '+cat.toLowerCase()+'...';
-  dropdown.classList.remove('open');
-  resultCard.classList.remove('show');
-  curItem=null;curRoll=null;
-  showDropdown('');
-}
-
-function showDropdown(q){
-  const items=getItems();
-  filtered=q?items.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())):items;
-  dropdown.innerHTML='';focusIdx=-1;
-  if(!filtered.length){dropdown.innerHTML='<div class="no-results">No treasures found…</div>';}
-  else{
-    filtered.slice(0,80).forEach(item=>{
-      const div=document.createElement('div');div.className='drop-item';
-      let badge='';
-      if(item.rarity){const cls=RARITY_BADGE[item.rarity]||'r-common';badge='<span class="rbadge '+cls+'">'+item.rarity+'</span>';}
-      const catTag=activeCat==='All'?'<span style="font-family:Cinzel,serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.06em;">'+item._cat+'</span>':'';
-      div.innerHTML='<span class="drop-name">'+item.name+'</span><span style="display:flex;align-items:center;gap:5px;flex-shrink:0;"><span style="font-size:12px;color:var(--gd);font-style:italic;">'+item.cost+'</span>'+catTag+badge+'</span>';
-      div.addEventListener('touchstart',e=>{e.preventDefault();selItem(item);},{passive:false});
-      div.addEventListener('mousedown',e=>{e.preventDefault();selItem(item);});
-      dropdown.appendChild(div);
-    });
-    if(filtered.length>80){const m=document.createElement('div');m.className='no-results';m.textContent='+'+(filtered.length-80)+' more — narrow your search';dropdown.appendChild(m);}
-  }
-  dropdown.classList.add('open');
-}
-
-function selItem(item){
-  curItem=item;curRoll=null;
-  searchInput.value=item.name;
-  dropdown.classList.remove('open');
-  qtyInput.value=1;rollManual.value='';
-  document.getElementById('repDisplay').style.display='none';
-  renderResult(item);
-  resultCard.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function renderResult(item){
-  document.getElementById('rName').textContent=item.name;
-  document.getElementById('rCat').textContent='✦ '+(item._cat||activeCat)+' ✦';
-  document.getElementById('rCost').textContent=item.cost;
-  document.getElementById('rNote').textContent=item.note||'';
-  const badgeEl=document.getElementById('rBadge');
-  if(item.rarity){const cls=RARITY_BADGE[item.rarity]||'r-common';badgeEl.innerHTML='<span class="rbadge '+cls+'" style="padding:3px 10px;font-size:10px;">'+item.rarity+'</span>';}
-  else badgeEl.innerHTML='';
-  const det=document.getElementById('rDetails');det.innerHTML='';
-  Object.entries(item.details).forEach(([k,v])=>{
-    const c=document.createElement('div');c.className='detail-cell';
-    c.innerHTML='<div class="detail-label">'+k+'</div><div class="detail-val">'+v+'</div>';
-    det.appendChild(c);
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    mobActiveCat=cat;
+    mobSearchArea.style.display='block';
+    mobSearchInput.value='';
+    mobSearchInput.placeholder=cat==='All'?'Search the merchant\'s wares...':'Search '+cat.toLowerCase()+'...';
+    mobDropdown.classList.remove('open');
+    mobItemCard.style.display='none';mobItemCard.innerHTML='';
+    mobShowDropdown('');
   });
-  const cb=document.getElementById('craftBox');const cr=document.getElementById('craftRow');
-  if(item.rarity&&CRAFT[item.rarity]){
-    const c=CRAFT[item.rarity];
-    cr.innerHTML='<span class="craft-stat">Time: <span>'+c.days+' days</span></span><span class="craft-stat">Materials: <span>'+c.cost+'</span></span><span class="craft-stat">Needs: <span>Arcana prof.</span></span>';
-    cb.style.display='block';
-  } else if(item.rarity==='Artifact'){
-    cr.innerHTML='<span class="craft-stat">Artifacts cannot be crafted — ancient and unique.</span>';
-    cb.style.display='block';
-  } else cb.style.display='none';
-  resultCard.classList.add('show');
-  updateTotal();
-}
-
-function updateTotal(){
-  if(!curItem)return;
-  const qty=Math.max(1,parseInt(qtyInput.value)||1);
-  const tv=document.getElementById('totalVal');const ts=document.getElementById('totalSub');
-  if(curItem.baseCost===null||curItem.baseCost===undefined){tv.textContent=curItem.cost;ts.textContent='';return;}
-  if(curItem.baseCost===0){tv.textContent='—';ts.textContent='';return;}
-  const mult=curRoll!==null?getTier(curRoll).mult:1.0;
-  const final=Math.round(curItem.baseCost*qty*mult);
-  tv.textContent=cpToDisplay(final);
-  const p=[];
-  if(qty>1)p.push(qty+'× base');
-  if(mult!==1.0)p.push((mult>1?'+':'')+Math.round((mult-1)*100)+'% reputation');
-  ts.textContent=p.join(' · ');
-}
-
-function applyRoll(raw){
-  const mod=parseInt(chaMod.value)||0;
-  const eff=Math.max(1,Math.min(20,raw+mod));
-  curRoll=eff;
-  const t=getTier(eff);
-  const rd=document.getElementById('repDisplay');
-  rd.style.display='flex';rd.style.background=t.bg;rd.style.borderColor='rgba(201,168,76,0.2)';
-  const rn=document.getElementById('repName');rn.textContent=t.name;rn.style.color=t.nc;
-  const rdesc=document.getElementById('repDesc');
-  rdesc.textContent='Roll: '+raw+(mod!==0?' ('+raw+(mod>=0?'+':'')+mod+'='+eff+')':'')+' — '+t.desc;
-  rdesc.style.color=t.dc;
-  const rm=document.getElementById('repMod');rm.textContent=t.ml;rm.style.color=t.nc;
-  updateTotal();
-}
-
-rollBtn.addEventListener('click',()=>{
-  const raw=Math.ceil(Math.random()*20);
-  const ic=document.getElementById('diceIcon');
-  ic.classList.remove('spin');void ic.offsetWidth;ic.classList.add('spin');
-  setTimeout(()=>ic.classList.remove('spin'),400);
-  rollManual.value=raw;applyRoll(raw);
+  mobCatGrid.appendChild(btn);
 });
-rollManual.addEventListener('input',()=>{const v=parseInt(rollManual.value);if(v>=1&&v<=20)applyRoll(v);});
-chaMod.addEventListener('input',()=>{if(rollManual.value)applyRoll(parseInt(rollManual.value)||1);});
-qtyInput.addEventListener('input',updateTotal);
-searchInput.addEventListener('input',e=>showDropdown(e.target.value));
-searchInput.addEventListener('focus',()=>showDropdown(searchInput.value));
-searchInput.addEventListener('keydown',e=>{
-  const items=dropdown.querySelectorAll('.drop-item');
-  if(e.key==='ArrowDown'){focusIdx=Math.min(focusIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));e.preventDefault();}
-  else if(e.key==='ArrowUp'){focusIdx=Math.max(focusIdx-1,0);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));e.preventDefault();}
-  else if(e.key==='Enter'&&focusIdx>=0&&filtered[focusIdx])selItem(filtered[focusIdx]);
-  else if(e.key==='Escape')dropdown.classList.remove('open');
-});
-document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))dropdown.classList.remove('open');});
+
+function mobShowDropdown(q){
+  const items=getItems(mobActiveCat);
+  mobFiltered=q?items.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())):items;
+  mobDropdown.innerHTML='';
+  if(!mobFiltered.length){mobDropdown.innerHTML='<div class="no-results">No items found.</div>';}
+  else{
+    mobFiltered.slice(0,80).forEach(item=>{
+      const div=document.createElement('div');div.className='drop-item';
+      let badge=item.rarity?badgeHtml(item.rarity,false):'';
+      const catTag=mobActiveCat==='All'?'<span style="font-family:Cinzel,serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.05em;">'+item._cat+'</span>':'';
+      div.innerHTML='<span class="drop-name">'+item.name+'</span><span style="display:flex;align-items:center;gap:5px;flex-shrink:0;"><span style="font-size:12px;color:var(--gd);font-style:italic;">'+item.cost+'</span>'+catTag+badge+'</span>';
+      div.addEventListener('touchstart',e=>{e.preventDefault();mobSelectItem(item);},{passive:false});
+      div.addEventListener('mousedown',e=>{e.preventDefault();mobSelectItem(item);});
+      mobDropdown.appendChild(div);
+    });
+    if(mobFiltered.length>80){const m=document.createElement('div');m.className='no-results';m.textContent='+'+(mobFiltered.length-80)+' more — narrow your search';mobDropdown.appendChild(m);}
+  }
+  mobDropdown.classList.add('open');
+}
+
+function mobSelectItem(item){
+  mobSearchInput.value=item.name;
+  mobDropdown.classList.remove('open');
+  mobItemCard.style.display='block';
+  mobItemCard.innerHTML=buildItemCardHtml(item,'_mob');
+  wireCard(item,'_mob');
+  mobItemCard.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+mobSearchInput.addEventListener('input',e=>mobShowDropdown(e.target.value));
+mobSearchInput.addEventListener('focus',()=>mobShowDropdown(mobSearchInput.value));
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))mobDropdown.classList.remove('open');});
 </script>
