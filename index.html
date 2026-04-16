@@ -1,172 +1,49 @@
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
-
 :root{
-  --parchment:#1a1410;
-  --parchment-mid:#221c15;
-  --parchment-card:#2a221a;
-  --parchment-hover:#332a20;
-  --gold:#c9a84c;
-  --gold-light:#e2c87a;
-  --gold-dim:#7a6330;
-  --gold-glow:rgba(201,168,76,0.15);
-  --crimson:#8b1a1a;
-  --crimson-light:#b52828;
-  --ink:#f0e8d8;
-  --ink-muted:#a89878;
-  --ink-faint:#6b5c45;
-  --border-gold:rgba(201,168,76,0.3);
-  --border-gold-bright:rgba(201,168,76,0.6);
-  --shadow:rgba(0,0,0,0.6);
+  --p:#1a1410;--pm:#221c15;--pc:#2a221a;--ph:#332a20;
+  --gold:#c9a84c;--gl:#e2c87a;--gd:#7a6330;--gg:rgba(201,168,76,0.15);
+  --cr:#8b1a1a;--crl:#b52828;--ink:#f0e8d8;--im:#a89878;--if:#6b5c45;
+  --bg:rgba(201,168,76,0.3);--bgb:rgba(201,168,76,0.6);
 }
+body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink);margin:0;padding:0;}
+.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--p);}
 
-.nt-wrap{
-  background:var(--parchment);
-  font-family:'EB Garamond',Georgia,serif;
-  color:var(--ink);
-  padding:1.5rem 0 2rem;
-  min-height:400px;
-}
+.header{text-align:center;padding:20px 16px 14px;border-bottom:1px solid var(--bg);position:relative;}
+.header::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(to right,transparent,var(--gd),transparent);}
+.h-title{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--gl);letter-spacing:0.06em;margin-bottom:2px;}
+.h-sub{font-family:'EB Garamond',serif;font-size:12px;color:var(--im);font-style:italic;}
 
-.nt-header{
-  text-align:center;
-  margin-bottom:1.75rem;
-  padding-bottom:1.25rem;
-  border-bottom:1px solid var(--border-gold);
-  position:relative;
-}
-.nt-header::after{
-  content:'';
-  position:absolute;
-  bottom:-3px;left:50%;transform:translateX(-50%);
-  width:60%;height:1px;
-  background:linear-gradient(to right,transparent,var(--gold-dim),transparent);
-}
-.nt-title{
-  font-family:'Cinzel Decorative',serif;
-  font-size:20px;
-  font-weight:700;
-  color:var(--gold-light);
-  letter-spacing:0.08em;
-  text-shadow:0 0 20px rgba(201,168,76,0.4);
-  margin-bottom:4px;
-}
-.nt-subtitle{
-  font-family:'EB Garamond',serif;
-  font-size:14px;
-  color:var(--ink-muted);
-  font-style:italic;
-  letter-spacing:0.05em;
-}
+.currency-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:10px 14px;border-bottom:1px solid var(--bg);}
+.cur-chip{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:5px 8px;font-family:'Cinzel',serif;font-size:10px;color:var(--im);letter-spacing:0.03em;display:flex;align-items:center;gap:5px;}
+.cur-chip:last-child{grid-column:1/-1;}
+.cur-label{color:var(--gl);font-weight:600;}
 
-.nt-section-label{
-  font-family:'Cinzel',serif;
-  font-size:10px;
-  font-weight:600;
-  color:var(--gold-dim);
-  text-transform:uppercase;
-  letter-spacing:0.12em;
-  margin-bottom:10px;
-}
+.body{padding:14px;}
 
-.cat-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
-  gap:6px;
-  margin-bottom:1.5rem;
-}
-.cat-btn{
-  background:var(--parchment-mid);
-  border:1px solid var(--border-gold);
-  border-radius:2px;
-  padding:8px 6px;
-  font-family:'Cinzel',serif;
-  font-size:10px;
-  font-weight:600;
-  color:var(--ink-muted);
-  cursor:pointer;
-  text-align:center;
-  line-height:1.4;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  transition:all 0.2s;
-}
-.cat-btn:hover{
-  border-color:var(--gold-dim);
-  color:var(--gold-light);
-  background:var(--parchment-hover);
-}
-.cat-btn.active{
-  background:var(--gold-glow);
-  border-color:var(--gold);
-  color:var(--gold-light);
-  box-shadow:inset 0 0 12px rgba(201,168,76,0.08);
-}
+.sec-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--gd);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;}
 
-.search-wrap{position:relative;margin-bottom:1.25rem;}
-.search-input{
-  width:100%;
-  padding:11px 16px;
-  font-family:'EB Garamond',serif;
-  font-size:16px;
-  border:1px solid var(--border-gold);
-  border-radius:2px;
-  background:var(--parchment-mid);
-  color:var(--ink);
-  outline:none;
-  letter-spacing:0.02em;
-}
-.search-input::placeholder{color:var(--ink-faint);font-style:italic;}
-.search-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-glow);}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:16px;}
+.cat-btn{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:8px 6px;font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);cursor:pointer;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.2s;-webkit-tap-highlight-color:transparent;text-align:center;line-height:1.3;}
+.cat-btn.active{background:var(--gg);border-color:var(--gold);color:var(--gl);}
+.cat-btn:active{transform:scale(0.96);}
 
-.dropdown{
-  position:absolute;top:calc(100% + 3px);left:0;right:0;
-  background:var(--parchment-card);
-  border:1px solid var(--border-gold);
-  border-radius:2px;
-  max-height:260px;overflow-y:auto;
-  z-index:10;display:none;
-  box-shadow:0 8px 32px var(--shadow);
-}
+.search-wrap{position:relative;margin-bottom:16px;}
+.search-input{width:100%;padding:12px 16px;font-family:'EB Garamond',serif;font-size:16px;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--ink);outline:none;-webkit-appearance:none;}
+.search-input::placeholder{color:var(--if);font-style:italic;}
+.search-input:focus{border-color:var(--gold);}
+
+.dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--pc);border:1px solid var(--bg);border-radius:8px;max-height:280px;overflow-y:auto;z-index:20;display:none;scrollbar-width:thin;scrollbar-color:var(--gd) var(--pm);}
 .dropdown.open{display:block;}
-.dropdown::-webkit-scrollbar{width:4px;}
-.dropdown::-webkit-scrollbar-track{background:var(--parchment-mid);}
-.dropdown::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px;}
-
-.drop-item{
-  padding:9px 16px;
-  font-family:'EB Garamond',serif;
-  font-size:15px;
-  cursor:pointer;
-  color:var(--ink-muted);
-  border-bottom:1px solid rgba(201,168,76,0.1);
-  display:flex;justify-content:space-between;align-items:center;gap:8px;
-  transition:all 0.15s;
-}
+.drop-item{padding:11px 16px;font-family:'EB Garamond',serif;font-size:15px;cursor:pointer;color:var(--im);border-bottom:1px solid rgba(201,168,76,0.08);display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-tap-highlight-color:transparent;}
 .drop-item:last-child{border-bottom:none;}
-.drop-item:hover,.drop-item.focused{
-  background:var(--parchment-hover);
-  color:var(--ink);
-}
-.drop-name{flex:1;min-width:0;}
-.drop-meta{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-.drop-cost{font-size:13px;color:var(--gold-dim);font-style:italic;}
-.drop-cat{font-size:11px;color:var(--ink-faint);font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;}
-.no-results{padding:12px 16px;font-size:14px;color:var(--ink-faint);font-style:italic;}
+.drop-item:active{background:var(--ph);}
+.drop-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.no-results{padding:14px 16px;font-size:14px;color:var(--if);font-style:italic;text-align:center;}
 
-.rarity-badge{
-  font-family:'Cinzel',serif;
-  font-size:9px;
-  font-weight:600;
-  padding:2px 8px;
-  border-radius:1px;
-  white-space:nowrap;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-}
+.rbadge{font-family:'Cinzel',serif;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:0.05em;text-transform:uppercase;}
 .r-common{background:#2a2a25;color:#aaa89a;border:1px solid #4a4a40;}
 .r-uncommon{background:#1a2a1a;color:#7ab87a;border:1px solid #3a6a3a;}
 .r-rare{background:#1a1f2e;color:#7a9ad4;border:1px solid #3a4a7a;}
@@ -174,630 +51,397 @@
 .r-legendary{background:#2e2010;color:#d4a050;border:1px solid #7a5020;}
 .r-artifact{background:#2e1010;color:#dc7a7a;border:1px solid #7a3030;}
 
-.result-card{
-  background:var(--parchment-card);
-  border:1px solid var(--border-gold);
-  border-radius:2px;
-  padding:1.5rem;
-  display:none;
-  position:relative;
-  box-shadow:0 4px 24px rgba(0,0,0,0.4);
-}
-.result-card::before,.result-card::after{
-  content:'';
-  position:absolute;
-  width:12px;height:12px;
-  border-color:var(--gold-dim);
-  border-style:solid;
-}
-.result-card::before{top:6px;left:6px;border-width:1px 0 0 1px;}
-.result-card::after{bottom:6px;right:6px;border-width:0 1px 1px 0;}
-.result-card.show{display:block;}
+.card{background:var(--pc);border:1px solid var(--bg);border-radius:8px;padding:16px;margin-bottom:16px;display:none;position:relative;}
+.card::before,.card::after{content:'';position:absolute;width:10px;height:10px;border-color:var(--gd);border-style:solid;}
+.card::before{top:5px;left:5px;border-width:1px 0 0 1px;}
+.card::after{bottom:5px;right:5px;border-width:0 1px 1px 0;}
+.card.show{display:block;}
 
-.result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:2px;}
-.result-name{
-  font-family:'Cinzel',serif;
-  font-size:18px;
-  font-weight:600;
-  color:var(--gold-light);
-  letter-spacing:0.04em;
-  line-height:1.3;
-}
-.result-cat{
-  font-family:'EB Garamond',serif;
-  font-size:13px;
-  color:var(--ink-faint);
-  font-style:italic;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  font-family:'Cinzel',serif;
-  font-size:10px;
-  margin-bottom:1rem;
-}
+.item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:2px;}
+.item-name{font-family:'Cinzel',serif;font-size:17px;font-weight:600;color:var(--gl);letter-spacing:0.03em;line-height:1.3;}
+.item-cat{font-family:'Cinzel',serif;font-size:9px;color:var(--if);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+.cost-row{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
+.cost-big{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--gl);}
+.cost-note{font-size:12px;color:var(--im);font-style:italic;}
 
-.ornament{
-  text-align:center;
-  color:var(--gold-dim);
-  font-size:14px;
-  letter-spacing:0.3em;
-  margin:0.75rem 0;
-  opacity:0.7;
-}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-bottom:12px;}
+.detail-cell{background:var(--pm);border:1px solid rgba(201,168,76,0.12);border-radius:6px;padding:8px 10px;}
+.detail-label{font-family:'Cinzel',serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
+.detail-val{font-family:'EB Garamond',serif;font-size:13px;color:var(--ink);}
 
-.base-cost-row{display:flex;align-items:baseline;gap:10px;margin-bottom:1.25rem;}
-.cost-big{
-  font-family:'Cinzel',serif;
-  font-size:28px;
-  font-weight:700;
-  color:var(--gold-light);
-  text-shadow:0 0 12px rgba(201,168,76,0.3);
-}
-.cost-note{font-size:13px;color:var(--ink-muted);font-style:italic;}
+.craft-box{background:var(--pm);border:1px solid rgba(139,26,26,0.35);border-radius:6px;padding:10px 12px;margin-bottom:12px;}
+.craft-title{font-family:'Cinzel',serif;font-size:9px;color:var(--crl);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
+.craft-row{display:flex;flex-wrap:wrap;gap:10px;}
+.craft-stat{font-size:13px;color:var(--im);font-style:italic;}
+.craft-stat span{font-style:normal;color:var(--ink);}
 
-.details-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-  gap:8px;
-  margin-bottom:1.25rem;
-}
-.detail-cell{
-  background:var(--parchment-mid);
-  border:1px solid rgba(201,168,76,0.15);
-  border-radius:2px;
-  padding:10px 12px;
-}
-.detail-label{
-  font-family:'Cinzel',serif;
-  font-size:9px;
-  font-weight:600;
-  color:var(--ink-faint);
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-  margin-bottom:4px;
-}
-.detail-val{
-  font-family:'EB Garamond',serif;
-  font-size:14px;
-  color:var(--ink);
-  line-height:1.3;
-}
+.divider{border:none;border-top:1px solid var(--bg);margin:14px 0;position:relative;}
+.divider::after{content:'✦';position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--pc);padding:0 8px;color:var(--gd);font-size:11px;}
 
-.craft-box{
-  background:var(--parchment-mid);
-  border:1px solid rgba(139,26,26,0.4);
-  border-radius:2px;
-  padding:10px 14px;
-  margin-bottom:1.25rem;
-}
-.craft-title{
-  font-family:'Cinzel',serif;
-  font-size:9px;
-  font-weight:600;
-  color:var(--crimson-light);
-  text-transform:uppercase;
-  letter-spacing:0.12em;
-  margin-bottom:6px;
-}
-.craft-row{display:flex;gap:16px;flex-wrap:wrap;}
-.craft-stat{font-size:13px;color:var(--ink-muted);font-style:italic;}
-.craft-stat span{font-style:normal;color:var(--ink);font-weight:500;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.field-group{display:flex;flex-direction:column;gap:5px;}
+.field-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.08em;}
+.field-input{padding:10px 12px;font-family:'EB Garamond',serif;font-size:16px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;width:100%;-webkit-appearance:none;}
+.field-input:focus{border-color:var(--gold);}
 
-.divider{
-  border:none;
-  border-top:1px solid var(--border-gold);
-  margin:1.25rem 0;
-  position:relative;
-}
-.divider::after{
-  content:'⚔';
-  position:absolute;
-  top:-9px;left:50%;transform:translateX(-50%);
-  background:var(--parchment-card);
-  padding:0 8px;
-  color:var(--gold-dim);
-  font-size:12px;
-}
-
-.qty-barter-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem;}
-.field-group{display:flex;flex-direction:column;gap:6px;}
-.field-label{
-  font-family:'Cinzel',serif;
-  font-size:10px;
-  font-weight:600;
-  color:var(--ink-muted);
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-}
-.field-input{
-  padding:9px 12px;
-  font-family:'EB Garamond',serif;
-  font-size:15px;
-  border:1px solid var(--border-gold);
-  border-radius:2px;
-  background:var(--parchment-mid);
-  color:var(--ink);
-  outline:none;
-  width:100%;
-}
-.field-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-glow);}
-
-.roll-section{margin-bottom:1.25rem;}
-.roll-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
-.roll-btn{
-  padding:9px 20px;
-  font-family:'Cinzel',serif;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  background:var(--parchment-mid);
-  border:1px solid var(--gold-dim);
-  border-radius:2px;
-  cursor:pointer;
-  color:var(--gold-light);
-  transition:all 0.2s;
-}
-.roll-btn:hover{
-  background:var(--gold-glow);
-  border-color:var(--gold);
-  box-shadow:0 0 8px rgba(201,168,76,0.2);
-}
-.roll-manual{
-  width:72px;
-  padding:9px 10px;
-  font-family:'Cinzel',serif;
-  font-size:16px;
-  font-weight:600;
-  text-align:center;
-  border:1px solid var(--border-gold);
-  border-radius:2px;
-  background:var(--parchment-mid);
-  color:var(--gold-light);
-  outline:none;
-}
+.roll-section{margin-bottom:14px;}
+.roll-btns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;align-items:center;}
+.roll-btn{padding:13px 16px;font-family:'Cinzel',serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--pm);border:1px solid var(--gd);border-radius:8px;cursor:pointer;color:var(--gl);transition:all 0.15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
+.roll-btn:active{background:var(--gg);transform:scale(0.97);}
+.roll-manual{width:64px;padding:13px 10px;font-family:'Cinzel',serif;font-size:18px;font-weight:600;text-align:center;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--gl);outline:none;-webkit-appearance:none;}
 .roll-manual:focus{border-color:var(--gold);}
-.roll-or{font-family:'EB Garamond',serif;font-size:14px;color:var(--ink-faint);font-style:italic;}
 
-.rep-display{
-  border-radius:2px;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:8px;
-  border:1px solid rgba(201,168,76,0.2);
-}
-.rep-name{
-  font-family:'Cinzel',serif;
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:0.04em;
-}
-.rep-desc{font-size:13px;margin-top:3px;font-style:italic;}
-.rep-mod{
-  font-family:'Cinzel',serif;
-  font-size:16px;
-  font-weight:700;
-}
+.rep-display{border-radius:8px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;border:1px solid rgba(201,168,76,0.18);display:none;}
+.rep-name{font-family:'Cinzel',serif;font-size:14px;font-weight:600;letter-spacing:0.03em;}
+.rep-desc{font-size:12px;margin-top:2px;font-style:italic;}
+.rep-mod{font-family:'Cinzel',serif;font-size:18px;font-weight:700;flex-shrink:0;margin-left:12px;}
 
-.total-row{
-  background:var(--parchment-mid);
-  border:1px solid var(--border-gold-bright);
-  border-radius:2px;
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:relative;
-}
-.total-row::before,.total-row::after{
-  content:'';position:absolute;
-  width:8px;height:8px;
-  border-color:var(--gold);border-style:solid;
-}
+.total-row{background:var(--pm);border:1px solid var(--bgb);border-radius:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:relative;}
+.total-row::before,.total-row::after{content:'';position:absolute;width:7px;height:7px;border-color:var(--gold);border-style:solid;}
 .total-row::before{top:4px;left:4px;border-width:1px 0 0 1px;}
 .total-row::after{bottom:4px;right:4px;border-width:0 1px 1px 0;}
-.total-left{}
-.total-label{
-  font-family:'Cinzel',serif;
-  font-size:10px;
-  font-weight:600;
-  color:var(--ink-muted);
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-}
-.total-sub{font-size:12px;color:var(--ink-faint);font-style:italic;margin-top:3px;}
-.total-val{
-  font-family:'Cinzel',serif;
-  font-size:24px;
-  font-weight:700;
-  color:var(--gold-light);
-  text-shadow:0 0 16px rgba(201,168,76,0.5);
-  text-align:right;
-}
+.total-label{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.1em;}
+.total-sub{font-size:11px;color:var(--if);font-style:italic;margin-top:3px;}
+.total-val{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--gl);text-align:right;}
 
-.dice-icon{display:inline-block;font-size:20px;color:var(--gold-dim);}
-@keyframes diceroll{0%{transform:rotate(0deg) scale(1.3);}50%{transform:rotate(180deg) scale(0.8);}100%{transform:rotate(360deg) scale(1);}}
-.spinning{animation:diceroll 0.4s ease-out;}
+.dice{display:inline-block;font-size:18px;}
+@keyframes dr{0%{transform:rotate(0) scale(1.3);}50%{transform:rotate(180deg) scale(0.8);}100%{transform:rotate(360deg) scale(1);}}
+.spin{animation:dr 0.4s ease-out;}
 </style>
 
-<div class="nt-wrap">
-<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Natural Twenty — D&D 5E Merchant Calculator</h2>
-
-<div class="nt-header">
-  <div class="nt-title">Merchant's Ledger</div>
-  <div class="nt-subtitle">🟤Copper (cp): 100 cp = 1 gp ⚪Silver (sp): 10 sp = 1 gp 🟠Electrum (ep): 2 ep = 1 gp 🟡Gold (gp): Base unit 🔵Platinum (pp): 1 pp = 10 gp</div>
-</div>
-
-<div class="nt-section-label">Browse by category</div>
-<div class="cat-grid" id="catGrid"></div>
-
-<div id="searchArea" style="display:none;">
-  <div class="search-wrap">
-    <input type="text" class="search-input" id="searchInput" placeholder="Search the merchant's wares..." autocomplete="off"/>
-    <div class="dropdown" id="dropdown"></div>
-  </div>
-</div>
-
-<div class="result-card" id="resultCard">
-  <div class="result-top">
-    <div class="result-name" id="rName"></div>
-    <div id="rBadge"></div>
-  </div>
-  <div class="result-cat" id="rCat"></div>
-  <div class="base-cost-row">
-    <span class="cost-big" id="rCost"></span>
-    <span class="cost-note" id="rCostNote"></span>
-  </div>
-  <div class="details-grid" id="rDetails"></div>
-  <div id="craftBox" style="display:none;" class="craft-box">
-    <div class="craft-title">⚗ Crafting — DMG Rules</div>
-    <div class="craft-row" id="craftRow"></div>
+<div class="app">
+  <div class="header">
+    <div class="h-title">Merchant's Ledger</div>
+    <div class="h-sub">D&D 5e · Item Pricing & Bartering</div>
   </div>
 
-  <div class="divider"></div>
-  <div class="nt-section-label">Calculate cost</div>
-  <div class="qty-barter-row">
-    <div class="field-group">
-      <span class="field-label">Quantity</span>
-      <input type="number" class="field-input" id="qtyInput" value="1" min="1"/>
-    </div>
-    <div class="field-group">
-      <span class="field-label">Charisma modifier</span>
-      <input type="number" class="field-input" id="chaMod" value="0" min="-5" max="10" placeholder="+0"/>
-    </div>
+  <div class="currency-grid">
+    <div class="cur-chip"><span>🟤</span><span><span class="cur-label">Copper (cp)</span> · 100 = 1 gp</span></div>
+    <div class="cur-chip"><span>⚪</span><span><span class="cur-label">Silver (sp)</span> · 10 = 1 gp</span></div>
+    <div class="cur-chip"><span>🟡</span><span><span class="cur-label">Electrum (ep)</span> · 2 = 1 gp</span></div>
+    <div class="cur-chip"><span>🟠</span><span><span class="cur-label">Gold (gp)</span> · base unit</span></div>
+    <div class="cur-chip"><span>🔵</span><span><span class="cur-label">Platinum (pp)</span> · 1 pp = 10 gp</span></div>
   </div>
 
-  <div class="roll-section">
-    <div class="nt-section-label">⌛ Reputation &amp; bartering</div>
-    <div class="roll-row">
-      <button class="roll-btn" id="rollBtn">🎲Roll the d20</button>
-      <span class="roll-or">or enter your roll:</span>
-      <input type="number" class="roll-manual" id="rollManual" min="1" max="20" placeholder="—"/>
-      <span id="diceIcon" class="dice-icon">&#9820;</span>
-    </div>
-    <div id="repDisplay" style="display:none;" class="rep-display">
-      <div>
-        <div class="rep-name" id="repName"></div>
-        <div class="rep-desc" id="repDesc"></div>
+  <div class="body">
+    <div class="sec-label">Browse by category</div>
+    <div class="cat-grid" id="catGrid"></div>
+
+    <div id="searchArea" style="display:none;">
+      <div class="search-wrap">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search the merchant's wares..." autocomplete="off" autocorrect="off" autocapitalize="off"/>
+        <div class="dropdown" id="dropdown"></div>
       </div>
-      <div class="rep-mod" id="repMod"></div>
     </div>
-  </div>
 
-  <div class="total-row">
-    <div class="total-left">
-      <div class="total-label">Final price</div>
-      <div class="total-sub" id="totalSub"></div>
+    <div class="card" id="resultCard">
+      <div class="item-top">
+        <div class="item-name" id="rName"></div>
+        <div id="rBadge"></div>
+      </div>
+      <div class="item-cat" id="rCat"></div>
+      <div class="cost-row">
+        <span class="cost-big" id="rCost"></span>
+        <span class="cost-note" id="rNote"></span>
+      </div>
+      <div class="details-grid" id="rDetails"></div>
+      <div class="craft-box" id="craftBox" style="display:none;">
+        <div class="craft-title">⚗ Crafting — DMG rules</div>
+        <div class="craft-row" id="craftRow"></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="sec-label">Calculate price</div>
+      <div class="calc-grid">
+        <div class="field-group">
+          <span class="field-label">Quantity</span>
+          <input type="number" class="field-input" id="qtyInput" value="1" min="1" inputmode="numeric"/>
+        </div>
+        <div class="field-group">
+          <span class="field-label">CHA modifier</span>
+          <input type="number" class="field-input" id="chaMod" value="0" min="-5" max="10" inputmode="numeric"/>
+        </div>
+      </div>
+
+      <div class="roll-section">
+        <div class="sec-label">Reputation & bartering</div>
+        <div class="roll-btns">
+          <button class="roll-btn" id="rollBtn"><span class="dice" id="diceIcon">🎲</span> Roll d20</button>
+          <input type="number" class="roll-manual" id="rollManual" min="1" max="20" placeholder="—" inputmode="numeric"/>
+        </div>
+        <div class="rep-display" id="repDisplay">
+          <div>
+            <div class="rep-name" id="repName"></div>
+            <div class="rep-desc" id="repDesc"></div>
+          </div>
+          <div class="rep-mod" id="repMod"></div>
+        </div>
+      </div>
+
+      <div class="total-row">
+        <div>
+          <div class="total-label">Final price</div>
+          <div class="total-sub" id="totalSub"></div>
+        </div>
+        <div class="total-val" id="totalVal">—</div>
+      </div>
     </div>
-    <div class="total-val" id="totalVal">—</div>
   </div>
-</div>
 </div>
 
 <script>
 const RARITY_BADGE={Common:'r-common',Uncommon:'r-uncommon',Rare:'r-rare','Very Rare':'r-very-rare',Legendary:'r-legendary',Artifact:'r-artifact'};
 const CRAFT={Common:{days:5,cost:'50 gp'},Uncommon:{days:10,cost:'200 gp'},Rare:{days:50,cost:'2,000 gp'},'Very Rare':{days:125,cost:'20,000 gp'},Legendary:{days:250,cost:'100,000 gp'}};
-const REP_TIERS=[
-  {min:1,max:1,name:'Enemy',desc:'They despise you — expect hostility',mult:4.0,bg:'rgba(139,26,26,0.35)',nameColor:'#e87a7a',descColor:'#a86060',modLabel:'+300%'},
-  {min:2,max:5,name:'Unfriendly',desc:'Suspicion and dislike colour the deal',mult:2.0,bg:'rgba(120,80,20,0.35)',nameColor:'#d4a050',descColor:'#a07840',modLabel:'+100%'},
-  {min:6,max:10,name:'Acquaintance',desc:'Neutral ground — just business',mult:1.5,bg:'rgba(80,80,80,0.3)',nameColor:'#c8c0b0',descColor:'#908880',modLabel:'+50%'},
-  {min:11,max:15,name:'Friend',desc:'Standard pricing — mutual respect',mult:1.0,bg:'rgba(30,80,30,0.3)',nameColor:'#7ad47a',descColor:'#50a050',modLabel:'Standard'},
-  {min:16,max:19,name:'Trusted Ally',desc:'They would give you the world',mult:0.75,bg:'rgba(20,60,90,0.4)',nameColor:'#7ab8e8',descColor:'#4a88b8',modLabel:'-25%'},
-  {min:20,max:20,name:'Adored — Natural 20!',desc:'Legends are told of your reputation',mult:0.5,bg:'rgba(80,40,120,0.4)',nameColor:'#c8a0f8',descColor:'#9070c8',modLabel:'-50%'},
+const REP=[
+  {min:1,max:1,name:'Enemy',desc:'They despise you',mult:4.0,bg:'rgba(139,26,26,0.35)',nc:'#e87a7a',dc:'#a86060',ml:'+300%'},
+  {min:2,max:5,name:'Unfriendly',desc:'Suspicion colours the deal',mult:2.0,bg:'rgba(120,80,20,0.35)',nc:'#d4a050',dc:'#a07840',ml:'+100%'},
+  {min:6,max:10,name:'Acquaintance',desc:'Neutral — just business',mult:1.5,bg:'rgba(80,80,80,0.3)',nc:'#c8c0b0',dc:'#908880',ml:'+50%'},
+  {min:11,max:15,name:'Friend',desc:'Standard pricing — mutual respect',mult:1.0,bg:'rgba(30,80,30,0.3)',nc:'#7ad47a',dc:'#50a050',ml:'Standard'},
+  {min:16,max:19,name:'Trusted Ally',desc:'They would give you the world',mult:0.75,bg:'rgba(20,60,90,0.4)',nc:'#7ab8e8',dc:'#4a88b8',ml:'-25%'},
+  {min:20,max:20,name:'Natural 20 — Adored!',desc:'Legends are told of your name',mult:0.5,bg:'rgba(80,40,120,0.4)',nc:'#c8a0f8',dc:'#9070c8',ml:'-50%'},
 ];
-function getTier(r){return REP_TIERS.find(t=>r>=t.min&&r<=t.max)||REP_TIERS[2];}
+function getTier(r){return REP.find(t=>r>=t.min&&r<=t.max)||REP[2];}
 
-function ingItem(name,rarity,costCp){
+function ing(name,rarity,costCp){
   const costStr={500:'5 gp',1000:'10 gp',5000:'50 gp',15000:'150 gp',50000:'500 gp'}[costCp]||costCp+' cp';
-  const tier={Common:'Common ingredient',Uncommon:'Uncommon ingredient',Rare:'Rare ingredient','Very Rare':'Very rare ingredient',Legendary:'Legendary ingredient'}[rarity]||'Ingredient';
-  return{name,cost:costStr,baseCost:costCp,note:'',rarity,details:{Rarity:rarity,Type:tier,Use:'Alchemy / crafting / potions'}};
+  return{name,cost:costStr,baseCost:costCp,note:'',rarity,details:{Rarity:rarity,Type:'Ingredient',Use:'Alchemy / crafting'}};
 }
 
 const data={
-  "Ingredients":[
-    ingItem('Bittergreen Leaf','Common',500),ingItem('Sageroot','Common',500),ingItem('Fennel Silk','Common',500),
-    ingItem('Lavender Sprig','Common',500),ingItem('Hyacinth Nectar','Common',500),ingItem('Mandrake Root (young)','Common',500),
-    ingItem('Milkweed Seeds','Common',500),ingItem('Wild Thyme','Common',500),ingItem('Ashmoss','Common',500), ingItem('Poppy Resin','Common',500),
-    ingItem('Dewcap Mushroom','Common',500),ingItem('River Reed Pith','Common',500),ingItem('Bracken Fern Curl','Common',500),
-    ingItem('Charleaf','Common',500),ingItem('Soft Bark Shavings','Common',500),ingItem('Hollowstem Grass','Common',500),
-    ingItem('Ironpetal Weed','Common',500),ingItem('Yellowdock Root','Common',500),ingItem('Cracked Acorns','Common',500),
-    ingItem('Bluecap Fungus','Common',500),ingItem('Ember Ash Residue','Common',500),ingItem('Field Clover','Common',500), ingItem('Thick Plant Sap','Common',500),
-    ingItem('Green Nettle','Common',500),ingItem('Sungrass','Common',500),ingItem('Dandelion Sap','Common',500), ingItem('Fermented Fruit Mash','Common',500),
-    ingItem('Thistle Spine','Common',500),ingItem('Pine Resin','Common',500),ingItem('Oak Gall','Common',500), ingItem('Nutmeg','Common',500),
-    ingItem('Willow Bark','Common',500),ingItem('Mudwort','Common',500),ingItem('Dry Moss Clump','Common',500), ingItem('Charcoal','Common',500),
-    ingItem('Dried Ephedra','Uncommon',1000),ingItem('Ginkgo Brush','Uncommon',1000),ingItem('Silverthorn Vine','Uncommon',1000),
-    ingItem('Ghostcap Mushroom','Uncommon',1000),ingItem('Frostmint','Uncommon',1000),ingItem('Bloodleaf','Uncommon',1000),
-    ingItem('Hollowbone Reed','Uncommon',1000),ingItem('Glowmoss Cluster','Uncommon',1000),ingItem('Stormpetal Flower','Uncommon',1000),
-    ingItem('Duskwheat Husk','Uncommon',1000),ingItem('Ironroot Shard','Uncommon',1000),ingItem('Brimstone Lichen','Uncommon',1000),
-    ingItem('Mire Lotus','Uncommon',1000),ingItem('Black Sap Resin','Uncommon',1000),ingItem('Thundertwig Bark','Uncommon',1000),
-    ingItem('Veilflower','Uncommon',1000),ingItem('Pale Widow Fern','Uncommon',1000),ingItem('Bog Lantern Pod','Uncommon',1000),
-    ingItem('Owlfeather Down','Uncommon',1000),ingItem('Cinderbloom','Uncommon',1000),ingItem('Redthorn Stem','Uncommon',1000), ingItem('Wormwood','Uncommon',1000),
-    ingItem('Deepwater Kelp','Uncommon',1000),ingItem('Grave Soil Sample','Uncommon',1000),ingItem('Smokeflower','Uncommon',1000),
-    ingItem('Shardcap Fungus','Uncommon',1000),ingItem('Night Reed','Uncommon',1000),ingItem('Cold Iron Filings','Uncommon',1000),
-    ingItem('Amber Sap','Uncommon',1000),ingItem('Moon Dew','Uncommon',1000),ingItem('Tangleweed','Uncommon',1000),
-    ingItem('Chromus Slime','Rare',5000),ingItem('Eyebright Cluster','Rare',5000),ingItem('Nightshade Bloom','Rare',5000),
-    ingItem('Wolfsbane','Rare',5000),ingItem('Blood Tree Sap','Rare',5000),ingItem('Spiritcap Mushroom','Rare',5000),
-    ingItem('Gravebloom','Rare',5000),ingItem('Moonlit Mycelium','Rare',5000),ingItem('Shadethorn Branch','Rare',5000),
-    ingItem('Wyrmtongue Petals','Rare',5000),ingItem('Carrion Crawler Mucus','Rare',5000),ingItem('Phoenix Ash','Rare',5000),
-    ingItem("Dreamer's Root",'Rare',5000),ingItem('Veinstalk Tendril','Rare',5000),ingItem('Widow Orchid','Rare',5000),
-    ingItem('Blackmilk Resin','Rare',5000),ingItem('Echo Seed','Rare',5000),ingItem('Pale Heartwood','Rare',5000),
-    ingItem('Owlbone Fragment','Rare',5000),ingItem('Refined Venom Sac','Rare',5000),ingItem('Shadow Resin','Rare',5000),
-    ingItem('Feyspore Cluster','Rare',5000),ingItem('Gloomshade Petal','Rare',5000),ingItem('Bone Ash Powder','Rare',5000),
-    ingItem('Ethereal Sap','Rare',5000),ingItem('Ghoul Fungus','Rare',5000),ingItem('Ironwood Core','Rare',5000),
-    ingItem('Storm Residue Crystal','Rare',5000),ingItem('Glassleaf','Rare',5000),ingItem('Sorrowmoss','Rare',5000),
-    ingItem('Wyvern Poison Gland','Very Rare',15000),ingItem('Purple Worm Toxin','Very Rare',15000),ingItem('Dragon Blood','Very Rare',15000),
-    ingItem('Lightning-Struck Corewood','Very Rare',15000),ingItem('White Ghost Orchid Seeds','Very Rare',15000),ingItem('Aasimar Feather','Very Rare',15000),
-    ingItem('Voidglass Shard','Very Rare',15000),ingItem('Heartfire Ember','Very Rare',15000),ingItem('Temporal Residue','Very Rare',15000),
-    ingItem('Soulroot Cluster','Very Rare',15000),ingItem('Demon Ichor','Very Rare',15000),ingItem('Celestial Sap','Very Rare',15000),
-    ingItem('Storm Giant Nail Fragment','Very Rare',15000),ingItem('Rift Salt Crystal','Very Rare',15000),ingItem('Memory Pollen','Very Rare',15000),
-    ingItem('Black Halo Fungus','Very Rare',15000),ingItem('Ashen Halo Petal','Very Rare',15000),ingItem('Gloam Silk Thread','Very Rare',15000),
-    ingItem('Echoing Bone Dust','Very Rare',15000),ingItem('Arcane Catalyst Crystal','Very Rare',15000),ingItem('Phase Spider Silk','Very Rare',15000),
-    ingItem('Planar Residue','Very Rare',15000),ingItem('Bloodstone Core','Very Rare',15000),ingItem('Astral Dust','Very Rare',15000),
-    ingItem('Runebound Ore','Very Rare',15000),ingItem('Spellscar Tissue','Very Rare',15000),ingItem('Void Bloom','Very Rare',15000),
-    ingItem('Starfallen Fragment','Very Rare',15000),ingItem('Lifebinder Sap','Very Rare',15000),ingItem('Null Essence','Very Rare',15000),
-    ingItem('Pure Dragon Heartblood','Legendary',50000),ingItem('Archdemon Ichor','Legendary',50000),ingItem('Celestial Tear','Legendary',50000),
-    ingItem('Hourglass Sand','Legendary',50000),ingItem('First Flame Cinder','Legendary',50000),ingItem('World Tree Root','Legendary',50000),
-    ingItem('Living Shadow Fragment','Legendary',50000),ingItem('Bound Soul Vessel','Legendary',50000),ingItem('Phoenix Heartseed','Legendary',50000),
-    ingItem('Time-Fractured Crystal','Legendary',50000),ingItem('True Name Inscription','Legendary',50000),ingItem('Serpent Coil Fragment','Legendary',50000),
-    ingItem('Voidborn Essence','Legendary',50000),ingItem('Fatewoven Thread','Legendary',50000),ingItem("King's Blood",'Legendary',50000),
-    ingItem('Final Feather','Legendary',50000),ingItem('Forgotten Ash','Legendary',50000),ingItem('Divine Spark','Legendary',50000),
-    ingItem('Primordial Core','Legendary',50000),ingItem('Eternal Ember','Legendary',50000),
-  ],
-  "Services":[
-    {name:"Coach cab (between towns)",cost:"3 cp/mile",baseCost:null,note:"per mile",details:{}},
-    {name:"Coach cab (within a city)",cost:"1 cp",baseCost:1,note:"",details:{}},
-    {name:"Hireling — skilled",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
-    {name:"Hireling — unskilled",cost:"2 sp/day",baseCost:20,note:"per day",details:{}},
-    {name:"Messenger",cost:"2 cp/mile",baseCost:null,note:"per mile",details:{}},
-    {name:"Road/Gate toll",cost:"1 cp",baseCost:1,note:"",details:{}},
-    {name:"Ship's passage",cost:"1 sp/mile",baseCost:null,note:"per mile",details:{}},
-    {name:"Spell — 1st level",cost:"10–30 gp + components",baseCost:null,note:"",details:{}},
-    {name:"Spell — 2nd level",cost:"30–50 gp + components",baseCost:null,note:"",details:{}},
-    {name:"Spell — 3rd level+",cost:"Negotiable",baseCost:null,note:"possibly an errand or quest",details:{}},
-  ],
-  "Tavern":[
-    {name:"Cindrel Brew (Coffee) — mug",cost:"2 sp",baseCost:20,note:"",details:{}},
-    {name:"Honeyed Spirit (Mead) — mug",cost:"2 sp",baseCost:20,note:"",details:{}},
-    {name:"Wellish Ale (Whisky)— mug",cost:"2 sp",baseCost:20,note:"",details:{}},
-    {name:"Bread, loaf",cost:"1 sp",baseCost:10,note:"",details:{}},{name:"Cheese, hunk",cost:"1 sp",baseCost:10,note:"",details:{}},
-    {name:"Meat, chunk",cost:"3 sp",baseCost:30,note:"",details:{}},{name:"Wine — common (pitcher)",cost:"2 sp",baseCost:20,note:"",details:{}},
-    {name:"Wine — fine (bottle)",cost:"1 gp",baseCost:1000,note:"",details:{}},
-    {name:"Inn — squalid",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
-    {name:"Inn — modest",cost:"4 gp/day",baseCost:400,note:"per day",details:{}},
-    {name:"Inn — wealthy",cost:"6 gp/day",baseCost:600,note:"per day",details:{}},
-    {name:"Meals — squalid",cost:"3 sp/day",baseCost:30,note:"per day",details:{}},
-    {name:"Meals — modest",cost:"6 sp/day",baseCost:60,note:"per day",details:{}},
-    {name:"Meals — wealthy",cost:"1 gp/day",baseCost:100,note:"per day",details:{}},
-  ],
-  "Armor":[
-    {name:"Padded armor",cost:"5 gp",baseCost:500,note:"",details:{Type:"Light",AC:"11 + Dex",Weight:"8 lb",Stealth:"Disadvantage"}},
-    {name:"Leather armor",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Light",AC:"11 + Dex",Weight:"10 lb"}},
-    {name:"Studded leather",cost:"45 gp",baseCost:4500,note:"",details:{Type:"Light",AC:"12 + Dex",Weight:"13 lb"}},
-    {name:"Hide armor",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Medium",AC:"12 + Dex (max 2)",Weight:"12 lb"}},
-    {name:"Chain shirt",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Medium",AC:"13 + Dex (max 2)",Weight:"20 lb"}},
-    {name:"Scale mail",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Medium",AC:"14 + Dex (max 2)",Weight:"45 lb",Stealth:"Disadvantage"}},
-    {name:"Breastplate",cost:"400 gp",baseCost:40000,note:"",details:{Type:"Medium",AC:"14 + Dex (max 2)",Weight:"20 lb"}},
-    {name:"Half plate",cost:"750 gp",baseCost:75000,note:"",details:{Type:"Medium",AC:"15 + Dex (max 2)",Weight:"40 lb",Stealth:"Disadvantage"}},
-    {name:"Ring mail",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Heavy",AC:"14",Weight:"40 lb",Stealth:"Disadvantage"}},
-    {name:"Chain mail",cost:"75 gp",baseCost:7500,note:"",details:{Type:"Heavy",AC:"16",Weight:"55 lb",Stealth:"Disadvantage"}},
-    {name:"Splint armor",cost:"200 gp",baseCost:20000,note:"",details:{Type:"Heavy",AC:"17",Weight:"60 lb",Stealth:"Disadvantage"}},
-    {name:"Plate armor",cost:"1,500 gp",baseCost:150000,note:"",details:{Type:"Heavy",AC:"18",Weight:"65 lb",Stealth:"Disadvantage"}},
-    {name:"Shield",cost:"10 gp",baseCost:1000,note:"",details:{AC:"+2",Weight:"6 lb"}},
-  ],
-  "Weapons":[
-    {name:"Club",cost:"1 sp",baseCost:10,note:"",details:{Damage:"1d4 B",Weight:"2 lb",Type:"Simple melee"}}, {name:"Weapon Sharpening",cost:"1 gp",baseCost:100,note:"",details:{Type:"Simple melee"}},
-    {name:"Dagger",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 P",Weight:"1 lb",Type:"Simple melee",Properties:"Finesse, Thrown (20/60)"}},
-    {name:"Greatclub",cost:"2 sp",baseCost:20,note:"",details:{Damage:"1d8 B",Weight:"10 lb",Type:"Simple melee",Properties:"Two-handed"}},
-    {name:"Handaxe",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 S",Weight:"2 lb",Type:"Simple melee",Properties:"Thrown (20/60)"}},
-    {name:"Javelin",cost:"5 sp",baseCost:50,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Simple melee",Properties:"Thrown (30/120)"}},
-    {name:"Light hammer",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 B",Weight:"2 lb",Type:"Simple melee",Properties:"Thrown (20/60)"}},
-    {name:"Mace",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 B",Weight:"4 lb",Type:"Simple melee"}},
-    {name:"Quarterstaff",cost:"2 sp",baseCost:20,note:"",details:{Damage:"1d6 B",Weight:"4 lb",Type:"Simple melee",Properties:"Versatile (1d8)"}},
-    {name:"Sickle",cost:"1 gp",baseCost:100,note:"",details:{Damage:"1d4 S",Weight:"2 lb",Type:"Simple melee"}},
-    {name:"Spear",cost:"1 gp",baseCost:100,note:"",details:{Damage:"1d6 P",Weight:"3 lb",Type:"Simple melee",Properties:"Thrown (20/60), Versatile (1d8)"}},
-    {name:"Crossbow, light",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d8 P",Weight:"5 lb",Type:"Simple ranged",Properties:"Ammunition, Range (80/320), Two-handed"}},
-    {name:"Dart",cost:"5 cp",baseCost:5,note:"",details:{Damage:"1d4 P",Weight:"¼ lb",Type:"Simple ranged",Properties:"Finesse, Thrown (20/60)"}},
-    {name:"Shortbow",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Simple ranged",Properties:"Ammunition, Range (80/320), Two-handed"}},
-    {name:"Sling",cost:"1 sp",baseCost:10,note:"",details:{Damage:"1d4 B",Weight:"—",Type:"Simple ranged",Properties:"Ammunition, Range (30/120)"}},
-    {name:"Battleaxe",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1d8 S",Weight:"4 lb",Type:"Martial melee",Properties:"Versatile (1d10)"}},
-    {name:"Flail",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1d8 B",Weight:"2 lb",Type:"Martial melee"}},
-    {name:"Glaive",cost:"20 gp",baseCost:2000,note:"",details:{Damage:"1d10 S",Weight:"6 lb",Type:"Martial melee",Properties:"Reach, Two-handed"}},
-    {name:"Greataxe",cost:"30 gp",baseCost:3000,note:"",details:{Damage:"1d12 S",Weight:"7 lb",Type:"Martial melee",Properties:"Two-handed"}},
-    {name:"Greatsword",cost:"50 gp",baseCost:5000,note:"",details:{Damage:"2d6 S",Weight:"6 lb",Type:"Martial melee",Properties:"Two-handed"}},
-    {name:"Halberd",cost:"20 gp",baseCost:2000,note:"",details:{Damage:"1d10 S",Weight:"6 lb",Type:"Martial melee",Properties:"Reach, Two-handed"}},
-    {name:"Lance",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1d12 P",Weight:"6 lb",Type:"Martial melee",Properties:"Reach, Special"}},
-    {name:"Longsword",cost:"15 gp",baseCost:1500,note:"",details:{Damage:"1d8 S",Weight:"3 lb",Type:"Martial melee",Properties:"Versatile (1d10)"}},
-    {name:"Maul",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"2d6 B",Weight:"10 lb",Type:"Martial melee",Properties:"Two-handed"}},
-    {name:"Morningstar",cost:"15 gp",baseCost:1500,note:"",details:{Damage:"1d8 P",Weight:"4 lb",Type:"Martial melee"}},
-    {name:"Pike",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d10 P",Weight:"18 lb",Type:"Martial melee",Properties:"Reach, Two-handed"}},
-    {name:"Rapier",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d8 P",Weight:"2 lb",Type:"Martial melee",Properties:"Finesse"}},
-    {name:"Scimitar",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d6 S",Weight:"3 lb",Type:"Martial melee",Properties:"Finesse"}},
-    {name:"Shortsword",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Martial melee",Properties:"Finesse"}},
-    {name:"Trident",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 P",Weight:"4 lb",Type:"Martial melee",Properties:"Thrown (20/60), Versatile (1d8)"}},
-    {name:"War pick",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d8 P",Weight:"2 lb",Type:"Martial melee"}},
-    {name:"Warhammer",cost:"15 gp",baseCost:1500,note:"",details:{Damage:"1d8 B",Weight:"2 lb",Type:"Martial melee",Properties:"Versatile (1d10)"}},
-    {name:"Whip",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 S",Weight:"3 lb",Type:"Martial melee",Properties:"Finesse, Reach"}},
-    {name:"Blowgun",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1 P",Weight:"1 lb",Type:"Martial ranged",Properties:"Ammunition, Range (25/100)"}},
-    {name:"Crossbow, hand",cost:"75 gp",baseCost:7500,note:"",details:{Damage:"1d6 P",Weight:"3 lb",Type:"Martial ranged",Properties:"Ammunition, Range (30/120)"}},
-    {name:"Crossbow, heavy",cost:"50 gp",baseCost:5000,note:"",details:{Damage:"1d10 P",Weight:"18 lb",Type:"Martial ranged",Properties:"Ammunition, Range (100/400), Two-handed"}},
-    {name:"Longbow",cost:"50 gp",baseCost:5000,note:"",details:{Damage:"1d8 P",Weight:"2 lb",Type:"Martial ranged",Properties:"Ammunition, Range (150/600), Two-handed"}},
-    {name:"Net",cost:"1 gp",baseCost:100,note:"",details:{Weight:"3 lb",Type:"Martial ranged",Properties:"Special, Thrown (5/15)"}},
-  ],
-  "Magic Items":[
-    {name:"Potion of healing",cost:"50 gp",baseCost:5000,note:"consumable",rarity:"Common",details:{Rarity:"Common",Type:"Potion",Heals:"2d4 + 2 HP",Attunement:"No"}},
-    {name:"Potion of greater healing",cost:"100 gp",baseCost:10000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Potion",Heals:"4d4 + 4 HP",Attunement:"No"}}, {name:"Potion of invisibility",cost:"100 gp",baseCost:10000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Potion",Duration:"1 Hour",Attunement:"No"}},
-    {name:"Potion of superior healing",cost:"500 gp",baseCost:50000,note:"consumable",rarity:"Rare",details:{Rarity:"Rare",Type:"Potion",Heals:"8d4 + 8 HP",Attunement:"No"}},
-    {name:"Potion of supreme healing",cost:"5,000 gp",baseCost:500000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Potion",Heals:"10d4 + 20 HP",Attunement:"No"}},
-    {name:"+1 weapon",cost:"400 gp + weapon cost",baseCost:40000,note:"+ base weapon cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Weapon",Bonus:"+1 attack & damage",Attunement:"No"}},
-    {name:"+2 weapon",cost:"4,000 gp + weapon cost",baseCost:400000,note:"+ base weapon cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon",Bonus:"+2 attack & damage",Attunement:"No"}},
-    {name:"+3 weapon",cost:"40,000 gp + weapon cost",baseCost:4000000,note:"+ base weapon cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Weapon",Bonus:"+3 attack & damage",Attunement:"No"}},
-    {name:"+1 armor",cost:"400 gp + armor cost",baseCost:40000,note:"+ base armor cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Armor",Bonus:"+1 AC",Attunement:"No"}},
-    {name:"+2 armor",cost:"4,000 gp + armor cost",baseCost:400000,note:"+ base armor cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Armor",Bonus:"+2 AC",Attunement:"No"}},
-    {name:"+3 armor",cost:"40,000 gp + armor cost",baseCost:4000000,note:"+ base armor cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Armor",Bonus:"+3 AC",Attunement:"No"}},
-    {name:"Bag of holding",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"No",Capacity:"500 lb / 64 cu ft"}},
-    {name:"Boots of elvenkind",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"No",Effect:"Silent movement"}},
-    {name:"Cloak of elvenkind",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes",Effect:"Advantage on Stealth"}},
-    {name:"Cloak of protection",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes",Bonus:"+1 AC & saving throws"}},
-    {name:"Gauntlets of ogre power",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes",Effect:"Strength set to 19"}},
-    {name:"Headband of intellect",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes",Effect:"Intelligence set to 19"}},
-    {name:"Immovable rod",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Rod",Attunement:"No",Effect:"Locks in place in the air"}},
-    {name:"Ring of protection",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Bonus:"+1 AC & saving throws"}},
-    {name:"Ring of invisibility",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Ring",Attunement:"Yes",Effect:"Turn invisible at will"}},
-    {name:"Staff of healing",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Staff",Attunement:"Yes (cleric, druid, paladin)",Charges:"10 (regain 1d6+4/dawn)"}},
-    {name:"Staff of power",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Staff",Attunement:"Yes (spellcaster)",Charges:"20 (regain 2d8+4/dawn)"}},
-    {name:"Staff of the magi",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Staff",Attunement:"Yes (spellcaster)",Charges:"50 (regain 4d6+2/dawn)"}},
-    {name:"Wand of fireballs",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wand",Attunement:"Yes (spellcaster)",Charges:"7 (regain 1d6+1/dawn)"}},
-    {name:"Wand of magic missiles",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wand",Attunement:"No",Charges:"7 (regain 1d6+1/dawn)"}},
-    {name:"Wand of lightning bolts",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wand",Attunement:"Yes (spellcaster)",Charges:"7 (regain 1d6+1/dawn)"}},
-    {name:"Amulet of health",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Constitution set to 19"}},
-    {name:"Belt of giant strength (hill)",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Strength set to 21"}},
-    {name:"Belt of giant strength (storm)",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Wondrous item",Attunement:"Yes",Effect:"Strength set to 29"}},
-    {name:"Boots of speed",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Double speed, bonus action"}},
-    {name:"Bracers of archery",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes",Bonus:"+2 damage with longbow/shortbow"}},
-    {name:"Cloak of displacement",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Disadvantage on attacks against you"}},
-    {name:"Cloak of invisibility",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Turn invisible (2hr/day total)"}},
-    {name:"Deck of many things",cost:"Priceless",baseCost:null,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Wondrous item",Attunement:"No",Warning:"Extremely dangerous"}},
-    {name:"Flame tongue",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon (any sword)",Attunement:"Yes",Effect:"2d6 extra fire damage, sheds light"}},
-    {name:"Holy avenger",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (any sword)",Attunement:"Yes (paladin)",Effect:"+3 bonus, radiant dmg vs undead/fiends"}},
-    {name:"Luck blade",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (any sword)",Attunement:"Yes",Effect:"+1, luck points, wish (1d4-1)"}},
-    {name:"Mantle of spell resistance",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Advantage on spell saving throws"}},
-    {name:"Pearl of power",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes (spellcaster)",Effect:"Recover one 3rd-level or lower spell slot"}},
-    {name:"Ring of feather falling",cost:"400 gp",baseCost:40000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Effect:"Always under Feather Fall"}},
-    {name:"Ring of regeneration",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Ring",Attunement:"Yes",Effect:"Regain 1d6 HP / 10 min"}},
-    {name:"Ring of spell storing",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Capacity:"Up to 5 levels of spells"}},
-    {name:"Ring of three wishes",cost:"Priceless",baseCost:null,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Ring",Attunement:"No",Effect:"Cast Wish 3 times, then mundane"}},
-    {name:"Robe of the archmagi",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Wondrous item",Attunement:"Yes (sorcerer, warlock, wizard)",Effect:"+2 spell DC, +2 spell attack, arcane res."}},
-    {name:"Rod of absorption",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Rod",Attunement:"Yes",Effect:"Absorb spells (max 50 levels)"}},
-    {name:"Sphere of annihilation",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Wondrous item",Attunement:"Yes",Effect:"2-foot void of nothingness"}},
-    {name:"Spell scroll (cantrip)",cost:"25 gp",baseCost:2500,note:"consumable",rarity:"Common",details:{Rarity:"Common",Type:"Scroll",Attunement:"No","Spell level":"Cantrip"}},
-    {name:"Spell scroll (1st level)",cost:"50 gp",baseCost:5000,note:"consumable",rarity:"Common",details:{Rarity:"Common",Type:"Scroll",Attunement:"No","Spell level":"1st"}},
-    {name:"Spell scroll (2nd level)",cost:"100 gp",baseCost:10000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Scroll",Attunement:"No","Spell level":"2nd"}},
-    {name:"Spell scroll (3rd level)",cost:"150 gp",baseCost:15000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Scroll",Attunement:"No","Spell level":"3rd"}},
-    {name:"Spell scroll (4th level)",cost:"500 gp",baseCost:50000,note:"consumable",rarity:"Rare",details:{Rarity:"Rare",Type:"Scroll",Attunement:"No","Spell level":"4th"}},
-    {name:"Spell scroll (5th level)",cost:"1,000 gp",baseCost:100000,note:"consumable",rarity:"Rare",details:{Rarity:"Rare",Type:"Scroll",Attunement:"No","Spell level":"5th"}},
-    {name:"Spell scroll (6th level)",cost:"2,000 gp",baseCost:200000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Scroll",Attunement:"No","Spell level":"6th"}},
-    {name:"Spell scroll (7th level)",cost:"4,000 gp",baseCost:400000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Scroll",Attunement:"No","Spell level":"7th"}},
-    {name:"Spell scroll (8th level)",cost:"8,000 gp",baseCost:800000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Scroll",Attunement:"No","Spell level":"8th"}},
-    {name:"Spell scroll (9th level)",cost:"20,000 gp",baseCost:2000000,note:"consumable",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Scroll",Attunement:"No","Spell level":"9th"}},
-    {name:"Sun blade",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon (longsword)",Attunement:"Yes",Effect:"+2, radiant dmg, sunlight, undead bane"}},
-    {name:"Sword of sharpness",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Weapon (slashing sword)",Attunement:"Yes",Effect:"Max damage die on 20, sever limbs"}},
-    {name:"Tome of clear thought",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Wondrous item",Attunement:"No",Effect:"+2 Intelligence (permanent), consumed"}},
-    {name:"Vorpal sword",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (slashing sword)",Attunement:"Yes",Effect:"+3, decapitate on a 20"}},
-    {name:"Wand of orcus",cost:"Priceless",baseCost:null,note:"",rarity:"Artifact",details:{Rarity:"Artifact",Type:"Wand",Attunement:"Yes",Effect:"Raise undead, massive death power"}},
-    {name:"Winged boots",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous item",Attunement:"Yes",Effect:"Fly speed = walking (4 hr/day)"}},
-    {name:"Wings of flying",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous item",Attunement:"Yes",Effect:"Fly speed 60 ft (1 hr, then rest)"}},
-  ],
-  "Trade Goods":[
-    {name:"Wheat (1 lb)",cost:"1 cp",baseCost:1,note:"",details:{}},{name:"Chicken",cost:"2 cp",baseCost:2,note:"",details:{}},
-    {name:"Salt (1 lb)",cost:"5 cp",baseCost:5,note:"",details:{}},{name:"Iron (1 lb)",cost:"1 sp",baseCost:10,note:"",details:{}},
-    {name:"Copper (1 lb)",cost:"5 sp",baseCost:50,note:"",details:{}},{name:"Ginger (1 lb)",cost:"1 gp",baseCost:100,note:"",details:{}},
-    {name:"Goat",cost:"1 gp",baseCost:100,note:"",details:{}},{name:"Sheep",cost:"2 gp",baseCost:200,note:"",details:{}},
-    {name:"Pig",cost:"3 gp",baseCost:300,note:"",details:{}},{name:"Silver (1 lb)",cost:"5 gp",baseCost:500,note:"",details:{}},
-    {name:"Silk (1 lb)",cost:"10 gp",baseCost:1000,note:"",details:{}},{name:"Cow",cost:"10 gp",baseCost:1000,note:"",details:{}},
-    {name:"Saffron (1 lb)",cost:"15 gp",baseCost:1500,note:"",details:{}},{name:"Ox",cost:"15 gp",baseCost:1500,note:"",details:{}},
-    {name:"Gold (1 lb)",cost:"50 gp",baseCost:5000,note:"",details:{}},{name:"Platinum (1 lb)",cost:"500 gp",baseCost:50000,note:"",details:{}},
-    {name:"Silver bar (2 lb)",cost:"10 gp",baseCost:1000,note:"",details:{Dimensions:'5"×2"×½"'}},{name:"Silver bar (5 lb)",cost:"25 gp",baseCost:2500,note:"",details:{Dimensions:'6"×2"×1"'}},
-    {name:"Gold bar (5 lb)",cost:"250 gp",baseCost:25000,note:"",details:{Dimensions:'5"×2"×¾"'}},
-  ],
-  "Tools":[
-    {name:"Alchemist's supplies",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
-    {name:"Brewer's supplies",cost:"20 gp",baseCost:2000,note:"",details:{Type:"Artisan's tools",Weight:"9 lb"}},
-    {name:"Calligrapher's supplies",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Artisan's tools",Weight:"5 lb"}},
-    {name:"Carpenter's tools",cost:"8 gp",baseCost:800,note:"",details:{Type:"Artisan's tools",Weight:"6 lb"}},
-    {name:"Cook's utensils",cost:"1 gp",baseCost:100,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
-    {name:"Glassblower's tools",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Artisan's tools",Weight:"5 lb"}},
-    {name:"Jeweler's tools",cost:"25 gp",baseCost:2500,note:"",details:{Type:"Artisan's tools",Weight:"2 lb"}},
-    {name:"Leatherworker's tools",cost:"5 gp",baseCost:500,note:"",details:{Type:"Artisan's tools",Weight:"5 lb"}},
-    {name:"Mason's tools",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
-    {name:"Painter's supplies",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Artisan's tools",Weight:"5 lb"}},
-    {name:"Smith's tools",cost:"20 gp",baseCost:2000,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
-    {name:"Tinker's tools",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Artisan's tools",Weight:"10 lb"}},
-    {name:"Herbalism kit",cost:"5 gp",baseCost:500,note:"",details:{Weight:"3 lb"}},
-    {name:"Navigator's tools",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"2 lb"}},
-    {name:"Poisoner's kit",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"2 lb"}},
-    {name:"Thieves' tools",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"1 lb"}},
-    {name:"Disguise kit",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"3 lb"}},
-    {name:"Forgery kit",cost:"15 gp",baseCost:1500,note:"",details:{Weight:"5 lb"}},
-    {name:"Bagpipes",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Musical instrument",Weight:"6 lb"}},
-    {name:"Drum",cost:"6 gp",baseCost:600,note:"",details:{Type:"Musical instrument",Weight:"3 lb"}},
-    {name:"Flute",cost:"2 gp",baseCost:200,note:"",details:{Type:"Musical instrument",Weight:"1 lb"}},
-    {name:"Lute",cost:"35 gp",baseCost:3500,note:"",details:{Type:"Musical instrument",Weight:"2 lb"}},
-    {name:"Lyre",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Musical instrument",Weight:"2 lb"}},
-    {name:"Horn",cost:"3 gp",baseCost:300,note:"",details:{Type:"Musical instrument",Weight:"2 lb"}},
-    {name:"Viol",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Musical instrument",Weight:"1 lb"}},
-  ],
-  "Mounts":[
-    {name:"Camel",cost:"50 gp",baseCost:5000,note:"",details:{Speed:"50 ft",Carrying:"480 lb"}},
-    {name:"Donkey or mule",cost:"8 gp",baseCost:800,note:"",details:{Speed:"40 ft",Carrying:"420 lb"}},
-    {name:"Horse, draft",cost:"50 gp",baseCost:5000,note:"",details:{Speed:"40 ft",Carrying:"540 lb"}},
-    {name:"Horse, riding",cost:"75 gp",baseCost:7500,note:"",details:{Speed:"60 ft",Carrying:"480 lb"}},
-    {name:"Mastiff",cost:"25 gp",baseCost:2500,note:"",details:{Speed:"40 ft",Carrying:"195 lb"}},
-    {name:"Pony",cost:"30 gp",baseCost:3000,note:"",details:{Speed:"40 ft",Carrying:"225 lb"}},
-    {name:"Warhorse",cost:"400 gp",baseCost:40000,note:"",details:{Speed:"60 ft",Carrying:"540 lb"}},
-    {name:"Carriage",cost:"100 gp",baseCost:10000,note:"",details:{Weight:"600 lb"}},
-    {name:"Cart",cost:"15 gp",baseCost:1500,note:"",details:{Weight:"200 lb"}},
-    {name:"Wagon",cost:"35 gp",baseCost:3500,note:"",details:{Weight:"400 lb"}},
-    {name:"Saddle — riding",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"25 lb"}},
-    {name:"Saddlebags",cost:"4 gp",baseCost:400,note:"",details:{Weight:"8 lb"}},
-    {name:"Feed (per day)",cost:"5 cp",baseCost:5,note:"per day",details:{}},
-    {name:"Stabling (per day)",cost:"5 sp",baseCost:50,note:"per day",details:{}},
-  ],
-  "Ships":[
-    {name:"Galley",cost:"30,000 gp",baseCost:3000000,note:"",details:{Speed:"4 mph"}},
-    {name:"Keelboat",cost:"3,000 gp",baseCost:300000,note:"",details:{Speed:"1 mph"}},
-    {name:"Longship",cost:"10,000 gp",baseCost:1000000,note:"",details:{Speed:"3 mph"}},
-    {name:"Rowboat",cost:"50 gp",baseCost:5000,note:"",details:{Speed:"1.5 mph"}},
-    {name:"Sailing ship",cost:"10,000 gp",baseCost:1000000,note:"",details:{Speed:"2 mph"}},
-    {name:"Warship",cost:"25,000 gp",baseCost:2500000,note:"",details:{Speed:"2.5 mph"}},
-  ],
-  "Gear":[
-    {name:"Abacus",cost:"2 gp",baseCost:200,note:"",details:{Weight:"2 lb"}},{name:"Acid (vial)",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"1 lb"}},
-    {name:"Alchemist's fire (flask)",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"1 lb"}},{name:"Antitoxin (vial)",cost:"50 gp",baseCost:5000,note:"",details:{}},
-    {name:"Arrows (20)",cost:"1 gp",baseCost:100,note:"",details:{Weight:"1 lb"}},{name:"Backpack",cost:"2 gp",baseCost:200,note:"",details:{Weight:"5 lb"}},
-    {name:"Bedroll",cost:"1 gp",baseCost:100,note:"",details:{Weight:"7 lb"}},{name:"Blanket",cost:"5 sp",baseCost:50,note:"",details:{Weight:"3 lb"}},
-    {name:"Book (common)",cost:"20 gp",baseCost:2000,note:"",details:{Weight:"5 lb"}},{name:"Chain (10 feet)",cost:"5 gp",baseCost:500,note:"",details:{Weight:"10 lb"}},
-    {name:"Climber's kit",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"12 lb"}},{name:"Clothes, common",cost:"5 sp",baseCost:50,note:"",details:{Weight:"3 lb"}},
-    {name:"Clothes, fine",cost:"15 gp",baseCost:1500,note:"",details:{Weight:"6 lb"}},{name:"Clothes, traveler's",cost:"2 gp",baseCost:200,note:"",details:{Weight:"4 lb"}},
-    {name:"Component pouch",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"2 lb"}},{name:"Crowbar",cost:"2 gp",baseCost:200,note:"",details:{Weight:"5 lb"}},
-    {name:"Grappling hook",cost:"2 gp",baseCost:200,note:"",details:{Weight:"4 lb"}},{name:"Healer's kit",cost:"5 gp",baseCost:500,note:"",details:{Weight:"3 lb"}},
-    {name:"Holy water (flask)",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"1 lb"}},{name:"Hunting trap",cost:"5 gp",baseCost:500,note:"",details:{Weight:"25 lb"}},
-    {name:"Lantern, bullseye",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"2 lb"}},{name:"Lantern, hooded",cost:"5 gp",baseCost:500,note:"",details:{Weight:"2 lb"}},
-    {name:"Lock",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"1 lb"}},{name:"Magnifying glass",cost:"100 gp",baseCost:10000,note:"",details:{}},
-    {name:"Manacles",cost:"2 gp",baseCost:200,note:"",details:{Weight:"6 lb"}},{name:"Mirror, steel",cost:"5 gp",baseCost:500,note:"",details:{Weight:"½ lb"}},
-    {name:"Oil (flask)",cost:"1 sp",baseCost:10,note:"",details:{Weight:"1 lb"}},{name:"Poison, basic (vial)",cost:"100 gp",baseCost:10000,note:"",details:{}},
-    {name:"Potion of healing",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"½ lb"}},{name:"Rations (1 day)",cost:"5 sp",baseCost:50,note:"per day",details:{Weight:"2 lb"}},
-    {name:"Rope, hempen (50 ft)",cost:"1 gp",baseCost:100,note:"",details:{Weight:"10 lb"}},{name:"Rope, silk (50 ft)",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"5 lb"}},
-    {name:"Spellbook",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"3 lb"}},{name:"Spyglass",cost:"1,000 gp",baseCost:100000,note:"",details:{Weight:"1 lb"}},
-    {name:"Tent, two-person",cost:"2 gp",baseCost:200,note:"",details:{Weight:"20 lb"}},{name:"Torch",cost:"1 cp",baseCost:1,note:"",details:{Weight:"1 lb"}},
-    {name:"Waterskin",cost:"2 sp",baseCost:20,note:"",details:{Weight:"5 lb (full)"}},
-  ],
+"Ingredients":[
+  ing('Bittergreen Leaf','Common',500),ing('Sageroot','Common',500),ing('Fennel Silk','Common',500),ing('Lavender Sprig','Common',500),
+  ing('Hyacinth Nectar','Common',500),ing('Mandrake Root','Common',500),ing('Milkweed Seeds','Common',500),ing('Wild Thyme','Common',500),
+  ing('Ashmoss','Common',500),ing('Poppy Resin','Common',500),ing('Dewcap Mushroom','Common',500),ing('Charcoal','Common',500),
+  ing('Pine Resin','Common',500),ing('Willow Bark','Common',500),ing('Oak Gall','Common',500),ing('Sungrass','Common',500),
+  ing('Dried Ephedra','Uncommon',1000),ing('Ginkgo Brush','Uncommon',1000),ing('Silverthorn Vine','Uncommon',1000),
+  ing('Ghostcap Mushroom','Uncommon',1000),ing('Frostmint','Uncommon',1000),ing('Bloodleaf','Uncommon',1000),
+  ing('Glowmoss Cluster','Uncommon',1000),ing('Stormpetal Flower','Uncommon',1000),ing('Brimstone Lichen','Uncommon',1000),
+  ing('Wormwood','Uncommon',1000),ing('Moon Dew','Uncommon',1000),ing('Cinderbloom','Uncommon',1000),
+  ing('Chromus Slime','Rare',5000),ing('Eyebright Cluster','Rare',5000),ing('Nightshade Bloom','Rare',5000),
+  ing('Wolfsbane','Rare',5000),ing('Blood Tree Sap','Rare',5000),ing('Phoenix Ash','Rare',5000),
+  ing("Dreamer's Root",'Rare',5000),ing('Wyrmtongue Petals','Rare',5000),ing('Feyspore Cluster','Rare',5000),
+  ing('Wyvern Poison Gland','Very Rare',15000),ing('Dragon Blood','Very Rare',15000),ing('Demon Ichor','Very Rare',15000),
+  ing('Celestial Sap','Very Rare',15000),ing('Voidglass Shard','Very Rare',15000),ing('Phase Spider Silk','Very Rare',15000),
+  ing('Pure Dragon Heartblood','Legendary',50000),ing('Archdemon Ichor','Legendary',50000),ing('Celestial Tear','Legendary',50000),
+  ing('Phoenix Heartseed','Legendary',50000),ing('Divine Spark','Legendary',50000),ing('Primordial Core','Legendary',50000),
+],
+"Services":[
+  {name:"Coach cab (city)",cost:"1 cp",baseCost:1,note:"",details:{}},
+  {name:"Coach cab (between towns)",cost:"3 cp/mile",baseCost:null,note:"per mile",details:{}},
+  {name:"Hireling — skilled",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
+  {name:"Hireling — unskilled",cost:"2 sp/day",baseCost:20,note:"per day",details:{}},
+  {name:"Messenger",cost:"2 cp/mile",baseCost:null,note:"per mile",details:{}},
+  {name:"Road/Gate toll",cost:"1 cp",baseCost:1,note:"",details:{}},
+  {name:"Ship's passage",cost:"1 sp/mile",baseCost:null,note:"per mile",details:{}},
+  {name:"Spell — 1st level",cost:"10–30 gp",baseCost:null,note:"+ components",details:{}},
+  {name:"Spell — 2nd level",cost:"30–50 gp",baseCost:null,note:"+ components",details:{}},
+  {name:"Spell — 3rd level+",cost:"Negotiable",baseCost:null,note:"possibly a quest",details:{}},
+],
+"Tavern":[
+  {name:"Cindrel Brew (Coffee)",cost:"2 sp",baseCost:20,note:"mug",details:{}},
+  {name:"Honeyed Mead",cost:"2 sp",baseCost:20,note:"mug",details:{}},
+  {name:"Wellish Ale",cost:"2 sp",baseCost:20,note:"mug",details:{}},
+  {name:"Bread, loaf",cost:"1 sp",baseCost:10,note:"",details:{}},
+  {name:"Cheese, hunk",cost:"1 sp",baseCost:10,note:"",details:{}},
+  {name:"Meat, chunk",cost:"3 sp",baseCost:30,note:"",details:{}},
+  {name:"Wine — common",cost:"2 sp",baseCost:20,note:"pitcher",details:{}},
+  {name:"Wine — fine",cost:"1 gp",baseCost:100,note:"bottle",details:{}},
+  {name:"Inn — squalid",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
+  {name:"Inn — modest",cost:"4 gp/day",baseCost:400,note:"per day",details:{}},
+  {name:"Inn — wealthy",cost:"6 gp/day",baseCost:600,note:"per day",details:{}},
+  {name:"Meals — squalid",cost:"3 sp/day",baseCost:30,note:"per day",details:{}},
+  {name:"Meals — modest",cost:"6 sp/day",baseCost:60,note:"per day",details:{}},
+  {name:"Meals — wealthy",cost:"1 gp/day",baseCost:100,note:"per day",details:{}},
+],
+"Armor":[
+  {name:"Padded armor",cost:"5 gp",baseCost:500,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"8 lb",Stealth:"Disadv."}},
+  {name:"Leather armor",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"10 lb"}},
+  {name:"Studded leather",cost:"45 gp",baseCost:4500,note:"",details:{Type:"Light",AC:"12+Dex",Weight:"13 lb"}},
+  {name:"Hide armor",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Medium",AC:"12+Dex(2)",Weight:"12 lb"}},
+  {name:"Chain shirt",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Medium",AC:"13+Dex(2)",Weight:"20 lb"}},
+  {name:"Scale mail",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Medium",AC:"14+Dex(2)",Weight:"45 lb",Stealth:"Disadv."}},
+  {name:"Breastplate",cost:"400 gp",baseCost:40000,note:"",details:{Type:"Medium",AC:"14+Dex(2)",Weight:"20 lb"}},
+  {name:"Half plate",cost:"750 gp",baseCost:75000,note:"",details:{Type:"Medium",AC:"15+Dex(2)",Weight:"40 lb",Stealth:"Disadv."}},
+  {name:"Ring mail",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Heavy",AC:"14",Weight:"40 lb",Stealth:"Disadv."}},
+  {name:"Chain mail",cost:"75 gp",baseCost:7500,note:"",details:{Type:"Heavy",AC:"16",Weight:"55 lb",Stealth:"Disadv."}},
+  {name:"Splint armor",cost:"200 gp",baseCost:20000,note:"",details:{Type:"Heavy",AC:"17",Weight:"60 lb",Stealth:"Disadv."}},
+  {name:"Plate armor",cost:"1,500 gp",baseCost:150000,note:"",details:{Type:"Heavy",AC:"18",Weight:"65 lb",Stealth:"Disadv."}},
+  {name:"Shield",cost:"10 gp",baseCost:1000,note:"",details:{AC:"+2",Weight:"6 lb"}},
+],
+"Weapons":[
+  {name:"Club",cost:"1 sp",baseCost:10,note:"",details:{Damage:"1d4 B",Weight:"2 lb",Type:"Simple melee"}},
+  {name:"Dagger",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 P",Weight:"1 lb",Type:"Simple melee",Props:"Finesse, Thrown"}},
+  {name:"Handaxe",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 S",Weight:"2 lb",Type:"Simple melee",Props:"Thrown (20/60)"}},
+  {name:"Javelin",cost:"5 sp",baseCost:50,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Simple melee"}},
+  {name:"Mace",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 B",Weight:"4 lb",Type:"Simple melee"}},
+  {name:"Quarterstaff",cost:"2 sp",baseCost:20,note:"",details:{Damage:"1d6 B",Weight:"4 lb",Type:"Simple melee",Props:"Versatile (1d8)"}},
+  {name:"Spear",cost:"1 gp",baseCost:100,note:"",details:{Damage:"1d6 P",Weight:"3 lb",Type:"Simple melee",Props:"Thrown, Versatile"}},
+  {name:"Crossbow, light",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d8 P",Weight:"5 lb",Type:"Simple ranged"}},
+  {name:"Shortbow",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Simple ranged"}},
+  {name:"Battleaxe",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1d8 S",Weight:"4 lb",Type:"Martial melee",Props:"Versatile (1d10)"}},
+  {name:"Glaive",cost:"20 gp",baseCost:2000,note:"",details:{Damage:"1d10 S",Weight:"6 lb",Type:"Martial melee",Props:"Reach, Two-handed"}},
+  {name:"Greataxe",cost:"30 gp",baseCost:3000,note:"",details:{Damage:"1d12 S",Weight:"7 lb",Type:"Martial melee"}},
+  {name:"Greatsword",cost:"50 gp",baseCost:5000,note:"",details:{Damage:"2d6 S",Weight:"6 lb",Type:"Martial melee"}},
+  {name:"Longsword",cost:"15 gp",baseCost:1500,note:"",details:{Damage:"1d8 S",Weight:"3 lb",Type:"Martial melee",Props:"Versatile (1d10)"}},
+  {name:"Rapier",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d8 P",Weight:"2 lb",Type:"Martial melee",Props:"Finesse"}},
+  {name:"Scimitar",cost:"25 gp",baseCost:2500,note:"",details:{Damage:"1d6 S",Weight:"3 lb",Type:"Martial melee",Props:"Finesse"}},
+  {name:"Shortsword",cost:"10 gp",baseCost:1000,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Martial melee",Props:"Finesse"}},
+  {name:"Warhammer",cost:"15 gp",baseCost:1500,note:"",details:{Damage:"1d8 B",Weight:"2 lb",Type:"Martial melee",Props:"Versatile (1d10)"}},
+  {name:"Crossbow, hand",cost:"75 gp",baseCost:7500,note:"",details:{Damage:"1d6 P",Weight:"3 lb",Type:"Martial ranged"}},
+  {name:"Crossbow, heavy",cost:"50 gp",baseCost:5000,note:"",details:{Damage:"1d10 P",Weight:"18 lb",Type:"Martial ranged"}},
+  {name:"Longbow",cost:"50 gp",baseCost:5000,note:"",details:{Damage:"1d8 P",Weight:"2 lb",Type:"Martial ranged"}},
+  {name:"Whip",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 S",Weight:"3 lb",Type:"Martial melee",Props:"Finesse, Reach"}},
+  {name:"Net",cost:"1 gp",baseCost:100,note:"",details:{Weight:"3 lb",Type:"Martial ranged"}},
+  {name:"Weapon sharpening",cost:"1 gp",baseCost:100,note:"service",details:{}},
+],
+"Magic Items":[
+  {name:"Potion of healing",cost:"50 gp",baseCost:5000,note:"consumable",rarity:"Common",details:{Rarity:"Common",Type:"Potion",Heals:"2d4+2 HP",Attunement:"No"}},
+  {name:"Potion of greater healing",cost:"100 gp",baseCost:10000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Potion",Heals:"4d4+4 HP",Attunement:"No"}},
+  {name:"Potion of invisibility",cost:"100 gp",baseCost:10000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Potion",Duration:"1 hour",Attunement:"No"}},
+  {name:"Potion of superior healing",cost:"500 gp",baseCost:50000,note:"consumable",rarity:"Rare",details:{Rarity:"Rare",Type:"Potion",Heals:"8d4+8 HP",Attunement:"No"}},
+  {name:"Potion of supreme healing",cost:"5,000 gp",baseCost:500000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Potion",Heals:"10d4+20 HP",Attunement:"No"}},
+  {name:"+1 weapon",cost:"400 gp",baseCost:40000,note:"+ weapon cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Weapon",Bonus:"+1 atk & dmg",Attunement:"No"}},
+  {name:"+2 weapon",cost:"4,000 gp",baseCost:400000,note:"+ weapon cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon",Bonus:"+2 atk & dmg",Attunement:"No"}},
+  {name:"+3 weapon",cost:"40,000 gp",baseCost:4000000,note:"+ weapon cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Weapon",Bonus:"+3 atk & dmg",Attunement:"No"}},
+  {name:"+1 armor",cost:"400 gp",baseCost:40000,note:"+ armor cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Armor",Bonus:"+1 AC",Attunement:"No"}},
+  {name:"+2 armor",cost:"4,000 gp",baseCost:400000,note:"+ armor cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Armor",Bonus:"+2 AC",Attunement:"No"}},
+  {name:"+3 armor",cost:"40,000 gp",baseCost:4000000,note:"+ armor cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Armor",Bonus:"+3 AC",Attunement:"No"}},
+  {name:"Bag of holding",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"No",Capacity:"500 lb / 64 cu ft"}},
+  {name:"Boots of elvenkind",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"No",Effect:"Silent movement"}},
+  {name:"Cloak of elvenkind",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"Adv. on Stealth"}},
+  {name:"Cloak of protection",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Bonus:"+1 AC & saves"}},
+  {name:"Gauntlets of ogre power",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"STR = 19"}},
+  {name:"Headband of intellect",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"INT = 19"}},
+  {name:"Immovable rod",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Rod",Attunement:"No",Effect:"Locks in mid-air"}},
+  {name:"Ring of protection",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Bonus:"+1 AC & saves"}},
+  {name:"Ring of invisibility",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Ring",Attunement:"Yes",Effect:"Invisible at will"}},
+  {name:"Staff of healing",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Staff",Attunement:"Yes",Charges:"10 (1d6+4/dawn)"}},
+  {name:"Staff of power",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Staff",Attunement:"Yes (caster)",Charges:"20 (2d8+4/dawn)"}},
+  {name:"Staff of the magi",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Staff",Attunement:"Yes (caster)",Charges:"50 (4d6+2/dawn)"}},
+  {name:"Wand of fireballs",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wand",Attunement:"Yes (caster)",Charges:"7 (1d6+1/dawn)"}},
+  {name:"Wand of magic missiles",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wand",Attunement:"No",Charges:"7 (1d6+1/dawn)"}},
+  {name:"Deck of many things",cost:"Priceless",baseCost:null,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Wondrous",Warning:"Extremely dangerous"}},
+  {name:"Flame tongue",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon (sword)",Attunement:"Yes",Effect:"2d6 extra fire dmg"}},
+  {name:"Holy avenger",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (sword)",Attunement:"Yes (paladin)",Effect:"+3, radiant vs undead"}},
+  {name:"Luck blade",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (sword)",Attunement:"Yes",Effect:"+1, luck, wish"}},
+  {name:"Pearl of power",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes (caster)",Effect:"Recover spell slot ≤3rd"}},
+  {name:"Ring of feather falling",cost:"400 gp",baseCost:40000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Effect:"Always Feather Fall"}},
+  {name:"Ring of regeneration",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Ring",Attunement:"Yes",Effect:"1d6 HP / 10 min"}},
+  {name:"Ring of spell storing",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Ring",Attunement:"Yes",Capacity:"≤5 spell levels"}},
+  {name:"Ring of three wishes",cost:"Priceless",baseCost:null,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Ring",Attunement:"No",Effect:"Wish × 3"}},
+  {name:"Robe of the archmagi",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Wondrous",Attunement:"Yes",Effect:"+2 spell DC & atk"}},
+  {name:"Vorpal sword",cost:"200,000 gp",baseCost:20000000,note:"",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Weapon (slashing)",Attunement:"Yes",Effect:"+3, decapitate on 20"}},
+  {name:"Sun blade",cost:"40,000 gp",baseCost:4000000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon (longsword)",Attunement:"Yes",Effect:"+2, radiant, sunlight"}},
+  {name:"Wand of orcus",cost:"Priceless",baseCost:null,note:"",rarity:"Artifact",details:{Rarity:"Artifact",Type:"Wand",Attunement:"Yes",Effect:"Raise undead"}},
+  {name:"Winged boots",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"Fly = walk speed, 4hr/day"}},
+  {name:"Boots of speed",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous",Attunement:"Yes",Effect:"Double speed, bonus action"}},
+  {name:"Cloak of displacement",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous",Attunement:"Yes",Effect:"Disadv. on attacks vs you"}},
+  {name:"Amulet of health",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Rare",details:{Rarity:"Rare",Type:"Wondrous",Attunement:"Yes",Effect:"CON = 19"}},
+  {name:"Spell scroll (cantrip)",cost:"25 gp",baseCost:2500,note:"consumable",rarity:"Common",details:{Rarity:"Common",Type:"Scroll",Level:"Cantrip"}},
+  {name:"Spell scroll (1st)",cost:"50 gp",baseCost:5000,note:"consumable",rarity:"Common",details:{Rarity:"Common",Type:"Scroll",Level:"1st"}},
+  {name:"Spell scroll (2nd)",cost:"100 gp",baseCost:10000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Scroll",Level:"2nd"}},
+  {name:"Spell scroll (3rd)",cost:"150 gp",baseCost:15000,note:"consumable",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Scroll",Level:"3rd"}},
+  {name:"Spell scroll (4th)",cost:"500 gp",baseCost:50000,note:"consumable",rarity:"Rare",details:{Rarity:"Rare",Type:"Scroll",Level:"4th"}},
+  {name:"Spell scroll (5th)",cost:"1,000 gp",baseCost:100000,note:"consumable",rarity:"Rare",details:{Rarity:"Rare",Type:"Scroll",Level:"5th"}},
+  {name:"Spell scroll (6th)",cost:"2,000 gp",baseCost:200000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Scroll",Level:"6th"}},
+  {name:"Spell scroll (7th)",cost:"4,000 gp",baseCost:400000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Scroll",Level:"7th"}},
+  {name:"Spell scroll (8th)",cost:"8,000 gp",baseCost:800000,note:"consumable",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Scroll",Level:"8th"}},
+  {name:"Spell scroll (9th)",cost:"20,000 gp",baseCost:2000000,note:"consumable",rarity:"Legendary",details:{Rarity:"Legendary",Type:"Scroll",Level:"9th"}},
+],
+"Trade Goods":[
+  {name:"Wheat (1 lb)",cost:"1 cp",baseCost:1,note:"",details:{}},{name:"Chicken",cost:"2 cp",baseCost:2,note:"",details:{}},
+  {name:"Salt (1 lb)",cost:"5 cp",baseCost:5,note:"",details:{}},{name:"Iron (1 lb)",cost:"1 sp",baseCost:10,note:"",details:{}},
+  {name:"Copper (1 lb)",cost:"5 sp",baseCost:50,note:"",details:{}},{name:"Ginger (1 lb)",cost:"1 gp",baseCost:100,note:"",details:{}},
+  {name:"Goat",cost:"1 gp",baseCost:100,note:"",details:{}},{name:"Sheep",cost:"2 gp",baseCost:200,note:"",details:{}},
+  {name:"Pig",cost:"3 gp",baseCost:300,note:"",details:{}},{name:"Silver (1 lb)",cost:"5 gp",baseCost:500,note:"",details:{}},
+  {name:"Silk (1 lb)",cost:"10 gp",baseCost:1000,note:"",details:{}},{name:"Cow",cost:"10 gp",baseCost:1000,note:"",details:{}},
+  {name:"Saffron (1 lb)",cost:"15 gp",baseCost:1500,note:"",details:{}},{name:"Ox",cost:"15 gp",baseCost:1500,note:"",details:{}},
+  {name:"Gold (1 lb)",cost:"50 gp",baseCost:5000,note:"",details:{}},{name:"Platinum (1 lb)",cost:"500 gp",baseCost:50000,note:"",details:{}},
+],
+"Tools":[
+  {name:"Alchemist's supplies",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
+  {name:"Brewer's supplies",cost:"20 gp",baseCost:2000,note:"",details:{Type:"Artisan's tools",Weight:"9 lb"}},
+  {name:"Calligrapher's supplies",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Artisan's tools",Weight:"5 lb"}},
+  {name:"Carpenter's tools",cost:"8 gp",baseCost:800,note:"",details:{Type:"Artisan's tools",Weight:"6 lb"}},
+  {name:"Herbalism kit",cost:"5 gp",baseCost:500,note:"",details:{Weight:"3 lb"}},
+  {name:"Navigator's tools",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"2 lb"}},
+  {name:"Poisoner's kit",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"2 lb"}},
+  {name:"Thieves' tools",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"1 lb"}},
+  {name:"Disguise kit",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"3 lb"}},
+  {name:"Forgery kit",cost:"15 gp",baseCost:1500,note:"",details:{Weight:"5 lb"}},
+  {name:"Smith's tools",cost:"20 gp",baseCost:2000,note:"",details:{Type:"Artisan's tools",Weight:"8 lb"}},
+  {name:"Tinker's tools",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Artisan's tools",Weight:"10 lb"}},
+  {name:"Jeweler's tools",cost:"25 gp",baseCost:2500,note:"",details:{Type:"Artisan's tools",Weight:"2 lb"}},
+  {name:"Lute",cost:"35 gp",baseCost:3500,note:"",details:{Type:"Musical instrument",Weight:"2 lb"}},
+  {name:"Drum",cost:"6 gp",baseCost:600,note:"",details:{Type:"Musical instrument",Weight:"3 lb"}},
+  {name:"Flute",cost:"2 gp",baseCost:200,note:"",details:{Type:"Musical instrument",Weight:"1 lb"}},
+  {name:"Bagpipes",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Musical instrument",Weight:"6 lb"}},
+],
+"Mounts":[
+  {name:"Camel",cost:"50 gp",baseCost:5000,note:"",details:{Speed:"50 ft",Carrying:"480 lb"}},
+  {name:"Donkey / mule",cost:"8 gp",baseCost:800,note:"",details:{Speed:"40 ft",Carrying:"420 lb"}},
+  {name:"Horse, draft",cost:"50 gp",baseCost:5000,note:"",details:{Speed:"40 ft",Carrying:"540 lb"}},
+  {name:"Horse, riding",cost:"75 gp",baseCost:7500,note:"",details:{Speed:"60 ft",Carrying:"480 lb"}},
+  {name:"Warhorse",cost:"400 gp",baseCost:40000,note:"",details:{Speed:"60 ft",Carrying:"540 lb"}},
+  {name:"Pony",cost:"30 gp",baseCost:3000,note:"",details:{Speed:"40 ft",Carrying:"225 lb"}},
+  {name:"Mastiff",cost:"25 gp",baseCost:2500,note:"",details:{Speed:"40 ft",Carrying:"195 lb"}},
+  {name:"Carriage",cost:"100 gp",baseCost:10000,note:"",details:{Weight:"600 lb"}},
+  {name:"Wagon",cost:"35 gp",baseCost:3500,note:"",details:{Weight:"400 lb"}},
+  {name:"Saddle — riding",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"25 lb"}},
+  {name:"Saddlebags",cost:"4 gp",baseCost:400,note:"",details:{Weight:"8 lb"}},
+  {name:"Feed (per day)",cost:"5 cp",baseCost:5,note:"per day",details:{}},
+  {name:"Stabling (per day)",cost:"5 sp",baseCost:50,note:"per day",details:{}},
+],
+"Ships":[
+  {name:"Galley",cost:"30,000 gp",baseCost:3000000,note:"",details:{Speed:"4 mph"}},
+  {name:"Keelboat",cost:"3,000 gp",baseCost:300000,note:"",details:{Speed:"1 mph"}},
+  {name:"Longship",cost:"10,000 gp",baseCost:1000000,note:"",details:{Speed:"3 mph"}},
+  {name:"Rowboat",cost:"50 gp",baseCost:5000,note:"",details:{Speed:"1.5 mph"}},
+  {name:"Sailing ship",cost:"10,000 gp",baseCost:1000000,note:"",details:{Speed:"2 mph"}},
+  {name:"Warship",cost:"25,000 gp",baseCost:2500000,note:"",details:{Speed:"2.5 mph"}},
+],
+"Gear":[
+  {name:"Acid (vial)",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"1 lb"}},
+  {name:"Alchemist's fire",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"1 lb"}},
+  {name:"Antitoxin (vial)",cost:"50 gp",baseCost:5000,note:"",details:{}},
+  {name:"Arrows (20)",cost:"1 gp",baseCost:100,note:"",details:{Weight:"1 lb"}},
+  {name:"Backpack",cost:"2 gp",baseCost:200,note:"",details:{Weight:"5 lb"}},
+  {name:"Bedroll",cost:"1 gp",baseCost:100,note:"",details:{Weight:"7 lb"}},
+  {name:"Blanket",cost:"5 sp",baseCost:50,note:"",details:{Weight:"3 lb"}},
+  {name:"Book (common)",cost:"20 gp",baseCost:2000,note:"",details:{Weight:"5 lb"}},
+  {name:"Climber's kit",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"12 lb"}},
+  {name:"Clothes, common",cost:"5 sp",baseCost:50,note:"",details:{Weight:"3 lb"}},
+  {name:"Clothes, fine",cost:"15 gp",baseCost:1500,note:"",details:{Weight:"6 lb"}},
+  {name:"Clothes, traveler's",cost:"2 gp",baseCost:200,note:"",details:{Weight:"4 lb"}},
+  {name:"Component pouch",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"2 lb"}},
+  {name:"Crowbar",cost:"2 gp",baseCost:200,note:"",details:{Weight:"5 lb"}},
+  {name:"Grappling hook",cost:"2 gp",baseCost:200,note:"",details:{Weight:"4 lb"}},
+  {name:"Healer's kit",cost:"5 gp",baseCost:500,note:"",details:{Weight:"3 lb"}},
+  {name:"Holy water (flask)",cost:"25 gp",baseCost:2500,note:"",details:{Weight:"1 lb"}},
+  {name:"Lantern, bullseye",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"2 lb"}},
+  {name:"Lantern, hooded",cost:"5 gp",baseCost:500,note:"",details:{Weight:"2 lb"}},
+  {name:"Lock",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"1 lb"}},
+  {name:"Magnifying glass",cost:"100 gp",baseCost:10000,note:"",details:{}},
+  {name:"Manacles",cost:"2 gp",baseCost:200,note:"",details:{Weight:"6 lb"}},
+  {name:"Mirror, steel",cost:"5 gp",baseCost:500,note:"",details:{Weight:"½ lb"}},
+  {name:"Oil (flask)",cost:"1 sp",baseCost:10,note:"",details:{Weight:"1 lb"}},
+  {name:"Poison, basic (vial)",cost:"100 gp",baseCost:10000,note:"",details:{}},
+  {name:"Rations (1 day)",cost:"5 sp",baseCost:50,note:"per day",details:{Weight:"2 lb"}},
+  {name:"Rope, hempen (50 ft)",cost:"1 gp",baseCost:100,note:"",details:{Weight:"10 lb"}},
+  {name:"Rope, silk (50 ft)",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"5 lb"}},
+  {name:"Spellbook",cost:"50 gp",baseCost:5000,note:"",details:{Weight:"3 lb"}},
+  {name:"Spyglass",cost:"1,000 gp",baseCost:100000,note:"",details:{Weight:"1 lb"}},
+  {name:"Tent, two-person",cost:"2 gp",baseCost:200,note:"",details:{Weight:"20 lb"}},
+  {name:"Torch",cost:"1 cp",baseCost:1,note:"",details:{Weight:"1 lb"}},
+  {name:"Waterskin",cost:"2 sp",baseCost:20,note:"",details:{Weight:"5 lb (full)"}},
+],
 };
 
 function cpToDisplay(cp){
   if(!cp)return'—';
+  if(cp>=1000000&&cp%1000000===0)return(cp/100000).toLocaleString()+' gp';
   if(cp>=100000&&cp%100000===0)return(cp/100000).toLocaleString()+' pp';
-  if(cp>=1000&&cp%1000===0)return(cp/1000).toLocaleString()+' pp';
+  if(cp>=1000&&cp%1000===0)return(cp/1000).toLocaleString()+' gp';
   if(cp>=100&&cp%100===0)return(cp/100).toLocaleString()+' gp';
   if(cp>=50&&cp%50===0)return(cp/50).toLocaleString()+' ep';
   if(cp>=10&&cp%10===0)return(cp/10).toLocaleString()+' sp';
@@ -806,7 +450,7 @@ function cpToDisplay(cp){
 }
 
 const allCats=['All','Ingredients',...Object.keys(data).filter(k=>k!=='Ingredients')];
-let activeCategory='All';let currentItem=null;let currentRoll=null;let focusedIndex=-1;let filteredItems=[];
+let activeCat='All';let curItem=null;let curRoll=null;let filtered=[];let focusIdx=-1;
 
 const catGrid=document.getElementById('catGrid');
 const searchArea=document.getElementById('searchArea');
@@ -820,144 +464,133 @@ const rollManual=document.getElementById('rollManual');
 
 allCats.forEach(cat=>{
   const btn=document.createElement('button');
-  btn.className='cat-btn';
-  if(cat==='All')btn.classList.add('active');
+  btn.className='cat-btn'+(cat==='All'?' active':'');
   btn.textContent=cat;
-  btn.addEventListener('click',()=>selectCat(cat,btn));
+  btn.addEventListener('click',()=>selCat(cat,btn));
   catGrid.appendChild(btn);
 });
 
-function getAllItems(){
-  const all=[];
-  Object.entries(data).forEach(([cat,items])=>items.forEach(i=>all.push({...i,_cat:cat})));
-  return all;
-}
+function getAllItems(){const a=[];Object.entries(data).forEach(([c,items])=>items.forEach(i=>a.push({...i,_cat:c})));return a;}
+function getItems(){return activeCat==='All'?getAllItems():data[activeCat].map(i=>({...i,_cat:activeCat}));}
 
-function selectCat(cat,btn){
+function selCat(cat,btn){
   document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  activeCategory=cat;
+  activeCat=cat;
   searchArea.style.display='block';
   searchInput.value='';
   searchInput.placeholder=cat==='All'?'Search the merchant\'s wares...':'Search '+cat.toLowerCase()+'...';
   dropdown.classList.remove('open');
   resultCard.classList.remove('show');
-  currentItem=null;currentRoll=null;
-  searchInput.focus();showDropdown('');
+  curItem=null;curRoll=null;
+  showDropdown('');
 }
 
-function getItems(){return activeCategory==='All'?getAllItems():data[activeCategory].map(i=>({...i,_cat:activeCategory}));}
-
-function showDropdown(query){
+function showDropdown(q){
   const items=getItems();
-  filteredItems=query?items.filter(i=>i.name.toLowerCase().includes(query.toLowerCase())):items;
-  dropdown.innerHTML='';focusedIndex=-1;
-  if(!filteredItems.length){dropdown.innerHTML='<div class="no-results">No treasures found matching your search...</div>';}
+  filtered=q?items.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())):items;
+  dropdown.innerHTML='';focusIdx=-1;
+  if(!filtered.length){dropdown.innerHTML='<div class="no-results">No treasures found…</div>';}
   else{
-    filteredItems.slice(0,100).forEach(item=>{
+    filtered.slice(0,80).forEach(item=>{
       const div=document.createElement('div');div.className='drop-item';
       let badge='';
-      if(item.rarity){const cls=RARITY_BADGE[item.rarity]||'r-common';badge='<span class="rarity-badge '+cls+'">'+item.rarity+'</span>';}
-      const catTag=activeCategory==='All'?'<span class="drop-cat">'+item._cat+'</span>':'';
-      div.innerHTML='<span class="drop-name">'+item.name+'</span><span class="drop-meta"><span class="drop-cost">'+item.cost+'</span>'+catTag+badge+'</span>';
-      div.addEventListener('mousedown',e=>{e.preventDefault();selectItem(item);});
+      if(item.rarity){const cls=RARITY_BADGE[item.rarity]||'r-common';badge='<span class="rbadge '+cls+'">'+item.rarity+'</span>';}
+      const catTag=activeCat==='All'?'<span style="font-family:Cinzel,serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.06em;">'+item._cat+'</span>':'';
+      div.innerHTML='<span class="drop-name">'+item.name+'</span><span style="display:flex;align-items:center;gap:5px;flex-shrink:0;"><span style="font-size:12px;color:var(--gd);font-style:italic;">'+item.cost+'</span>'+catTag+badge+'</span>';
+      div.addEventListener('touchstart',e=>{e.preventDefault();selItem(item);},{passive:false});
+      div.addEventListener('mousedown',e=>{e.preventDefault();selItem(item);});
       dropdown.appendChild(div);
     });
-    if(filteredItems.length>100){
-      const more=document.createElement('div');more.className='no-results';
-      more.textContent='+'+(filteredItems.length-100)+' more — narrow your search';
-      dropdown.appendChild(more);
-    }
+    if(filtered.length>80){const m=document.createElement('div');m.className='no-results';m.textContent='+'+(filtered.length-80)+' more — narrow your search';dropdown.appendChild(m);}
   }
   dropdown.classList.add('open');
 }
 
-function selectItem(item){
-  currentItem=item;currentRoll=null;
+function selItem(item){
+  curItem=item;curRoll=null;
   searchInput.value=item.name;
   dropdown.classList.remove('open');
   qtyInput.value=1;rollManual.value='';
   document.getElementById('repDisplay').style.display='none';
   renderResult(item);
+  resultCard.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function renderResult(item){
   document.getElementById('rName').textContent=item.name;
-  document.getElementById('rCat').textContent='\u2767 '+(item._cat||activeCategory)+' \u2767';
+  document.getElementById('rCat').textContent='✦ '+(item._cat||activeCat)+' ✦';
   document.getElementById('rCost').textContent=item.cost;
-  document.getElementById('rCostNote').textContent=item.note||'';
+  document.getElementById('rNote').textContent=item.note||'';
   const badgeEl=document.getElementById('rBadge');
-  if(item.rarity){const cls=RARITY_BADGE[item.rarity]||'r-common';badgeEl.innerHTML='<span class="rarity-badge '+cls+'" style="font-size:10px;padding:4px 12px;">'+item.rarity+'</span>';}
+  if(item.rarity){const cls=RARITY_BADGE[item.rarity]||'r-common';badgeEl.innerHTML='<span class="rbadge '+cls+'" style="padding:3px 10px;font-size:10px;">'+item.rarity+'</span>';}
   else badgeEl.innerHTML='';
-  const details=document.getElementById('rDetails');
-  details.innerHTML='';
+  const det=document.getElementById('rDetails');det.innerHTML='';
   Object.entries(item.details).forEach(([k,v])=>{
-    const cell=document.createElement('div');cell.className='detail-cell';
-    cell.innerHTML='<div class="detail-label">'+k+'</div><div class="detail-val">'+v+'</div>';
-    details.appendChild(cell);
+    const c=document.createElement('div');c.className='detail-cell';
+    c.innerHTML='<div class="detail-label">'+k+'</div><div class="detail-val">'+v+'</div>';
+    det.appendChild(c);
   });
-  const craftBox=document.getElementById('craftBox');
-  const craftRow=document.getElementById('craftRow');
+  const cb=document.getElementById('craftBox');const cr=document.getElementById('craftRow');
   if(item.rarity&&CRAFT[item.rarity]){
     const c=CRAFT[item.rarity];
-    craftRow.innerHTML='<span class="craft-stat">Time: <span>'+c.days+' days</span></span><span class="craft-stat">Materials: <span>'+c.cost+'</span></span><span class="craft-stat">Requires: <span>Arcana proficiency</span></span>';
-    craftBox.style.display='block';
+    cr.innerHTML='<span class="craft-stat">Time: <span>'+c.days+' days</span></span><span class="craft-stat">Materials: <span>'+c.cost+'</span></span><span class="craft-stat">Needs: <span>Arcana prof.</span></span>';
+    cb.style.display='block';
   } else if(item.rarity==='Artifact'){
-    craftRow.innerHTML='<span class="craft-stat">Artifacts cannot be crafted — they are ancient and unique.</span>';
-    craftBox.style.display='block';
-  } else craftBox.style.display='none';
+    cr.innerHTML='<span class="craft-stat">Artifacts cannot be crafted — ancient and unique.</span>';
+    cb.style.display='block';
+  } else cb.style.display='none';
   resultCard.classList.add('show');
   updateTotal();
 }
 
 function updateTotal(){
-  if(!currentItem)return;
+  if(!curItem)return;
   const qty=Math.max(1,parseInt(qtyInput.value)||1);
-  const totalEl=document.getElementById('totalVal');
-  const subEl=document.getElementById('totalSub');
-  if(currentItem.baseCost===null||currentItem.baseCost===undefined){totalEl.textContent=currentItem.cost;subEl.textContent='';return;}
-  if(currentItem.baseCost===0){totalEl.textContent='—';subEl.textContent='';return;}
-  let mult=currentRoll!==null?getTier(currentRoll).mult:1.0;
-  const final=Math.round(currentItem.baseCost*qty*mult);
-  totalEl.textContent=cpToDisplay(final);
-  const parts=[];
-  if(qty>1)parts.push(qty+'× base');
-  if(mult!==1.0)parts.push((mult>1?'+':'')+Math.round((mult-1)*100)+'% reputation');
-  subEl.textContent=parts.join(' · ');
+  const tv=document.getElementById('totalVal');const ts=document.getElementById('totalSub');
+  if(curItem.baseCost===null||curItem.baseCost===undefined){tv.textContent=curItem.cost;ts.textContent='';return;}
+  if(curItem.baseCost===0){tv.textContent='—';ts.textContent='';return;}
+  const mult=curRoll!==null?getTier(curRoll).mult:1.0;
+  const final=Math.round(curItem.baseCost*qty*mult);
+  tv.textContent=cpToDisplay(final);
+  const p=[];
+  if(qty>1)p.push(qty+'× base');
+  if(mult!==1.0)p.push((mult>1?'+':'')+Math.round((mult-1)*100)+'% reputation');
+  ts.textContent=p.join(' · ');
 }
 
 function applyRoll(raw){
   const mod=parseInt(chaMod.value)||0;
   const eff=Math.max(1,Math.min(20,raw+mod));
-  currentRoll=eff;
+  curRoll=eff;
   const t=getTier(eff);
-  const repEl=document.getElementById('repDisplay');
-  repEl.style.display='flex';repEl.style.background=t.bg;repEl.style.borderColor='rgba(201,168,76,0.2)';
-  const nameEl=document.getElementById('repName');nameEl.textContent=t.name;nameEl.style.color=t.nameColor;
-  const descEl=document.getElementById('repDesc');
-  descEl.textContent='Roll: '+raw+(mod!==0?' ('+raw+(mod>=0?'+':'')+mod+' = '+eff+')':'')+' — '+t.desc;
-  descEl.style.color=t.descColor;
-  const modEl=document.getElementById('repMod');modEl.textContent=t.modLabel;modEl.style.color=t.nameColor;
+  const rd=document.getElementById('repDisplay');
+  rd.style.display='flex';rd.style.background=t.bg;rd.style.borderColor='rgba(201,168,76,0.2)';
+  const rn=document.getElementById('repName');rn.textContent=t.name;rn.style.color=t.nc;
+  const rdesc=document.getElementById('repDesc');
+  rdesc.textContent='Roll: '+raw+(mod!==0?' ('+raw+(mod>=0?'+':'')+mod+'='+eff+')':'')+' — '+t.desc;
+  rdesc.style.color=t.dc;
+  const rm=document.getElementById('repMod');rm.textContent=t.ml;rm.style.color=t.nc;
   updateTotal();
 }
 
 rollBtn.addEventListener('click',()=>{
   const raw=Math.ceil(Math.random()*20);
-  const icon=document.getElementById('diceIcon');
-  icon.classList.remove('spinning');void icon.offsetWidth;icon.classList.add('spinning');
-  setTimeout(()=>icon.classList.remove('spinning'),400);
+  const ic=document.getElementById('diceIcon');
+  ic.classList.remove('spin');void ic.offsetWidth;ic.classList.add('spin');
+  setTimeout(()=>ic.classList.remove('spin'),400);
   rollManual.value=raw;applyRoll(raw);
 });
 rollManual.addEventListener('input',()=>{const v=parseInt(rollManual.value);if(v>=1&&v<=20)applyRoll(v);});
-chaMod.addEventListener('input',()=>{if(rollManual.value){applyRoll(parseInt(rollManual.value)||1);}});
+chaMod.addEventListener('input',()=>{if(rollManual.value)applyRoll(parseInt(rollManual.value)||1);});
 qtyInput.addEventListener('input',updateTotal);
 searchInput.addEventListener('input',e=>showDropdown(e.target.value));
 searchInput.addEventListener('focus',()=>showDropdown(searchInput.value));
 searchInput.addEventListener('keydown',e=>{
   const items=dropdown.querySelectorAll('.drop-item');
-  if(e.key==='ArrowDown'){focusedIndex=Math.min(focusedIndex+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('focused',i===focusedIndex));e.preventDefault();}
-  else if(e.key==='ArrowUp'){focusedIndex=Math.max(focusedIndex-1,0);items.forEach((el,i)=>el.classList.toggle('focused',i===focusedIndex));e.preventDefault();}
-  else if(e.key==='Enter'&&focusedIndex>=0&&filteredItems[focusedIndex])selectItem(filteredItems[focusedIndex]);
+  if(e.key==='ArrowDown'){focusIdx=Math.min(focusIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));e.preventDefault();}
+  else if(e.key==='ArrowUp'){focusIdx=Math.max(focusIdx-1,0);items.forEach((el,i)=>el.classList.toggle('focused',i===focusIdx));e.preventDefault();}
+  else if(e.key==='Enter'&&focusIdx>=0&&filtered[focusIdx])selItem(filtered[focusIdx]);
   else if(e.key==='Escape')dropdown.classList.remove('open');
 });
 document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))dropdown.classList.remove('open');});
