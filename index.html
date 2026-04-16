@@ -133,9 +133,7 @@ body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink
       <div class="cur-list">
         <div class="cur-row"><span class="cur-name">Copper (cp)</span><span>100 cp = 1 gp</span></div>
         <div class="cur-row"><span class="cur-name">Silver (sp)</span><span>10 sp = 1 gp</span></div>
-        <div class="cur-row"><span class="cur-name">Electrum (ep)</span><span>2 ep = 1 gp</span></div>
         <div class="cur-row"><span class="cur-name">Gold (gp)</span><span>base unit</span></div>
-        <div class="cur-row"><span class="cur-name">Platinum (pp)</span><span>1 pp = 10 gp</span></div>
       </div>
     </div>
     <div class="ds-cats">
@@ -168,9 +166,7 @@ body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink
   <div class="currency-grid">
     <div class="cur-chip"><span class="cname">Copper (cp)</span> · 100 = 1 gp</div>
     <div class="cur-chip"><span class="cname">Silver (sp)</span> · 10 = 1 gp</div>
-    <div class="cur-chip"><span class="cname">Electrum (ep)</span> · 2 = 1 gp</div>
     <div class="cur-chip"><span class="cname">Gold (gp)</span> · base unit</div>
-    <div class="cur-chip"><span class="cname">Platinum (pp)</span> · 1 pp = 10 gp</div>
   </div>
   <div class="mob-body">
     <div class="sec-label">Browse by category</div>
@@ -284,19 +280,19 @@ const data={
   {name:"Meals — modest",cost:"6 sp/day",baseCost:60,note:"per day",details:{}},
   {name:"Meals — wealthy",cost:"1 gp/day",baseCost:100,note:"per day",details:{}},
 ],
-"Armor":[
-  {name:"Padded armor",cost:"5 gp",baseCost:500,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"8 lb",Stealth:"Disadv."}},
-  {name:"Leather armor",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"10 lb"}},
+"Armour":[
+  {name:"Padded armour",cost:"5 gp",baseCost:500,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"8 lb",Stealth:"Disadv."}},
+  {name:"Leather armour",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"10 lb"}},
   {name:"Studded leather",cost:"45 gp",baseCost:4500,note:"",details:{Type:"Light",AC:"12+Dex",Weight:"13 lb"}},
-  {name:"Hide armor",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Medium",AC:"12+Dex(2)",Weight:"12 lb"}},
+  {name:"Hide armour",cost:"10 gp",baseCost:1000,note:"",details:{Type:"Medium",AC:"12+Dex(2)",Weight:"12 lb"}},
   {name:"Chain shirt",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Medium",AC:"13+Dex(2)",Weight:"20 lb"}},
   {name:"Scale mail",cost:"50 gp",baseCost:5000,note:"",details:{Type:"Medium",AC:"14+Dex(2)",Weight:"45 lb",Stealth:"Disadv."}},
   {name:"Breastplate",cost:"400 gp",baseCost:40000,note:"",details:{Type:"Medium",AC:"14+Dex(2)",Weight:"20 lb"}},
   {name:"Half plate",cost:"750 gp",baseCost:75000,note:"",details:{Type:"Medium",AC:"15+Dex(2)",Weight:"40 lb",Stealth:"Disadv."}},
   {name:"Ring mail",cost:"30 gp",baseCost:3000,note:"",details:{Type:"Heavy",AC:"14",Weight:"40 lb",Stealth:"Disadv."}},
   {name:"Chain mail",cost:"75 gp",baseCost:7500,note:"",details:{Type:"Heavy",AC:"16",Weight:"55 lb",Stealth:"Disadv."}},
-  {name:"Splint armor",cost:"200 gp",baseCost:20000,note:"",details:{Type:"Heavy",AC:"17",Weight:"60 lb",Stealth:"Disadv."}},
-  {name:"Plate armor",cost:"1,500 gp",baseCost:150000,note:"",details:{Type:"Heavy",AC:"18",Weight:"65 lb",Stealth:"Disadv."}},
+  {name:"Splint armour",cost:"200 gp",baseCost:20000,note:"",details:{Type:"Heavy",AC:"17",Weight:"60 lb",Stealth:"Disadv."}},
+  {name:"Plate armour",cost:"1,500 gp",baseCost:150000,note:"",details:{Type:"Heavy",AC:"18",Weight:"65 lb",Stealth:"Disadv."}},
   {name:"Shield",cost:"10 gp",baseCost:1000,note:"",details:{AC:"+2",Weight:"6 lb"}},
 ],
 "Weapons":[
@@ -334,9 +330,9 @@ const data={
   {name:"+1 weapon",cost:"400 gp",baseCost:40000,note:"+ weapon cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Weapon",Bonus:"+1 atk & dmg",Attunement:"No"}},
   {name:"+2 weapon",cost:"4,000 gp",baseCost:400000,note:"+ weapon cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Weapon",Bonus:"+2 atk & dmg",Attunement:"No"}},
   {name:"+3 weapon",cost:"40,000 gp",baseCost:4000000,note:"+ weapon cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Weapon",Bonus:"+3 atk & dmg",Attunement:"No"}},
-  {name:"+1 armor",cost:"400 gp",baseCost:40000,note:"+ armor cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Armor",Bonus:"+1 AC",Attunement:"No"}},
-  {name:"+2 armor",cost:"4,000 gp",baseCost:400000,note:"+ armor cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Armor",Bonus:"+2 AC",Attunement:"No"}},
-  {name:"+3 armor",cost:"40,000 gp",baseCost:4000000,note:"+ armor cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Armor",Bonus:"+3 AC",Attunement:"No"}},
+  {name:"+1 armour",cost:"400 gp",baseCost:40000,note:"+ armour cost",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Armour",Bonus:"+1 AC",Attunement:"No"}},
+  {name:"+2 armour",cost:"4,000 gp",baseCost:400000,note:"+ armour cost",rarity:"Rare",details:{Rarity:"Rare",Type:"Armour",Bonus:"+2 AC",Attunement:"No"}},
+  {name:"+3 armour",cost:"40,000 gp",baseCost:4000000,note:"+ armour cost",rarity:"Very Rare",details:{Rarity:"Very Rare",Type:"Armour",Bonus:"+3 AC",Attunement:"No"}},
   {name:"Bag of holding",cost:"4,000 gp",baseCost:400000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"No",Capacity:"500 lb / 64 cu ft"}},
   {name:"Boots of elvenkind",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"No",Effect:"Silent movement"}},
   {name:"Cloak of elvenkind",cost:"400 gp",baseCost:40000,note:"",rarity:"Uncommon",details:{Rarity:"Uncommon",Type:"Wondrous",Attunement:"Yes",Effect:"Adv. on Stealth"}},
