@@ -520,7 +520,7 @@ function buildItemCardHtml(item,s){
     </div>
     <div class="sec-label">Reputation & bartering</div>
     <div class="roll-btns">
-      <button class="roll-btn" id="rollBtn${s}"><span id="dice${s}" style="font-size:16px;">🎲</span> Roll d20</button>
+      <button class="roll-btn" id="rollBtn${s}"><span id="dice${s}" style="display:inline-flex;align-items:center;line-height:0;"><svg viewBox="0 0 100 100" width="20" height="20"><polygon points="32,38 68,38 50,5" fill="#e8cd7e"/><polygon points="32,38 50,5 11,27" fill="#b89a40"/><polygon points="68,38 50,5 89,27" fill="#c9a84c"/><polygon points="32,38 68,38 50,72" fill="#d4b560"/><polygon points="32,38 50,72 11,72" fill="#96802e"/><polygon points="68,38 50,72 89,72" fill="#a89038"/><polygon points="32,38 11,72 11,27" fill="#7a6628"/><polygon points="68,38 89,72 89,27" fill="#8a7530"/><polygon points="50,72 11,72 50,95" fill="#6a5820"/><polygon points="50,72 89,72 50,95" fill="#7a6628"/><text x="50" y="62" text-anchor="middle" dominant-baseline="middle" font-size="26" font-weight="800" fill="#1a1410" font-family="Cinzel,serif"></text></svg></span> Roll d20</button>
       <input type="number" class="roll-manual" id="manual${s}" min="1" max="20" placeholder="—" inputmode="numeric"/>
     </div>
     <div class="rep-display" id="rep${s}">
