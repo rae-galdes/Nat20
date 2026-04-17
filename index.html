@@ -100,6 +100,7 @@ body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink
 .item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:2px;}
 .item-name{font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--gl);letter-spacing:0.03em;line-height:1.3;}
 .item-cat{font-family:'Cinzel',serif;font-size:9px;color:var(--if);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+.item-img{width:100%;max-height:280px;object-fit:cover;border-radius:6px;border:1px solid var(--bg);margin-bottom:14px;display:block;}
 .cost-row{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
 .cost-big{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--gl);}
 .cost-note{font-size:13px;color:var(--im);font-style:italic;}
@@ -317,7 +318,7 @@ const data={
 ],
 "Weapons":[
   {name:"Club",cost:"1 sp",baseCost:10,note:"",details:{Damage:"1d4 B",Weight:"2 lb",Type:"Simple melee"}},
-  {name:"Dagger",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 P",Weight:"1 lb",Type:"Simple melee",Props:"Finesse, Thrown"}},
+  {name:"Dagger",img:"images/weapons/dagger.png",cost:"2 gp",baseCost:200,note:"",details:{Damage:"1d4 P",Weight:"1 lb",Type:"Simple melee",Props:"Finesse, Thrown"}},
   {name:"Handaxe",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 S",Weight:"2 lb",Type:"Simple melee",Props:"Thrown (20/60)"}},
   {name:"Javelin",cost:"5 sp",baseCost:50,note:"",details:{Damage:"1d6 P",Weight:"2 lb",Type:"Simple melee"}},
   {name:"Mace",cost:"5 gp",baseCost:500,note:"",details:{Damage:"1d6 B",Weight:"4 lb",Type:"Simple melee"}},
@@ -499,6 +500,7 @@ function buildItemCardHtml(item,s){
   return`<div class="item-card">
     <div class="item-top"><div class="item-name">${item.name}</div>${badgeHtml(item.rarity,true)}</div>
     <div class="item-cat">✦ ${item._cat||''} ✦</div>
+    ${item.img?`<img src="${item.img}" alt="${item.name}" class="item-img" onerror="this.style.display='none'"/>`:''}
     <div class="cost-row"><span class="cost-big">${item.cost}</span><span class="cost-note">${item.note||''}</span></div>
     ${detHtml?'<div class="details-grid">'+detHtml+'</div>':''}
     ${craftHtml}
