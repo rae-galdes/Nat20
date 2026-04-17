@@ -121,6 +121,13 @@ body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink
 .field-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.08em;}
 .field-input{padding:10px 12px;font-family:'EB Garamond',serif;font-size:15px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;width:100%;-webkit-appearance:none;}
 .field-input:focus{border-color:var(--gold);}
+.stepper{display:flex;align-items:stretch;gap:0;border:1px solid var(--bg);border-radius:6px;overflow:hidden;background:var(--pm);}
+.stepper:focus-within{border-color:var(--gold);}
+.stepper-input{border:none !important;border-radius:0 !important;text-align:center;flex:1;min-width:0;padding:10px 4px;background:transparent !important;}
+.stepper-input:focus{border:none !important;}
+.step-btn{background:var(--ph);border:none;color:var(--gl);font-family:'Cinzel',serif;font-size:20px;font-weight:700;width:40px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.15s;flex-shrink:0;user-select:none;}
+.step-btn:hover{background:var(--gg);}
+.step-btn:active{background:var(--gold);color:var(--p);}
 .roll-btns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;align-items:center;}
 .roll-btn{padding:11px 16px;font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--pm);border:1px solid var(--gd);border-radius:8px;cursor:pointer;color:var(--gl);transition:all 0.15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
 .roll-btn:hover{background:var(--gg);}
@@ -509,7 +516,7 @@ function buildItemCardHtml(item,s){
     <div class="sec-label">Calculate price</div>
     <div class="calc-grid">
       <div class="field-group"><span class="field-label">Quantity</span><input type="number" class="field-input" id="qty${s}" value="1" min="1" inputmode="numeric"/></div>
-      <div class="field-group"><span class="field-label">CHARISMA modifier</span><input type="number" class="field-input" id="cha${s}" value="0" min="-5" max="10" inputmode="numeric"/></div>
+      <div class="field-group"><span class="field-label">CHARISMA modifier</span><div class="stepper"><button type="button" class="step-btn" id="chaDec${s}">−</button><input type="number" class="field-input stepper-input" id="cha${s}" value="0" min="-5" max="10" inputmode="numeric"/><button type="button" class="step-btn" id="chaInc${s}">+</button></div></div>
     </div>
     <div class="sec-label">Reputation & bartering</div>
     <div class="roll-btns">
@@ -570,6 +577,16 @@ function wireCard(item,s){
   });
   document.getElementById('cha'+s).addEventListener('input',()=>{
     if(document.getElementById('manual'+s).value)applyRoll(parseInt(document.getElementById('manual'+s).value)||1);
+  });
+  document.getElementById('chaDec'+s).addEventListener('click',()=>{
+    const inp=document.getElementById('cha'+s);
+    inp.value=Math.max(-5,(parseInt(inp.value)||0)-1);
+    inp.dispatchEvent(new Event('input'));
+  });
+  document.getElementById('chaInc'+s).addEventListener('click',()=>{
+    const inp=document.getElementById('cha'+s);
+    inp.value=Math.min(10,(parseInt(inp.value)||0)+1);
+    inp.dispatchEvent(new Event('input'));
   });
   document.getElementById('qty'+s).addEventListener('input',upd);
   upd();
