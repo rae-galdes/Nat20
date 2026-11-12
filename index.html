@@ -1,228 +1,447 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Merchant's Ledger</title>
 
   <!-- Favicon (browser tab icon) -->
   <link rel="icon" type="image/png" href="merchant_ledger_image.png">
   <link rel="shortcut icon" href="merchant_ledger_image.png">
 
-  <!-- iOS — icon when saved to home screen -->
+  <!-- iOS: icon when saved to home screen -->
   <link rel="apple-touch-icon" href="merchant_ledger_image.png">
 
-  <!-- Android / PWA — icon when saved to home screen -->
+  <!-- Android / PWA: icon when saved to home screen -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1a1410">
+  <meta name="theme-color" content="#14100c">
 
-  <!-- Optional: app-like fullscreen on iOS when launched from home screen -->
+  <!-- App-like fullscreen on iOS when launched from home screen -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Merchant's Ledger">
-</head>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --p:#1a1410;--pm:#221c15;--pc:#2a221a;--ph:#332a20;
-  --gold:#c9a84c;--gl:#e2c87a;--gd:#7a6330;--gg:rgba(201,168,76,0.15);
-  --cr:#8b1a1a;--crl:#b52828;--ink:#f0e8d8;--im:#a89878;--if:#6b5c45;
-  --bg:rgba(201,168,76,0.3);--bgb:rgba(201,168,76,0.6);
+  --bg:#14100c;--bg2:#1a1510;--panel:#211a14;--panel2:#2a2119;--panel3:#33291f;
+  --line:rgba(201,168,76,0.16);--line2:rgba(201,168,76,0.34);
+  --ink:#efe6d4;--muted:#ab9b7d;--faint:#75664f;
+  --gold:#c9a84c;--gold-l:#e6cc85;--gold-d:#7a6330;
+  --sell:#e0783a;--sell-l:#f4a46c;--sell-d:#8a4318;
+  --accent:var(--gold);--accent-l:var(--gold-l);--accent-d:var(--gold-d);
+  --accent-soft:rgba(201,168,76,0.10);--accent-mid:rgba(201,168,76,0.22);
+  --r:10px;--hh:72px;
+  --serif:'EB Garamond',Georgia,serif;--display:'Cinzel',Georgia,serif;
 }
-body{background:var(--p);font-family:'EB Garamond',Georgia,serif;color:var(--ink);margin:0;}
-.app{background:var(--p);min-height:100vh;}
-.desktop-shell{display:none;height:100vh;overflow:hidden;}
-.ds-left{width:280px;flex-shrink:0;border-right:1px solid var(--bg);display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-.ds-main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-.ds-top{padding:20px 24px 16px;border-bottom:1px solid var(--bg);flex-shrink:0;}
-.ds-title{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:700;color:var(--gl);letter-spacing:0.06em;margin-bottom:2px;}
-.ds-sub{font-family:'EB Garamond',serif;font-size:13px;color:var(--im);font-style:italic;}
-.ds-currency{padding:14px 16px;border-bottom:1px solid var(--bg);flex-shrink:0;}
-.cur-label-sm{font-family:'Cinzel',serif;font-size:9px;color:var(--gd);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
-.cur-list{display:flex;flex-direction:column;gap:4px;}
-.cur-row{font-family:'EB Garamond',serif;font-size:13px;color:var(--im);display:flex;align-items:center;gap:6px;}
-.cur-name{color:var(--gl);font-family:'Cinzel',serif;font-size:11px;font-weight:600;min-width:90px;}
-.ds-cats{padding:14px 16px;flex:1;overflow-y:auto;}
-.ds-cats::-webkit-scrollbar{width:3px;}
-.ds-cats::-webkit-scrollbar-thumb{background:var(--gd);}
-.cat-list-btn{width:100%;text-align:left;padding:8px 12px;font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--im);background:none;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.15s;-webkit-tap-highlight-color:transparent;margin-bottom:2px;}
-.cat-list-btn:hover{background:var(--pm);color:var(--gl);}
-.cat-list-btn.active{background:var(--gg);border:1px solid var(--bg);color:var(--gl);}
-.ds-content{flex:1;display:flex;gap:0;overflow:hidden;}
-.ds-search-panel{width:320px;flex-shrink:0;border-right:1px solid var(--bg);display:flex;flex-direction:column;overflow:hidden;}
-.ds-search-head{padding:16px 20px 12px;border-bottom:1px solid var(--bg);flex-shrink:0;}
-.ds-search-input{width:100%;padding:10px 14px;font-family:'EB Garamond',serif;font-size:15px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;}
-.ds-search-input::placeholder{color:var(--if);font-style:italic;}
-.ds-search-input:focus{border-color:var(--gold);}
-.ds-results-list{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gd) var(--pm);}
-.ds-drop-item{padding:10px 20px;font-family:'EB Garamond',serif;font-size:14px;cursor:pointer;color:var(--im);border-bottom:1px solid rgba(201,168,76,0.08);display:flex;justify-content:space-between;align-items:center;gap:8px;transition:background 0.1s;}
-.ds-drop-item:hover,.ds-drop-item.sel{background:var(--ph);color:var(--ink);}
-.ds-drop-item .dn{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ds-drop-item .dm{display:flex;align-items:center;gap:5px;flex-shrink:0;}
-.ds-detail-panel{flex:1;overflow-y:auto;padding:24px;scrollbar-width:thin;scrollbar-color:var(--gd) var(--pm);}
-.ds-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--if);font-style:italic;font-size:16px;text-align:center;padding:40px;}
-.mobile-shell{display:block;}
-.mob-header{text-align:center;padding:18px 16px 14px;border-bottom:1px solid var(--bg);position:relative;}
-.mob-header::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(to right,transparent,var(--gd),transparent);}
-.mob-title{font-family:'Cinzel Decorative',serif;font-size:19px;font-weight:700;color:var(--gl);letter-spacing:0.06em;margin-bottom:2px;}
-.mob-sub{font-family:'EB Garamond',serif;font-size:12px;color:var(--im);font-style:italic;}
-.currency-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:10px 14px;border-bottom:1px solid var(--bg);}
-.cur-chip{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:5px 8px;font-family:'Cinzel',serif;font-size:10px;color:var(--im);letter-spacing:0.03em;display:flex;align-items:center;gap:5px;}
-.cur-chip:last-child{grid-column:1/-1;}
-.cname{color:var(--gl);font-weight:600;}
-.mob-body{padding:14px;}
-.cat-wrap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:16px;}
-.cat-btn{background:var(--pm);border:1px solid var(--bg);border-radius:6px;padding:8px 6px;font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);cursor:pointer;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.15s;-webkit-tap-highlight-color:transparent;text-align:center;line-height:1.3;}
-.cat-btn.active{background:var(--gg);border-color:var(--gold);color:var(--gl);}
-.cat-btn:active{transform:scale(0.96);}
-.sec-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--gd);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;}
-.search-wrap{position:relative;margin-bottom:14px;}
-.search-input{width:100%;padding:12px 16px;font-family:'EB Garamond',serif;font-size:16px;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--ink);outline:none;-webkit-appearance:none;}
-.search-input::placeholder{color:var(--if);font-style:italic;}
-.search-input:focus{border-color:var(--gold);}
-.dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--pc);border:1px solid var(--bg);border-radius:8px;max-height:260px;overflow-y:auto;z-index:20;display:none;}
-.dropdown.open{display:block;}
-.drop-item{padding:10px 16px;font-family:'EB Garamond',serif;font-size:15px;cursor:pointer;color:var(--im);border-bottom:1px solid rgba(201,168,76,0.08);display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-tap-highlight-color:transparent;}
-.drop-item:last-child{border-bottom:none;}
-.drop-item:active{background:var(--ph);}
-.drop-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.no-results{padding:14px 16px;font-size:14px;color:var(--if);font-style:italic;text-align:center;}
-.rbadge{font-family:'Cinzel',serif;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:0.04em;text-transform:uppercase;}
-.r-common{background:#2a2a25;color:#aaa89a;border:1px solid #4a4a40;}
-.r-uncommon{background:#1a2a1a;color:#7ab87a;border:1px solid #3a6a3a;}
-.r-rare{background:#1a1f2e;color:#7a9ad4;border:1px solid #3a4a7a;}
-.r-very-rare{background:#251a35;color:#b07adc;border:1px solid #5a3a7a;}
-.r-legendary{background:#2e2010;color:#d4a050;border:1px solid #7a5020;}
-.r-artifact{background:#2e1010;color:#dc7a7a;border:1px solid #7a3030;}
-.item-card{background:var(--pc);border:1px solid var(--bg);border-radius:8px;padding:20px;position:relative;}
-.item-card::before,.item-card::after{content:'';position:absolute;width:10px;height:10px;border-color:var(--gd);border-style:solid;}
-.item-card::before{top:6px;left:6px;border-width:1px 0 0 1px;}
-.item-card::after{bottom:6px;right:6px;border-width:0 1px 1px 0;}
-.item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:2px;}
-.item-name{font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--gl);letter-spacing:0.03em;line-height:1.3;}
-.item-cat{font-family:'Cinzel',serif;font-size:9px;color:var(--if);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
-.item-img{width:100%;max-height:280px;object-fit:cover;border-radius:6px;border:1px solid var(--bg);margin-bottom:14px;display:block;}
-.cost-row{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
-.cost-big{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--gl);}
-.cost-note{font-size:13px;color:var(--im);font-style:italic;}
-.details-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-bottom:14px;}
-.detail-cell{background:var(--pm);border:1px solid rgba(201,168,76,0.12);border-radius:6px;padding:8px 10px;}
-.detail-label{font-family:'Cinzel',serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
-.detail-val{font-family:'EB Garamond',serif;font-size:13px;color:var(--ink);}
-.craft-box{background:var(--pm);border:1px solid rgba(139,26,26,0.35);border-radius:6px;padding:10px 12px;margin-bottom:14px;}
-.craft-title{font-family:'Cinzel',serif;font-size:9px;color:var(--crl);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
-.craft-row{display:flex;flex-wrap:wrap;gap:10px;}
-.craft-stat{font-size:13px;color:var(--im);font-style:italic;}
-.craft-stat span{font-style:normal;color:var(--ink);}
-.divider{border:none;border-top:1px solid var(--bg);margin:16px 0;position:relative;}
-.divider::after{content:'✦';position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--pc);padding:0 8px;color:var(--gd);font-size:11px;}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.field-group{display:flex;flex-direction:column;gap:5px;}
-.field-label{font-family:'Cinzel',serif;font-size:9px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.08em;}
-.field-input{padding:10px 12px;font-family:'EB Garamond',serif;font-size:15px;border:1px solid var(--bg);border-radius:6px;background:var(--pm);color:var(--ink);outline:none;width:100%;-webkit-appearance:none;}
-.field-input:focus{border-color:var(--gold);}
-.stepper{display:flex;align-items:stretch;gap:0;border:1px solid var(--bg);border-radius:6px;overflow:hidden;background:var(--pm);}
-.stepper:focus-within{border-color:var(--gold);}
-.stepper-input{border:none !important;border-radius:0 !important;text-align:center;flex:1;min-width:0;padding:10px 4px;background:transparent !important;}
-.stepper-input:focus{border:none !important;}
-.step-btn{background:var(--ph);border:none;color:var(--gl);font-family:'Cinzel',serif;font-size:20px;font-weight:700;width:40px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.15s;flex-shrink:0;user-select:none;}
-.step-btn:hover{background:var(--gg);}
-.step-btn:active{background:var(--gold);color:var(--p);}
-.roll-btns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px;align-items:center;}
-.roll-btn{padding:11px 16px;font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--pm);border:1px solid var(--gd);border-radius:8px;cursor:pointer;color:var(--gl);transition:all 0.15s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
-.roll-btn:hover{background:var(--gg);}
-.roll-btn:active{transform:scale(0.97);}
-.roll-manual{width:62px;padding:11px 8px;font-family:'Cinzel',serif;font-size:17px;font-weight:600;text-align:center;border:1px solid var(--bg);border-radius:8px;background:var(--pm);color:var(--gl);outline:none;-webkit-appearance:none;}
-.roll-manual:focus{border-color:var(--gold);}
-.rep-display{border-radius:8px;padding:12px 14px;display:none;align-items:center;justify-content:space-between;margin-bottom:10px;border:1px solid rgba(201,168,76,0.18);}
-.rep-name{font-family:'Cinzel',serif;font-size:14px;font-weight:600;letter-spacing:0.03em;}
-.rep-desc{font-size:12px;margin-top:2px;font-style:italic;}
-.rep-mod{font-family:'Cinzel',serif;font-size:18px;font-weight:700;flex-shrink:0;margin-left:12px;}
-.total-row{background:var(--pm);border:1px solid var(--bgb);border-radius:8px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:relative;}
-.total-row::before,.total-row::after{content:'';position:absolute;width:7px;height:7px;border-color:var(--gold);border-style:solid;}
-.total-row::before{top:4px;left:4px;border-width:1px 0 0 1px;}
-.total-row::after{bottom:4px;right:4px;border-width:0 1px 1px 0;}
-.total-label{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--im);text-transform:uppercase;letter-spacing:0.1em;}
-.total-sub{font-size:11px;color:var(--if);font-style:italic;margin-top:3px;}
-.total-val{font-family:'Cinzel',serif;font-size:24px;font-weight:700;color:var(--gl);text-align:right;}
-@keyframes dr{0%{transform:rotate(0) scale(1.3);}50%{transform:rotate(180deg) scale(0.8);}100%{transform:rotate(360deg) scale(1);}}
-.spin{animation:dr 0.4s ease-out;}
-@media(min-width:780px){.mobile-shell{display:none;}.desktop-shell{display:flex;}}
+body[data-mode="sell"]{
+  --accent:var(--sell);--accent-l:var(--sell-l);--accent-d:var(--sell-d);
+  --accent-soft:rgba(224,120,58,0.10);--accent-mid:rgba(224,120,58,0.22);
+}
+html,body{height:100%;}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(ellipse at 20% -10%,rgba(201,168,76,0.07),transparent 55%),radial-gradient(ellipse at 110% 110%,rgba(139,26,26,0.07),transparent 50%);
+  font-family:var(--serif);color:var(--ink);font-size:16px;line-height:1.45;
+  display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;
+}
+button,input{font:inherit;color:inherit;}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+
+/* ── Top bar ───────────────────────────────── */
+.topbar{
+  position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:20px;
+  padding:12px 24px;padding-top:max(12px,env(safe-area-inset-top));
+  background:linear-gradient(180deg,#1e1813,#16110d);border-bottom:1px solid var(--line2);
+}
+.topbar::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.6;transition:background .3s;}
+.brand{display:flex;align-items:center;gap:12px;min-width:0;}
+.brand-mark{width:40px;height:40px;border-radius:8px;border:1px solid var(--line2);object-fit:cover;flex-shrink:0;}
+.brand h1{font-family:'Cinzel Decorative',var(--display);font-size:21px;font-weight:700;color:var(--gold-l);letter-spacing:.05em;line-height:1.1;white-space:nowrap;}
+.brand p{font-size:13px;color:var(--muted);font-style:italic;}
+
+.mode-toggle{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;margin:0 auto;
+  background:#0f0b08;border:1px solid var(--line2);border-radius:14px;padding:4px;width:min(460px,100%);
+}
+.mode-toggle::before{
+  content:'';position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:10px;
+  background:linear-gradient(180deg,rgba(201,168,76,0.30),rgba(201,168,76,0.10));
+  border:1px solid var(--gold);box-shadow:0 0 18px rgba(201,168,76,0.18);
+  transition:transform .28s cubic-bezier(.4,.1,.2,1),background .28s,border-color .28s,box-shadow .28s;
+}
+body[data-mode="sell"] .mode-toggle::before{
+  transform:translateX(100%);
+  background:linear-gradient(180deg,rgba(224,120,58,0.30),rgba(224,120,58,0.10));
+  border-color:var(--sell);box-shadow:0 0 18px rgba(224,120,58,0.18);
+}
+.mode-btn{
+  position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:9px 14px;
+  background:none;border:0;border-radius:10px;color:var(--faint);text-align:left;transition:color .2s;
+}
+.mode-btn:hover{color:var(--muted);}
+.mode-btn[aria-pressed="true"]{color:var(--ink);}
+.mode-ico{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1px solid currentColor;flex-shrink:0;}
+.mode-btn[aria-pressed="true"] .mode-ico{color:var(--accent-l);border-color:var(--accent);}
+.mode-ico svg{width:17px;height:17px;}
+.mode-btn strong{display:block;font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.mode-btn small{display:block;font-size:12.5px;font-style:italic;color:inherit;opacity:.85;line-height:1.2;}
+
+.currency{position:relative;flex-shrink:0;}
+.currency summary{
+  list-style:none;display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+  font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;user-select:none;
+}
+.currency summary::-webkit-details-marker{display:none;}
+.currency summary:hover,.currency[open] summary{color:var(--gold-l);border-color:var(--line2);}
+.coin-dot{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f3dc96,#a8862f);box-shadow:0 0 0 1px #5a4718;}
+.cur-pop{
+  position:absolute;right:0;top:calc(100% + 8px);width:250px;background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);
+  padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.55);z-index:50;
+}
+.cur-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted);}
+.cur-row:last-child{border-bottom:0;}
+.cur-row b{font-family:var(--display);font-size:12px;font-weight:600;color:var(--gold-l);letter-spacing:.04em;}
+
+/* ── Layout ────────────────────────────────── */
+.layout{flex:1;min-height:0;display:grid;grid-template-columns:220px 360px minmax(0,1fr);}
+.cats{border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;gap:2px;}
+.side-label{font-family:var(--display);font-size:10px;font-weight:600;color:var(--gold-d);letter-spacing:.14em;text-transform:uppercase;padding:0 10px 10px;}
+.cat{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;padding:9px 12px;
+  background:none;border:1px solid transparent;border-radius:8px;text-align:left;
+  font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:background .15s,color .15s;
+}
+.cat:hover{background:var(--panel);color:var(--ink);}
+.cat.active{background:var(--accent-soft);border-color:var(--accent-mid);color:var(--accent-l);}
+.cat-n{font-family:var(--serif);font-size:12px;font-weight:400;letter-spacing:0;color:var(--faint);}
+.cat.active .cat-n{color:var(--accent);}
+
+.browser{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;}
+.browser-head{padding:16px 18px 12px;border-bottom:1px solid var(--line);background:var(--bg);}
+.browser-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.browser-title span:first-child{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);}
+.browser-title span:last-child{font-size:13px;color:var(--faint);font-style:italic;}
+.search{position:relative;}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--faint);pointer-events:none;}
+.search input{
+  width:100%;padding:10px 12px 10px 36px;border:1px solid var(--line2);border-radius:8px;background:var(--panel);
+  font-size:16px;outline:none;-webkit-appearance:none;transition:border-color .15s;
+}
+.search input::placeholder{color:var(--faint);font-style:italic;}
+.search input:focus{border-color:var(--accent);}
+.sell-hint{margin-top:10px;font-size:13px;font-style:italic;color:var(--sell-l);display:none;}
+body[data-mode="sell"] .sell-hint{display:block;}
+
+.list{flex:1;overflow-y:auto;}
+.row{
+  display:flex;align-items:center;gap:12px;width:100%;padding:11px 18px;background:none;border:0;border-bottom:1px solid rgba(201,168,76,0.07);
+  text-align:left;transition:background .12s;position:relative;
+}
+.row:hover{background:var(--panel);}
+.row.sel{background:var(--accent-soft);}
+.row.sel::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 3px 3px 0;background:var(--accent);}
+.row-main{flex:1;min-width:0;}
+.row-name{display:block;font-size:16px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.row-meta:empty{display:none;}
+.row-meta{display:flex;align-items:center;gap:6px;margin-top:2px;min-height:18px;}
+.row-cat{font-family:var(--display);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);}
+.row-price{text-align:right;flex-shrink:0;font-family:var(--display);font-size:13px;font-weight:600;color:var(--accent-l);}
+.row-price small{display:block;font-family:var(--serif);font-size:11.5px;font-weight:400;font-style:italic;color:var(--faint);}
+.empty-list{padding:28px 18px;text-align:center;color:var(--faint);font-style:italic;}
+
+.rbadge{font-family:var(--display);font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;letter-spacing:.05em;text-transform:uppercase;}
+.rbadge.big{font-size:10.5px;padding:4px 11px;}
+.r-common{background:#2a2a25;color:#b3b1a2;border:1px solid #4a4a40;}
+.r-uncommon{background:#1a2a1a;color:#86c486;border:1px solid #3a6a3a;}
+.r-rare{background:#1a1f2e;color:#8aa8e0;border:1px solid #3a4a7a;}
+.r-very-rare{background:#251a35;color:#bb8ae4;border:1px solid #5a3a7a;}
+.r-legendary{background:#2e2010;color:#dcab5c;border:1px solid #7a5020;}
+.r-artifact{background:#2e1010;color:#e48a8a;border:1px solid #7a3030;}
+
+/* ── Detail ────────────────────────────────── */
+.detail{min-height:0;display:flex;flex-direction:column;}
+.sheet-bar{display:none;}
+.detail-scroll{flex:1;overflow-y:auto;padding:28px;}
+.empty-state{height:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;color:var(--faint);padding:30px;}
+.empty-state svg{width:54px;height:54px;color:var(--gold-d);}
+.empty-state h2{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:.08em;color:var(--muted);}
+.empty-state p{font-style:italic;max-width:340px;}
+.notice{margin-top:6px;padding:10px 14px;border:1px solid rgba(181,40,40,.4);background:rgba(139,26,26,.15);border-radius:8px;color:#e8b0a8;font-style:italic;font-size:14px;}
+
+.card{max-width:760px;margin:0 auto;}
+.mode-banner{
+  display:flex;align-items:center;gap:12px;padding:10px 14px;margin-bottom:18px;border-radius:var(--r);
+  background:var(--accent-soft);border:1px solid var(--accent-mid);
+}
+.mode-banner .mode-ico{display:grid;place-items:center;color:var(--accent-l);border-color:var(--accent);width:36px;height:36px;flex-shrink:0;}
+.mode-ico svg{display:block;}
+.mode-banner strong{display:block;font-family:var(--display);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-l);}
+.mode-banner div>span{display:block;font-size:14px;color:var(--muted);font-style:italic;line-height:1.3;}
+
+.eyebrow{font-family:var(--display);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:4px;}
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;}
+.title-row h2{font-family:var(--display);font-size:28px;font-weight:700;color:var(--gold-l);letter-spacing:.02em;line-height:1.15;}
+.item-img{width:100%;max-height:300px;object-fit:contain;background:#0f0b08;border-radius:var(--r);border:1px solid var(--line);margin-bottom:18px;display:block;}
+
+.top-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:12px;margin-bottom:12px;}
+.market{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);padding:14px 16px;position:relative;}
+.label{font-family:var(--display);font-size:10px;font-weight:600;color:var(--faint);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.market-val{font-family:var(--display);font-size:26px;font-weight:700;color:var(--gold-l);line-height:1.1;}
+.market-note{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:2px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;align-content:start;}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:8px 11px;}
+.stat-v{font-size:15px;color:var(--ink);line-height:1.3;}
+.craft{background:var(--bg2);border:1px solid rgba(181,40,40,0.35);border-radius:var(--r);padding:11px 14px;margin-bottom:12px;}
+.craft .label{color:#c9605a;}
+.craft-row{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;color:var(--muted);}
+.craft-row b{font-weight:500;color:var(--ink);}
+
+.section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;}
+.section-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+.section-h h3{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-l);}
+.section-h span{font-size:13px;color:var(--faint);font-style:italic;}
+
+.inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px;}
+.inputs.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+.stepper{display:flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;background:var(--bg2);height:46px;}
+.stepper:focus-within{border-color:var(--accent);}
+.stepper button{width:46px;flex-shrink:0;background:var(--panel3);border:0;font-family:var(--display);font-size:20px;font-weight:700;color:var(--gold-l);user-select:none;transition:background .12s;}
+.stepper button:hover{background:var(--accent-mid);}
+.stepper button:active{background:var(--accent);color:var(--bg);}
+.stepper input,.plain-input{flex:1;min-width:0;border:0;background:transparent;text-align:center;font-size:18px;font-family:var(--display);font-weight:600;outline:none;-webkit-appearance:none;-moz-appearance:textfield;}
+.plain-input{width:100%;height:46px;border:1px solid var(--line2);border-radius:8px;background:var(--bg2);}
+.plain-input:focus{border-color:var(--accent);}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+
+.roll-line{display:grid;grid-template-columns:1fr 92px;gap:10px;align-items:stretch;}
+.roll-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 18px;
+  background:linear-gradient(180deg,var(--accent-mid),var(--accent-soft));border:1px solid var(--accent);border-radius:10px;
+  font-family:var(--display);font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-l);transition:transform .1s,filter .15s;
+}
+.roll-btn:hover{filter:brightness(1.15);}
+.roll-btn:active{transform:scale(.98);}
+.roll-btn:disabled{opacity:.4;cursor:not-allowed;filter:none;}
+.dice{display:inline-flex;line-height:0;}
+.manual{position:relative;}
+.manual input{width:100%;height:100%;min-height:52px;border:1px solid var(--line2);border-radius:10px;background:var(--bg2);text-align:center;font-family:var(--display);font-size:22px;font-weight:700;color:var(--gold-l);outline:none;-moz-appearance:textfield;}
+.manual input:focus{border-color:var(--accent);}
+.manual span{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--panel);padding:0 5px;font-family:var(--display);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
+
+.tier{display:none;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:12px 14px;border-radius:10px;border:1px solid;}
+.tier.show{display:flex;}
+.tier-name{font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:.04em;}
+.tier-desc{font-size:14px;font-style:italic;opacity:.85;margin-top:1px;}
+.tier-mod{font-family:var(--display);font-size:18px;font-weight:700;white-space:nowrap;text-align:right;}
+
+.outcome{
+  margin-top:14px;padding:16px 18px;border-radius:12px;background:#0f0b08;border:1px solid var(--accent);
+  display:flex;justify-content:space-between;align-items:center;gap:16px;position:relative;
+}
+.outcome::before,.outcome::after{content:'';position:absolute;width:9px;height:9px;border-color:var(--accent);border-style:solid;}
+.outcome::before{top:5px;left:5px;border-width:1px 0 0 1px;}
+.outcome::after{bottom:5px;right:5px;border-width:0 1px 1px 0;}
+.out-label{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-l);}
+.out-sub{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:3px;}
+.out-val{font-family:var(--display);font-size:30px;font-weight:700;color:var(--ink);text-align:right;line-height:1.1;}
+.out-diff{font-size:13.5px;text-align:right;margin-top:3px;font-style:italic;}
+.breakdown{margin-top:10px;display:grid;gap:4px;font-size:14px;color:var(--muted);}
+.breakdown div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dotted var(--line);padding:3px 2px;}
+.breakdown b{font-weight:500;color:var(--ink);}
+
+.ref{margin-top:14px;}
+.ref summary{cursor:pointer;font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:6px 0;list-style:none;display:flex;align-items:center;gap:8px;}
+.ref summary::-webkit-details-marker{display:none;}
+.ref summary::before{content:'▸';color:var(--accent);transition:transform .2s;}
+.ref[open] summary::before{transform:rotate(90deg);}
+.ref table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;}
+.ref td{padding:6px 8px;border-bottom:1px solid var(--line);}
+.ref td:first-child{font-family:var(--display);font-size:12px;font-weight:600;white-space:nowrap;color:var(--muted);width:70px;}
+.ref td:last-child{text-align:right;white-space:nowrap;font-family:var(--display);font-size:12.5px;}
+.ref tr.on td{background:var(--accent-soft);}
+.ref p{font-size:13px;color:var(--faint);font-style:italic;margin-top:8px;}
+
+@keyframes dr{0%{transform:rotate(0) scale(1.3);}50%{transform:rotate(180deg) scale(.8);}100%{transform:rotate(360deg) scale(1);}}
+.spin{animation:dr .45s ease-out;}
+@keyframes pop{0%{transform:scale(.96);opacity:.4;}100%{transform:scale(1);opacity:1;}}
+.pop{animation:pop .25s ease-out;}
+
+/* ── Desktop: fixed-height panes ───────────── */
+@media (min-width:760px){
+  body{height:100vh;height:100dvh;overflow:hidden;}
+  .layout>*{min-height:0;overflow-y:auto;}
+  .browser{overflow:hidden;}
+  .detail{overflow:hidden;}
+}
+
+/* ── Tablet / small laptop ─────────────────── */
+@media (max-width:1099px) and (min-width:760px){
+  .layout{grid-template-columns:330px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);}
+  .cats{grid-column:1/-1;flex-direction:row;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid var(--line);padding:10px 16px;gap:6px;}
+  .side-label{display:none;}
+  .cat{width:auto;flex-shrink:0;padding:7px 12px;border-color:var(--line);}
+  .detail-scroll{padding:22px;}
+  .mode-btn small{display:none;}
+  .mode-toggle{width:min(340px,100%);}
+}
+
+/* ── Phone ─────────────────────────────────── */
+@media (max-width:759px){
+  .topbar{flex-wrap:wrap;gap:10px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top));}
+  .brand{flex:1;}
+  .brand-mark{width:34px;height:34px;}
+  .brand h1{font-size:17px;}
+  .brand p{font-size:12px;}
+  .mode-toggle{order:3;width:100%;}
+  .mode-btn{padding:8px 10px;gap:8px;}
+  .mode-ico{width:28px;height:28px;}
+  .mode-btn strong{font-size:13px;}
+  .mode-btn small{font-size:11.5px;}
+  .currency summary{padding:7px 10px;}
+  .layout{display:block;}
+  .cats{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px 14px;gap:6px;scrollbar-width:none;}
+  .cats::-webkit-scrollbar{display:none;}
+  .side-label{display:none;}
+  .cat{width:auto;flex-shrink:0;padding:7px 12px;border-color:var(--line);font-size:11px;}
+  .browser{border-right:0;}
+  .browser-head{position:sticky;top:var(--hh);z-index:20;padding:12px 14px 10px;}
+  .row{padding:12px 14px;min-height:58px;}
+  .detail{
+    position:fixed;left:0;right:0;bottom:0;top:var(--hh);z-index:35;background:var(--bg);
+    transform:translateY(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);visibility:hidden;
+  }
+  .detail.open{transform:none;visibility:visible;}
+  .sheet-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg2);}
+  .back-btn{display:flex;align-items:center;gap:6px;background:none;border:0;font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);padding:6px 0;}
+  .sheet-mode{font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-l);border:1px solid var(--accent);border-radius:20px;padding:3px 10px;}
+  .detail-scroll{padding:16px 14px calc(28px + env(safe-area-inset-bottom));}
+  .title-row h2{font-size:23px;}
+  .top-grid{grid-template-columns:1fr;}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .section{padding:14px;}
+  .inputs.three{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .inputs.three>:last-child{grid-column:1/-1;}
+  .outcome{flex-direction:column;align-items:stretch;gap:8px;}
+  .out-val,.out-diff{text-align:left;}
+  .out-val{font-size:28px;}
+  html.sheet-open,html.sheet-open body{overflow:hidden;}
+  .empty-state{display:none;}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
+</head>
 
-<div class="app">
-<div class="desktop-shell" id="desktopShell">
-  <div class="ds-left">
-    <div class="ds-top">
-      <div class="ds-title">Merchant's Ledger</div>
-      <div class="ds-sub">Natural Twenty</div>
-    </div>
-    <div class="ds-currency">
-      <div class="cur-label-sm">Currency key</div>
-      <div class="cur-list">
-        <div class="cur-row"><span class="cur-name">Copper (cp)</span><span>100 cp = 1 gp</span></div>
-        <div class="cur-row"><span class="cur-name">Silver (sp)</span><span>10 sp = 1 gp</span></div>
-        <div class="cur-row"><span class="cur-name">Gold (gp)</span><span>base unit</span></div>
-      </div>
-    </div>
-    <div class="ds-cats">
-      <div class="cur-label-sm" style="margin-bottom:10px;">Categories</div>
-      <div id="dsCatList"></div>
-    </div>
-  </div>
-  <div class="ds-main">
-    <div class="ds-content">
-      <div class="ds-search-panel">
-        <div class="ds-search-head">
-          <div class="cur-label-sm" style="margin-bottom:8px;" id="dsCatLabel">All items</div>
-          <input type="text" class="ds-search-input" id="dsSearchInput" placeholder="Search the merchant's wares..." autocomplete="off" autocorrect="off"/>
-        </div>
-        <div class="ds-results-list" id="dsResultsList"></div>
-      </div>
-      <div class="ds-detail-panel" id="dsDetailPanel">
-        <div class="ds-empty" id="dsEmpty">Select an item from the ledger to view details and calculate its price.</div>
-        <div id="dsItemCard" style="display:none;"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<body data-mode="buy">
 
-<div class="mobile-shell" id="mobileShell">
-  <div class="mob-header">
-    <div class="mob-title">Merchant's Ledger</div>
-    <div class="mob-sub">Natural Twenty</div>
+<header class="topbar" id="topbar">
+  <div class="brand">
+    <img src="merchant_ledger_image.png" alt="" class="brand-mark" onerror="this.remove()">
+    <div><h1>Merchant's Ledger</h1><p>Natural Twenty</p></div>
   </div>
-  <div class="currency-grid">
-    <div class="cur-chip"><span class="cname">Copper (cp)</span> · 100 = 1 gp</div>
-    <div class="cur-chip"><span class="cname">Silver (sp)</span> · 10 = 1 gp</div>
-    <div class="cur-chip"><span class="cname">Gold (gp)</span> · base unit</div>
+
+  <div class="mode-toggle" role="group" aria-label="Trade mode">
+    <button type="button" class="mode-btn" data-mode="buy" aria-pressed="true">
+      <span class="mode-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/><path d="M5 7h14l-1.2 12.2A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.8z"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg></span>
+      <span><strong>Buying</strong><small>Party pays the merchant</small></span>
+    </button>
+    <button type="button" class="mode-btn" data-mode="sell" aria-pressed="false">
+      <span class="mode-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="2.8"/><path d="M5 6v4c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6"/><path d="M5 10v4c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-4"/><path d="M5 14v3.5c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V14"/></svg></span>
+      <span><strong>Selling</strong><small>Merchant pays the party</small></span>
+    </button>
   </div>
-  <div class="mob-body">
-    <div class="sec-label">Browse by category</div>
-    <div class="cat-wrap-grid" id="mobCatGrid"></div>
-    <div id="mobSearchArea" style="display:none;">
-      <div class="search-wrap">
-        <input type="text" class="search-input" id="mobSearchInput" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off"/>
-        <div class="dropdown" id="mobDropdown"></div>
-      </div>
+
+  <details class="currency" id="currency">
+    <summary><span class="coin-dot"></span>Currency</summary>
+    <div class="cur-pop">
+      <div class="cur-row"><b>Copper (cp)</b><span>100 cp = 1 gp</span></div>
+      <div class="cur-row"><b>Silver (sp)</b><span>10 sp = 1 gp</span></div>
+      <div class="cur-row"><b>Electrum (ep)</b><span>2 ep = 1 gp</span></div>
+      <div class="cur-row"><b>Gold (gp)</b><span>base unit</span></div>
+      <div class="cur-row"><b>Platinum (pp)</b><span>1 pp = 10 gp</span></div>
     </div>
-    <div id="mobItemCard" style="display:none;"></div>
-  </div>
-</div>
+  </details>
+</header>
+
+<div class="layout">
+  <nav class="cats" id="cats" aria-label="Categories"></nav>
+
+  <section class="browser" aria-label="Wares">
+    <div class="browser-head">
+      <div class="browser-title"><span id="catLabel">All wares</span><span id="count"></span></div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="search" placeholder="Search the merchant's wares..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="sell-hint">Showing goods a merchant will buy back. Services and tavern fare are hidden.</div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section class="detail" id="detail" aria-live="polite">
+    <div class="sheet-bar">
+      <button type="button" class="back-btn" id="closeSheet"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>Back to wares</button>
+      <span class="sheet-mode" id="sheetMode">Buying</span>
+    </div>
+    <div class="detail-scroll" id="detailScroll"></div>
+  </section>
 </div>
 
 <script>
 const RB={Common:'r-common',Uncommon:'r-uncommon',Rare:'r-rare','Very Rare':'r-very-rare',Legendary:'r-legendary',Artifact:'r-artifact'};
 const CRAFT={Common:{days:5,cost:'50 gp'},Uncommon:{days:10,cost:'200 gp'},Rare:{days:50,cost:'2,000 gp'},'Very Rare':{days:125,cost:'20,000 gp'},Legendary:{days:250,cost:'100,000 gp'}};
-const REP=[
-  {min:1,max:1,name:'Enemy',desc:'They despise you',mult:4.0,bg:'rgba(139,26,26,0.35)',nc:'#e87a7a',dc:'#a86060',ml:'+300%'},
-  {min:2,max:5,name:'Unfriendly',desc:'Suspicion colours the deal',mult:2.0,bg:'rgba(120,80,20,0.35)',nc:'#d4a050',dc:'#a07840',ml:'+100%'},
-  {min:6,max:10,name:'Acquaintance',desc:'Neutral — just business',mult:1.5,bg:'rgba(80,80,80,0.3)',nc:'#c8c0b0',dc:'#908880',ml:'+50%'},
-  {min:11,max:15,name:'Friend',desc:'Standard pricing',mult:1.0,bg:'rgba(30,80,30,0.3)',nc:'#7ad47a',dc:'#50a050',ml:'Standard'},
-  {min:16,max:19,name:'Trusted Ally',desc:'They would give you the world',mult:0.75,bg:'rgba(20,60,90,0.4)',nc:'#7ab8e8',dc:'#4a88b8',ml:'-25%'},
-  {min:20,max:20,name:'Natural 20 — Adored!',desc:'Legends are told of your name',mult:0.5,bg:'rgba(80,40,120,0.4)',nc:'#c8a0f8',dc:'#9070c8',ml:'-50%'},
+
+/* Colours for reputation tiers, worst to best */
+const TONE={
+  bad3:{c:'#ea8f80',bg:'rgba(139,26,26,0.28)'},
+  bad2:{c:'#e0aa5e',bg:'rgba(120,80,20,0.28)'},
+  mid:{c:'#cfc6b4',bg:'rgba(90,90,90,0.22)'},
+  good:{c:'#8acf93',bg:'rgba(30,90,40,0.26)'},
+  great:{c:'#8cc2ee',bg:'rgba(20,70,110,0.30)'},
+  legend:{c:'#cdaaf8',bg:'rgba(90,45,135,0.32)'},
+};
+
+/*
+  BUYING: the merchant sets the price. Reputation multiplies market value,
+  so the party can pay above OR below market.
+  Tier is decided by the TOTAL (d20 + CHA modifier, clamped 1 to 20).
+*/
+const BUY_TIERS=[
+  {min:1, max:1, name:'Enemy',        desc:'They despise you',                 mult:4.00,tone:'bad3',  ml:'+300%'},
+  {min:2, max:5, name:'Unfriendly',   desc:'Suspicion colours the deal',       mult:2.00,tone:'bad2',  ml:'+100%'},
+  {min:6, max:10,name:'Acquaintance', desc:'Neutral, just business',           mult:1.50,tone:'mid',   ml:'+50%'},
+  {min:11,max:15,name:'Friend',       desc:'Standard pricing',                 mult:1.00,tone:'good',  ml:'Market'},
+  {min:16,max:19,name:'Trusted Ally', desc:'They would give you the world',    mult:0.75,tone:'great', ml:'-25%'},
+  {min:20,max:20,name:'Adored',       desc:'Legends are told of your name',    mult:0.50,tone:'legend',ml:'-50%'},
 ];
-function getTier(r){return REP.find(t=>r>=t.min&&r<=t.max)||REP[2];}
+
+/*
+  SELLING: the merchant makes an offer. The party receives a share of market value,
+  capped at 100%. Only a NATURAL 20 on the die (not a modified 20) beats market value.
+*/
+const SELL_TIERS=[
+  {min:1, max:1, name:'Insulting offer',  desc:'They scoff at your wares',           mult:0.10,tone:'bad3', ml:'10%'},
+  {min:2, max:5, name:'Lowball',          desc:'A miserly counter-offer',            mult:0.25,tone:'bad2', ml:'25%'},
+  {min:6, max:10,name:'Standard resale',  desc:'The usual rate for second-hand goods',mult:0.50,tone:'mid',  ml:'50%'},
+  {min:11,max:15,name:'Generous',         desc:'They see real worth in it',          mult:0.75,tone:'good', ml:'75%'},
+  {min:16,max:20,name:'Full market value',desc:'They pay what it is worth',          mult:1.00,tone:'great',ml:'100%'},
+];
+const SELL_NAT20={nat:true,name:'Natural 20: Bidding war',desc:'They want it badly and pay over the odds',mult:1.10,tone:'legend',ml:'110%'};
+
+function tiersFor(mode){return mode==='buy'?BUY_TIERS:SELL_TIERS;}
+function getTier(mode,total,raw){
+  if(mode==='sell'&&raw===20)return SELL_NAT20;
+  const list=tiersFor(mode);
+  return list.find(t=>total>=t.min&&total<=t.max)||list[2];
+}
 
 /*
   ALL prices are stored in copper pieces (cp). Conversion:
@@ -231,24 +450,11 @@ function getTier(r){return REP.find(t=>r>=t.min&&r<=t.max)||REP[2];}
     100 cp = 1 gp
     1000 cp = 10 gp = 1 pp
 
-  Display rules — always use the LARGEST clean unit:
-  - If exactly divisible by 1000 (= whole pp) AND result is a round number → show pp
-  - Else if >= 100 cp → show as gp (cp / 100), formatted with commas
-  - Else if exactly divisible by 50 → show ep
-  - Else if exactly divisible by 10 → show sp
-  - Else show cp
-
-  1 pp = 10 gp = 1000 cp. So to check for pp: cp % 1000 === 0.
-  Example checks:
-    400,000 cp → 400,000/100 = 4,000 gp ✓ (not divisible cleanly into pp that makes sense to display)
-    Actually 400,000 / 1000 = 400 pp — but D&D never prices things in pp in the PHB.
-  
-  Decision: Never auto-convert to pp in the calculator output. Always show gp for amounts >= 100 cp.
-  Platinum is listed in the currency key for reference only. The final price always shows gp (or sp/cp for tiny amounts).
-  This matches how D&D merchants actually price things.
+  Decision: never auto-convert to pp in the calculator output. Always show gp for amounts >= 100 cp.
+  Platinum is listed in the currency key for reference only. This matches how D&D merchants price things.
 */
 function cpToDisplay(cp){
-  if(cp===null||cp===undefined||cp===0)return'—';
+  if(cp===null||cp===undefined||cp===0)return'–';
   if(cp<0)cp=0;
   if(cp>=100){
     const gp=cp/100;
@@ -258,6 +464,7 @@ function cpToDisplay(cp){
   if(cp>=10&&cp%10===0)return(cp/10)+' sp';
   return cp+' cp';
 }
+function fmt(cp){cp=Math.round(cp);return cp<=0?'0 cp':cpToDisplay(cp);}
 
 function ing(name,rarity,cp){
   return{name,cost:cpToDisplay(cp),baseCost:cp,note:'',rarity,details:{Rarity:rarity,Type:'Ingredient',Use:'Alchemy / crafting'}};
@@ -283,15 +490,15 @@ const data={
 ],
 "Services":[
   {name:"Coach cab (city)",cost:"1 cp",baseCost:1,note:"",details:{}},
-  {name:"Coach cab (between towns)",cost:"3 cp/mile",baseCost:null,note:"per mile",details:{}},
-  {name:"Hireling — skilled",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
-  {name:"Hireling — unskilled",cost:"2 sp/day",baseCost:20,note:"per day",details:{}},
-  {name:"Messenger",cost:"2 cp/mile",baseCost:null,note:"per mile",details:{}},
+  {name:"Coach cab (between towns)",cost:"3 cp/mile",baseCost:3,note:"per mile",details:{}},
+  {name:"Hireling, skilled",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
+  {name:"Hireling, unskilled",cost:"2 sp/day",baseCost:20,note:"per day",details:{}},
+  {name:"Messenger",cost:"2 cp/mile",baseCost:2,note:"per mile",details:{}},
   {name:"Road/Gate toll",cost:"1 cp",baseCost:1,note:"",details:{}},
-  {name:"Ship's passage",cost:"1 sp/mile",baseCost:null,note:"per mile",details:{}},
-  {name:"Spell — 1st level",cost:"10–30 gp",baseCost:null,note:"+ components",details:{}},
-  {name:"Spell — 2nd level",cost:"30–50 gp",baseCost:null,note:"+ components",details:{}},
-  {name:"Spell — 3rd level+",cost:"Negotiable",baseCost:null,note:"possibly a quest",details:{}},
+  {name:"Ship's passage",cost:"1 sp/mile",baseCost:10,note:"per mile",details:{}},
+  {name:"Spell, 1st level",cost:"10–30 gp",baseCost:null,note:"+ components",details:{}},
+  {name:"Spell, 2nd level",cost:"30–50 gp",baseCost:null,note:"+ components",details:{}},
+  {name:"Spell, 3rd level+",cost:"Negotiable",baseCost:null,note:"possibly a quest",details:{}},
 ],
 "Tavern":[
   {name:"Cindrel Brew (Coffee)",cost:"2 sp",baseCost:20,note:"mug",details:{}},
@@ -300,14 +507,14 @@ const data={
   {name:"Bread, loaf",cost:"1 sp",baseCost:10,note:"",details:{}},
   {name:"Cheese, hunk",cost:"1 sp",baseCost:10,note:"",details:{}},
   {name:"Meat, chunk",cost:"3 sp",baseCost:30,note:"",details:{}},
-  {name:"Wine — common",cost:"2 sp",baseCost:20,note:"pitcher",details:{}},
-  {name:"Wine — fine",cost:"1 gp",baseCost:100,note:"bottle",details:{}},
-  {name:"Inn — squalid",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
-  {name:"Inn — modest",cost:"4 gp/day",baseCost:400,note:"per day",details:{}},
-  {name:"Inn — wealthy",cost:"6 gp/day",baseCost:600,note:"per day",details:{}},
-  {name:"Meals — squalid",cost:"3 sp/day",baseCost:30,note:"per day",details:{}},
-  {name:"Meals — modest",cost:"6 sp/day",baseCost:60,note:"per day",details:{}},
-  {name:"Meals — wealthy",cost:"1 gp/day",baseCost:100,note:"per day",details:{}},
+  {name:"Wine, common",cost:"2 sp",baseCost:20,note:"pitcher",details:{}},
+  {name:"Wine, fine",cost:"1 gp",baseCost:100,note:"bottle",details:{}},
+  {name:"Inn, squalid",cost:"2 gp/day",baseCost:200,note:"per day",details:{}},
+  {name:"Inn, modest",cost:"4 gp/day",baseCost:400,note:"per day",details:{}},
+  {name:"Inn, wealthy",cost:"6 gp/day",baseCost:600,note:"per day",details:{}},
+  {name:"Meals, squalid",cost:"3 sp/day",baseCost:30,note:"per day",details:{}},
+  {name:"Meals, modest",cost:"6 sp/day",baseCost:60,note:"per day",details:{}},
+  {name:"Meals, wealthy",cost:"1 gp/day",baseCost:100,note:"per day",details:{}},
 ],
 "Armour":[
   {name:"Padded armour",cost:"5 gp",baseCost:500,note:"",details:{Type:"Light",AC:"11+Dex",Weight:"8 lb",Stealth:"Disadv."}},
@@ -441,7 +648,7 @@ const data={
   {name:"Mastiff",cost:"25 gp",baseCost:2500,note:"",details:{Speed:"40 ft",Carrying:"195 lb"}},
   {name:"Carriage",cost:"100 gp",baseCost:10000,note:"",details:{Weight:"600 lb"}},
   {name:"Wagon",cost:"35 gp",baseCost:3500,note:"",details:{Weight:"400 lb"}},
-  {name:"Saddle — riding",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"25 lb"}},
+  {name:"Saddle, riding",cost:"10 gp",baseCost:1000,note:"",details:{Weight:"25 lb"}},
   {name:"Saddlebags",cost:"4 gp",baseCost:400,note:"",details:{Weight:"8 lb"}},
   {name:"Feed (per day)",cost:"5 cp",baseCost:5,note:"per day",details:{}},
   {name:"Stabling (per day)",cost:"5 sp",baseCost:50,note:"per day",details:{}},
@@ -490,229 +697,281 @@ const data={
 ],
 };
 
+/* ── Rules for what can be sold, and how quantity is labelled ── */
+const UNSELLABLE_CATS=['Services','Tavern'];
+function isSellable(item){return !UNSELLABLE_CATS.includes(item._cat)&&item.note!=='service';}
+function isPriceless(item){return item.cost==='Priceless';}
+function hasPrice(item){return item.baseCost!==null&&item.baseCost!==undefined;}
+function qtyLabel(item){
+  const n=(item.note||'').toLowerCase();
+  if(n.includes('per day'))return'Days';
+  if(n.includes('per mile'))return'Miles';
+  return'Quantity';
+}
+
+const CATS=['All',...Object.keys(data)];
+function itemsIn(cat){
+  if(cat==='All'){const a=[];Object.entries(data).forEach(([c,items])=>items.forEach(i=>a.push({...i,_cat:c})));return a;}
+  return (data[cat]||[]).map(i=>({...i,_cat:cat}));
+}
+function tradeable(items){return S.mode==='buy'?items:items.filter(isSellable);}
+
 function badgeHtml(rarity,big){
   if(!rarity)return'';
-  const cls=RB[rarity]||'r-common';
-  return'<span class="rbadge '+cls+'"'+(big?' style="padding:3px 10px;font-size:10px;"':'')+'>'+rarity+'</span>';
+  return'<span class="rbadge '+(RB[rarity]||'r-common')+(big?' big':'')+'">'+rarity+'</span>';
+}
+const DICE_SVG='<svg viewBox="0 0 100 100" width="24" height="24"><polygon points="32,38 68,38 50,5" fill="#e8cd7e"/><polygon points="32,38 50,5 11,27" fill="#b89a40"/><polygon points="68,38 50,5 89,27" fill="#c9a84c"/><polygon points="32,38 68,38 50,72" fill="#d4b560"/><polygon points="32,38 50,72 11,72" fill="#96802e"/><polygon points="68,38 50,72 89,72" fill="#a89038"/><polygon points="32,38 11,72 11,27" fill="#7a6628"/><polygon points="68,38 89,72 89,27" fill="#8a7530"/><polygon points="50,72 11,72 50,95" fill="#6a5820"/><polygon points="50,72 89,72 50,95" fill="#7a6628"/></svg>';
+const BUY_ICON=document.querySelector('.mode-btn[data-mode="buy"] .mode-ico').innerHTML;
+const SELL_ICON=document.querySelector('.mode-btn[data-mode="sell"] .mode-ico').innerHTML;
+
+/* ── State ── */
+const S={mode:'buy',cat:'All',q:'',item:null,qty:1,cha:0,raw:null,customGp:'',notice:''};
+
+const el=id=>document.getElementById(id);
+const catsEl=el('cats'),listEl=el('list'),searchEl=el('search'),detailEl=el('detail'),scrollEl=el('detailScroll');
+const narrow=()=>window.matchMedia('(max-width:759px)').matches;
+
+/* Keep the sticky offsets in step with the real header height */
+function syncHeader(){document.documentElement.style.setProperty('--hh',el('topbar').offsetHeight+'px');}
+new ResizeObserver(syncHeader).observe(el('topbar'));
+syncHeader();
+
+/* ── Categories ── */
+function renderCats(){
+  const visible=CATS.filter(c=>tradeable(itemsIn(c)).length>0);
+  if(!visible.includes(S.cat))S.cat='All';
+  catsEl.innerHTML='<div class="side-label">Categories</div>'+visible.map(c=>{
+    const n=tradeable(itemsIn(c)).length;
+    return'<button type="button" class="cat'+(c===S.cat?' active':'')+'" data-cat="'+c+'"><span>'+(c==='All'?'All wares':c)+'</span><span class="cat-n">'+n+'</span></button>';
+  }).join('');
+}
+catsEl.addEventListener('click',e=>{
+  const b=e.target.closest('.cat');if(!b)return;
+  S.cat=b.dataset.cat;S.q='';searchEl.value='';
+  searchEl.placeholder=S.cat==='All'?"Search the merchant's wares...":'Search '+S.cat.toLowerCase()+'...';
+  renderCats();renderList();
+  b.blur();
+  const active=catsEl.querySelector('.cat.active');if(active)active.scrollIntoView({block:'nearest',inline:'center'});
+});
+
+/* ── List ── */
+let shown=[];
+function renderList(){
+  el('catLabel').textContent=S.cat==='All'?'All wares':S.cat;
+  const q=S.q.trim().toLowerCase();
+  shown=tradeable(itemsIn(S.cat)).filter(i=>!q||i.name.toLowerCase().includes(q));
+  el('count').textContent=shown.length+(shown.length===1?' item':' items');
+  if(!shown.length){listEl.innerHTML='<div class="empty-list">Nothing on the shelves matches that.</div>';return;}
+  listEl.innerHTML=shown.map((it,i)=>{
+    const sel=S.item&&S.item._cat===it._cat&&S.item.name===it.name;
+    const cat=S.cat==='All'?'<span class="row-cat">'+it._cat+'</span>':'';
+    return'<button type="button" class="row'+(sel?' sel':'')+'" data-i="'+i+'">'+
+      '<span class="row-main"><span class="row-name">'+it.name+'</span><span class="row-meta">'+cat+badgeHtml(it.rarity,false)+'</span></span>'+
+      '<span class="row-price">'+it.cost+(it.note?'<small>'+it.note+'</small>':'')+'</span></button>';
+  }).join('');
+}
+listEl.addEventListener('click',e=>{
+  const r=e.target.closest('.row');if(!r)return;
+  selectItem(shown[+r.dataset.i]);
+});
+searchEl.addEventListener('input',()=>{S.q=searchEl.value;renderList();});
+
+function selectItem(item){
+  S.item=item;S.qty=1;S.raw=null;S.customGp='';S.notice='';
+  listEl.querySelectorAll('.row').forEach(r=>r.classList.toggle('sel',shown[+r.dataset.i]===item));
+  renderDetail();
+  scrollEl.scrollTop=0;
+  if(narrow())openSheet();
 }
 
-function buildItemCardHtml(item,s){
-  let craftHtml='';
-  if(item.rarity&&CRAFT[item.rarity]){
-    const c=CRAFT[item.rarity];
-    craftHtml=`<div class="craft-box"><div class="craft-title">⚗ Crafting — DMG rules</div><div class="craft-row"><span class="craft-stat">Time: <span>${c.days} days</span></span><span class="craft-stat">Materials: <span>${c.cost}</span></span><span class="craft-stat">Needs: <span>Arcana prof.</span></span></div></div>`;
-  }else if(item.rarity==='Artifact'){
-    craftHtml=`<div class="craft-box"><div class="craft-title">⚗ Crafting</div><div class="craft-row"><span class="craft-stat">Artifacts cannot be crafted — ancient and unique.</span></div></div>`;
+/* ── Mobile sheet ── */
+function openSheet(){detailEl.classList.add('open');document.documentElement.classList.add('sheet-open');}
+function closeSheet(){detailEl.classList.remove('open');document.documentElement.classList.remove('sheet-open');}
+el('closeSheet').addEventListener('click',closeSheet);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheet();el('currency').open=false;}});
+document.addEventListener('click',e=>{if(!e.target.closest('#currency'))el('currency').open=false;});
+
+/* ── Detail ── */
+function renderDetail(){
+  const buy=S.mode==='buy';
+  el('sheetMode').textContent=buy?'Buying':'Selling';
+  const it=S.item;
+  if(!it){
+    scrollEl.innerHTML='<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h6M8 11h6"/></svg>'+
+      '<h2>'+(buy?'What are they buying?':'What are you selling?')+'</h2>'+
+      '<p>Pick an item from the ledger to see its market value and haggle a price.</p>'+
+      (S.notice?'<div class="notice">'+S.notice+'</div>':'')+'</div>';
+    return;
   }
-  const detHtml=Object.entries(item.details).map(([k,v])=>`<div class="detail-cell"><div class="detail-label">${k}</div><div class="detail-val">${v}</div></div>`).join('');
-  return`<div class="item-card">
-    <div class="item-top"><div class="item-name">${item.name}</div>${badgeHtml(item.rarity,true)}</div>
-    <div class="item-cat">✦ ${item._cat||''} ✦</div>
-    ${item.img?`<img src="${item.img}" alt="${item.name}" class="item-img" onerror="this.style.display='none'"/>`:''}
-    <div class="cost-row"><span class="cost-big">${item.cost}</span><span class="cost-note">${item.note||''}</span></div>
-    ${detHtml?'<div class="details-grid">'+detHtml+'</div>':''}
-    ${craftHtml}
-    <div class="divider"></div>
-    <div class="sec-label">Calculate price</div>
-    <div class="calc-grid">
-      <div class="field-group"><span class="field-label">Quantity</span><input type="number" class="field-input" id="qty${s}" value="1" min="1" inputmode="numeric"/></div>
-      <div class="field-group"><span class="field-label">CHARISMA modifier</span><div class="stepper"><button type="button" class="step-btn" id="chaDec${s}">−</button><input type="number" class="field-input stepper-input" id="cha${s}" value="0" min="-5" max="10" inputmode="numeric"/><button type="button" class="step-btn" id="chaInc${s}">+</button></div></div>
-    </div>
-    <div class="sec-label">Reputation & bartering</div>
-    <div class="roll-btns">
-      <button class="roll-btn" id="rollBtn${s}"><span id="dice${s}" style="display:inline-flex;align-items:center;line-height:0;"><svg viewBox="0 0 100 100" width="20" height="20"><polygon points="32,38 68,38 50,5" fill="#e8cd7e"/><polygon points="32,38 50,5 11,27" fill="#b89a40"/><polygon points="68,38 50,5 89,27" fill="#c9a84c"/><polygon points="32,38 68,38 50,72" fill="#d4b560"/><polygon points="32,38 50,72 11,72" fill="#96802e"/><polygon points="68,38 50,72 89,72" fill="#a89038"/><polygon points="32,38 11,72 11,27" fill="#7a6628"/><polygon points="68,38 89,72 89,27" fill="#8a7530"/><polygon points="50,72 11,72 50,95" fill="#6a5820"/><polygon points="50,72 89,72 50,95" fill="#7a6628"/><text x="50" y="62" text-anchor="middle" dominant-baseline="middle" font-size="26" font-weight="800" fill="#1a1410" font-family="Cinzel,serif"></text></svg></span> Roll d20</button>
-      <input type="number" class="roll-manual" id="manual${s}" min="1" max="20" placeholder="—" inputmode="numeric"/>
-    </div>
-    <div class="rep-display" id="rep${s}">
-      <div><div class="rep-name" id="repName${s}"></div><div class="rep-desc" id="repDesc${s}"></div></div>
-      <div class="rep-mod" id="repMod${s}"></div>
-    </div>
-    <div class="total-row">
-      <div><div class="total-label">Final price</div><div class="total-sub" id="tsub${s}"></div></div>
-      <div class="total-val" id="tval${s}">—</div>
-    </div>
-  </div>`;
+  const details=Object.entries(it.details||{}).filter(([k])=>k!=='Rarity');
+  const stats=details.map(([k,v])=>'<div class="stat"><div class="label">'+k+'</div><div class="stat-v">'+v+'</div></div>').join('');
+
+  /* Crafting rules only make sense for magic items. Ingredients are materials, not crafted goods. */
+  let craft='';
+  if(it._cat==='Magic Items'&&!isPriceless(it)){
+    if(CRAFT[it.rarity]){
+      const c=CRAFT[it.rarity];
+      craft='<div class="craft"><div class="label">⚗ Crafting, DMG rules</div><div class="craft-row"><span>Time: <b>'+c.days+' days</b></span><span>Materials: <b>'+c.cost+'</b></span><span>Needs: <b>Arcana proficiency</b></span></div></div>';
+    }else if(it.rarity==='Artifact'){
+      craft='<div class="craft"><div class="label">⚗ Crafting</div><div class="craft-row"><span>Artifacts cannot be crafted. They are ancient and unique.</span></div></div>';
+    }
+  }
+
+  const priced=hasPrice(it);
+  const needsBase=!priced&&!isPriceless(it);
+  const ql=qtyLabel(it);
+
+  scrollEl.innerHTML=
+  '<article class="card">'+
+    '<div class="mode-banner"><span class="mode-ico">'+(buy?BUY_ICON:SELL_ICON)+'</span><div>'+
+      '<strong>'+(buy?'Buying from the merchant':'Selling to the merchant')+'</strong>'+
+      '<span>'+(buy?'The merchant names the price. Reputation can push it above or below market value.':'The merchant makes an offer. The best you can expect is market value, and only a natural 20 beats it.')+'</span>'+
+    '</div></div>'+
+    '<div class="eyebrow">✦ '+it._cat+' ✦</div>'+
+    '<div class="title-row"><h2>'+it.name+'</h2>'+badgeHtml(it.rarity,true)+'</div>'+
+    (it.img?'<img src="'+it.img+'" alt="'+it.name.replace(/"/g,'&quot;')+'" class="item-img" onerror="this.style.display=\'none\'">':'')+
+    '<div class="top-grid'+(stats?'':'" style="grid-template-columns:1fr')+'">'+
+      '<div class="market"><div class="label">Market value</div><div class="market-val">'+it.cost+'</div>'+(it.note?'<div class="market-note">'+it.note+'</div>':'')+'</div>'+
+      (stats?'<div class="stats">'+stats+'</div>':'')+
+    '</div>'+
+    craft+
+    '<div class="section">'+
+      '<div class="section-h"><h3>'+(buy?'Haggle the price':'Haggle the offer')+'</h3><span>d20 + Charisma</span></div>'+
+      '<div class="inputs'+(needsBase?' three':'')+'">'+
+        (needsBase?'<div><div class="label">Agreed base price (gp)</div><input type="number" class="plain-input" id="baseGp" min="0" step="0.01" inputmode="decimal" placeholder="Set by DM" value="'+S.customGp+'"></div>':'')+
+        '<div><div class="label">'+ql+'</div><div class="stepper"><button type="button" data-step="qty" data-d="-1" aria-label="Decrease">−</button><input type="number" id="qty" value="'+S.qty+'" min="1" inputmode="numeric"><button type="button" data-step="qty" data-d="1" aria-label="Increase">+</button></div></div>'+
+        '<div><div class="label">Charisma modifier</div><div class="stepper"><button type="button" data-step="cha" data-d="-1" aria-label="Decrease">−</button><input type="number" id="cha" value="'+S.cha+'" min="-5" max="10" inputmode="numeric"><button type="button" data-step="cha" data-d="1" aria-label="Increase">+</button></div></div>'+
+      '</div>'+
+      '<div class="roll-line">'+
+        '<button type="button" class="roll-btn" id="rollBtn"'+(isPriceless(it)?' disabled':'')+'><span class="dice" id="dice">'+DICE_SVG+'</span>Roll d20</button>'+
+        '<label class="manual"><span>or enter roll</span><input type="number" id="manual" min="1" max="20" placeholder="–" inputmode="numeric" value="'+(S.raw??'')+'"'+(isPriceless(it)?' disabled':'')+'></label>'+
+      '</div>'+
+      '<div class="tier" id="tier"><div><div class="tier-name" id="tierName"></div><div class="tier-desc" id="tierDesc"></div></div><div class="tier-mod" id="tierMod"></div></div>'+
+      '<div class="outcome" id="outcome"><div><div class="out-label" id="outLabel"></div><div class="out-sub" id="outSub"></div></div><div><div class="out-val" id="outVal">–</div><div class="out-diff" id="outDiff"></div></div></div>'+
+      '<div class="breakdown" id="breakdown"></div>'+
+      '<details class="ref"><summary>'+(buy?'Buying':'Selling')+' reputation table</summary><table id="refTable"></table>'+
+        '<p>'+(buy?'Total = d20 + Charisma modifier, capped between 1 and 20.':'Total = d20 + Charisma modifier, capped between 1 and 20. A modified 20 earns full value. Only a natural 20 on the die earns more.')+'</p></details>'+
+    '</div>'+
+  '</article>';
+
+  wireDetail();
+  updateCalc();
 }
 
-function wireCard(item,s){
-  let curRoll=null;
-  function upd(){
-    const qty=Math.max(1,parseInt(document.getElementById('qty'+s).value)||1);
-    const tv=document.getElementById('tval'+s);
-    const ts=document.getElementById('tsub'+s);
-    if(item.baseCost===null||item.baseCost===undefined){tv.textContent=item.cost;ts.textContent='';return;}
-    const mult=curRoll!==null?getTier(curRoll).mult:1.0;
-    const fin=Math.round(item.baseCost*qty*mult);
-    tv.textContent=cpToDisplay(fin);
-    const p=[];
-    if(qty>1)p.push(qty+'× base');
-    if(mult!==1.0)p.push((mult>1?'+':'')+Math.round((mult-1)*100)+'% reputation');
-    ts.textContent=p.join(' · ');
-  }
-  function applyRoll(raw){
-    const mod=parseInt(document.getElementById('cha'+s).value)||0;
-    const eff=Math.max(1,Math.min(20,raw+mod));
-    curRoll=eff;
-    const t=getTier(eff);
-    const rd=document.getElementById('rep'+s);
-    rd.style.display='flex';rd.style.background=t.bg;rd.style.borderColor='rgba(201,168,76,0.2)';
-    const rn=document.getElementById('repName'+s);rn.textContent=t.name;rn.style.color=t.nc;
-    const rdesc=document.getElementById('repDesc'+s);
-    rdesc.textContent='Roll: '+raw+(mod!==0?' ('+raw+(mod>=0?'+':'')+mod+'='+eff+')':'')+' — '+t.desc;
-    rdesc.style.color=t.dc;
-    const rm=document.getElementById('repMod'+s);rm.textContent=t.ml;rm.style.color=t.nc;
-    upd();
-  }
-  document.getElementById('rollBtn'+s).addEventListener('click',()=>{
+function wireDetail(){
+  const qty=el('qty'),cha=el('cha'),manual=el('manual'),base=el('baseGp');
+  scrollEl.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{
+    const d=+b.dataset.d;
+    if(b.dataset.step==='qty'){S.qty=Math.max(1,(parseInt(qty.value)||1)+d);qty.value=S.qty;}
+    else{S.cha=Math.max(-5,Math.min(10,(parseInt(cha.value)||0)+d));cha.value=S.cha;}
+    updateCalc();
+  }));
+  qty.addEventListener('input',()=>{S.qty=Math.max(1,parseInt(qty.value)||1);updateCalc();});
+  cha.addEventListener('input',()=>{S.cha=Math.max(-5,Math.min(10,parseInt(cha.value)||0));updateCalc();});
+  manual.addEventListener('input',()=>{
+    const v=parseInt(manual.value);
+    S.raw=(v>=1&&v<=20)?v:null;
+    updateCalc(true);
+  });
+  if(base)base.addEventListener('input',()=>{S.customGp=base.value;updateCalc();});
+  el('rollBtn').addEventListener('click',()=>{
     const raw=Math.ceil(Math.random()*20);
-    const ic=document.getElementById('dice'+s);
-    ic.classList.remove('spin');void ic.offsetWidth;ic.classList.add('spin');
-    setTimeout(()=>ic.classList.remove('spin'),400);
-    document.getElementById('manual'+s).value=raw;
-    applyRoll(raw);
-  });
-  document.getElementById('manual'+s).addEventListener('input',()=>{
-    const v=parseInt(document.getElementById('manual'+s).value);
-    if(v>=1&&v<=20)applyRoll(v);
-  });
-  document.getElementById('cha'+s).addEventListener('input',()=>{
-    if(document.getElementById('manual'+s).value)applyRoll(parseInt(document.getElementById('manual'+s).value)||1);
-  });
-  document.getElementById('chaDec'+s).addEventListener('click',()=>{
-    const inp=document.getElementById('cha'+s);
-    inp.value=Math.max(-5,(parseInt(inp.value)||0)-1);
-    inp.dispatchEvent(new Event('input'));
-  });
-  document.getElementById('chaInc'+s).addEventListener('click',()=>{
-    const inp=document.getElementById('cha'+s);
-    inp.value=Math.min(10,(parseInt(inp.value)||0)+1);
-    inp.dispatchEvent(new Event('input'));
-  });
-  document.getElementById('qty'+s).addEventListener('input',upd);
-  upd();
-}
-
-const allCats=['All','Ingredients',...Object.keys(data).filter(k=>k!=='Ingredients')];
-function getAllItems(){const a=[];Object.entries(data).forEach(([c,items])=>items.forEach(i=>a.push({...i,_cat:c})));return a;}
-function getItems(cat){return cat==='All'?getAllItems():(data[cat]||[]).map(i=>({...i,_cat:cat}));}
-
-/* ── DESKTOP ── */
-let dsActiveCat='All';
-const dsCatList=document.getElementById('dsCatList');
-const dsCatLabel=document.getElementById('dsCatLabel');
-const dsSearchInput=document.getElementById('dsSearchInput');
-const dsResultsList=document.getElementById('dsResultsList');
-const dsDetailPanel=document.getElementById('dsDetailPanel');
-const dsEmpty=document.getElementById('dsEmpty');
-const dsItemCard=document.getElementById('dsItemCard');
-
-allCats.forEach(cat=>{
-  const btn=document.createElement('button');
-  btn.className='cat-list-btn'+(cat==='All'?' active':'');
-  btn.textContent=cat;
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.cat-list-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    dsActiveCat=cat;
-    dsCatLabel.textContent=cat==='All'?'All items':cat;
-    dsSearchInput.value='';
-    dsSearchInput.placeholder=cat==='All'?'Search all items...':'Search '+cat.toLowerCase()+'...';
-    dsRenderList('');
-    dsClearDetail();
-  });
-  dsCatList.appendChild(btn);
-});
-
-function dsRenderList(q){
-  const items=getItems(dsActiveCat);
-  const filtered=q?items.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())):items;
-  dsResultsList.innerHTML='';
-  if(!filtered.length){dsResultsList.innerHTML='<div class="no-results">No items found.</div>';return;}
-  filtered.forEach(item=>{
-    const div=document.createElement('div');div.className='ds-drop-item';
-    const badge=item.rarity?badgeHtml(item.rarity,false):'';
-    const catTag=dsActiveCat==='All'?'<span style="font-family:Cinzel,serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.05em;">'+item._cat+'</span>':'';
-    div.innerHTML='<span class="dn">'+item.name+'</span><span class="dm"><span style="font-size:12px;color:var(--gd);font-style:italic;">'+item.cost+'</span>'+catTag+badge+'</span>';
-    div.addEventListener('click',()=>dsSelectItem(item,div));
-    dsResultsList.appendChild(div);
+    const d=el('dice');d.classList.remove('spin');void d.offsetWidth;d.classList.add('spin');
+    manual.value=raw;S.raw=raw;updateCalc(true);
   });
 }
 
-function dsSelectItem(item,el){
-  document.querySelectorAll('.ds-drop-item').forEach(d=>d.classList.remove('sel'));
-  if(el)el.classList.add('sel');
-  dsEmpty.style.display='none';
-  dsItemCard.style.display='block';
-  dsItemCard.innerHTML=buildItemCardHtml(item,'_ds');
-  wireCard(item,'_ds');
-  dsDetailPanel.scrollTop=0;
-}
+function updateCalc(animate){
+  const it=S.item;if(!it)return;
+  const buy=S.mode==='buy';
+  const outLabel=el('outLabel'),outSub=el('outSub'),outVal=el('outVal'),outDiff=el('outDiff'),bd=el('breakdown'),tierEl=el('tier');
 
-function dsClearDetail(){
-  dsEmpty.style.display='flex';dsItemCard.style.display='none';dsItemCard.innerHTML='';
-}
-
-dsSearchInput.addEventListener('input',e=>dsRenderList(e.target.value));
-dsRenderList('');
-
-/* ── MOBILE ── */
-let mobActiveCat='All';
-const mobCatGrid=document.getElementById('mobCatGrid');
-const mobSearchArea=document.getElementById('mobSearchArea');
-const mobSearchInput=document.getElementById('mobSearchInput');
-const mobDropdown=document.getElementById('mobDropdown');
-const mobItemCard=document.getElementById('mobItemCard');
-
-allCats.forEach(cat=>{
-  const btn=document.createElement('button');
-  btn.className='cat-btn'+(cat==='All'?' active':'');
-  btn.textContent=cat;
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    mobActiveCat=cat;
-    mobSearchArea.style.display='block';
-    mobSearchInput.value='';
-    mobSearchInput.placeholder=cat==='All'?'Search the merchant\'s wares...':'Search '+cat.toLowerCase()+'...';
-    mobDropdown.classList.remove('open');
-    mobItemCard.style.display='none';mobItemCard.innerHTML='';
-    mobShowDropdown('');
-  });
-  mobCatGrid.appendChild(btn);
-});
-
-function mobShowDropdown(q){
-  const items=getItems(mobActiveCat);
-  const filtered=q?items.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())):items;
-  mobDropdown.innerHTML='';
-  if(!filtered.length){mobDropdown.innerHTML='<div class="no-results">No items found.</div>';return;}
-  filtered.slice(0,80).forEach(item=>{
-    const div=document.createElement('div');div.className='drop-item';
-    const badge=item.rarity?badgeHtml(item.rarity,false):'';
-    const catTag=mobActiveCat==='All'?'<span style="font-family:Cinzel,serif;font-size:9px;color:var(--if);text-transform:uppercase;letter-spacing:0.05em;">'+item._cat+'</span>':'';
-    div.innerHTML='<span class="drop-name">'+item.name+'</span><span style="display:flex;align-items:center;gap:5px;flex-shrink:0;"><span style="font-size:12px;color:var(--gd);font-style:italic;">'+item.cost+'</span>'+catTag+badge+'</span>';
-    div.addEventListener('touchstart',e=>{e.preventDefault();mobSelectItem(item);},{passive:false});
-    div.addEventListener('mousedown',e=>{e.preventDefault();mobSelectItem(item);});
-    mobDropdown.appendChild(div);
-  });
-  if(filtered.length>80){
-    const m=document.createElement('div');m.className='no-results';
-    m.textContent='+'+(filtered.length-80)+' more — narrow your search';
-    mobDropdown.appendChild(m);
+  let total=null,tier=null;
+  if(S.raw!==null){
+    total=Math.max(1,Math.min(20,S.raw+S.cha));
+    tier=getTier(S.mode,total,S.raw);
   }
-  mobDropdown.classList.add('open');
+
+  /* Tier banner */
+  if(tier){
+    const t=TONE[tier.tone];
+    tierEl.classList.add('show');
+    tierEl.style.background=t.bg;tierEl.style.borderColor=t.c+'55';
+    el('tierName').textContent=tier.name;el('tierName').style.color=t.c;
+    const chaTxt=S.cha!==0?' '+(S.cha>0?'+ ':'− ')+Math.abs(S.cha)+' CHA = '+total:'';
+    el('tierDesc').textContent='Rolled '+S.raw+chaTxt+'. '+tier.desc+'.';
+    el('tierMod').textContent=buy?tier.ml:tier.ml+' of market';el('tierMod').style.color=t.c;
+    if(animate){tierEl.classList.remove('pop');void tierEl.offsetWidth;tierEl.classList.add('pop');}
+  }else tierEl.classList.remove('show');
+
+  /* Reference table */
+  const rows=tiersFor(S.mode).map(t=>({range:t.min===t.max?String(t.min):t.min+'–'+t.max,t}));
+  if(!buy)rows.push({range:'Nat 20',t:SELL_NAT20});
+  el('refTable').innerHTML=rows.map(r=>'<tr class="'+(tier===r.t?'on':'')+'"><td>'+r.range+'</td><td style="color:'+TONE[r.t.tone].c+'">'+r.t.name+'</td><td style="color:'+TONE[r.t.tone].c+'">'+(buy?r.t.ml:r.t.ml+' of market')+'</td></tr>').join('');
+
+  /* Priceless items */
+  if(isPriceless(it)){
+    outLabel.textContent=buy?'Price':'Offer';
+    outSub.textContent=buy?'No merchant can name a price for this.':'No merchant could afford this.';
+    outVal.textContent='Priceless';outDiff.textContent='';bd.innerHTML='';
+    return;
+  }
+
+  let unit=hasPrice(it)?it.baseCost:null;
+  if(unit===null&&S.customGp!==''&&!isNaN(parseFloat(S.customGp)))unit=Math.round(parseFloat(S.customGp)*100);
+  if(unit===null){
+    outLabel.textContent='Awaiting a base price';
+    outSub.textContent='The listed price is '+it.cost+'. Enter the agreed base price to haggle.';
+    outVal.textContent='–';outDiff.textContent='';bd.innerHTML='';
+    return;
+  }
+
+  const market=unit*S.qty;
+  const qtyLine=S.qty>1?'<div><span>Market value ('+S.qty+' × '+fmt(unit)+')</span><b>'+fmt(market)+'</b></div>':'<div><span>Market value</span><b>'+fmt(market)+'</b></div>';
+
+  if(!tier){
+    outLabel.textContent='Market value';
+    outSub.textContent=buy?'Roll to see what the merchant charges.':'Roll to see what the merchant offers.';
+    outVal.textContent=fmt(market);outDiff.textContent='';
+    bd.innerHTML=S.qty>1?qtyLine:'';
+    return;
+  }
+
+  const final=Math.round(market*tier.mult);
+  const diff=final-market;
+  outLabel.textContent=buy?'Party pays':'Merchant pays the party';
+  outSub.textContent=tier.name;
+  outVal.textContent=fmt(final);
+  if(animate){outVal.classList.remove('pop');void outVal.offsetWidth;outVal.classList.add('pop');}
+
+  /* Green means good for the party: paying less when buying, receiving more when selling */
+  const goodForParty=buy?diff<0:diff>0;
+  if(diff===0){outDiff.textContent='Exactly market value';outDiff.style.color='var(--muted)';}
+  else{
+    outDiff.textContent=(diff>0?'+':'−')+fmt(Math.abs(diff))+(diff>0?' above':' below')+' market';
+    outDiff.style.color=goodForParty?TONE.good.c:TONE.bad3.c;
+  }
+  bd.innerHTML=qtyLine+
+    '<div><span>'+(buy?'Reputation adjustment':'Share of market value')+'</span><b>'+(buy?tier.ml:tier.ml)+'</b></div>'+
+    '<div><span>'+(buy?'Final price':'Final offer')+'</span><b>'+fmt(final)+'</b></div>';
 }
 
-function mobSelectItem(item){
-  mobSearchInput.value=item.name;
-  mobDropdown.classList.remove('open');
-  mobItemCard.style.display='block';
-  mobItemCard.innerHTML=buildItemCardHtml(item,'_mob');
-  wireCard(item,'_mob');
-  mobItemCard.scrollIntoView({behavior:'smooth',block:'start'});
+/* ── Mode toggle ── */
+function setMode(mode){
+  if(mode===S.mode)return;
+  S.mode=mode;document.body.dataset.mode=mode;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+  S.notice='';
+  if(mode==='sell'&&S.item&&!isSellable(S.item)){
+    S.notice=S.item.name+' cannot be sold back to a merchant, so it has been cleared.';
+    S.item=null;S.raw=null;closeSheet();
+  }
+  renderCats();renderList();renderDetail();
 }
+document.querySelectorAll('.mode-btn').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 
-mobSearchInput.addEventListener('input',e=>mobShowDropdown(e.target.value));
-mobSearchInput.addEventListener('focus',()=>mobShowDropdown(mobSearchInput.value));
-document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))mobDropdown.classList.remove('open');});
+/* ── Boot ── */
+renderCats();renderList();renderDetail();
 </script>
+</body>
+</html>
