@@ -169,7 +169,7 @@ body[data-mode="sell"] .sell-hint{display:block;}
 
 /* ── Detail ────────────────────────────────── */
 .detail{min-height:0;display:flex;flex-direction:column;}
-.sheet-bar{display:none;}
+.sheet-bar,.sheet-foot{display:none;}
 .detail-scroll{flex:1;overflow-y:auto;padding:28px;}
 .empty-state{height:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;color:var(--faint);padding:30px;}
 .empty-state svg{width:54px;height:54px;color:var(--gold-d);}
@@ -321,9 +321,14 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   }
   .detail.open{transform:none;visibility:visible;}
   .sheet-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg2);}
-  .back-btn{display:flex;align-items:center;gap:6px;background:none;border:0;font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);padding:6px 0;}
+  .back-btn{display:flex;align-items:center;gap:8px;min-height:42px;padding:0 16px 0 10px;background:var(--panel2);border:1px solid var(--line2);border-radius:22px;font-family:var(--display);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);}
+  .back-btn:active{background:var(--accent-mid);}
+  .sheet-foot{display:block;padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:var(--bg2);box-shadow:0 -8px 20px rgba(0,0,0,.4);}
+  .foot-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:50px;border-radius:12px;background:var(--panel2);border:1px solid var(--line2);font-family:var(--display);font-size:13.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-l);}
+  .foot-btn:active{background:var(--accent-mid);}
+  .foot-btn svg{width:18px;height:18px;}
   .sheet-mode{font-family:var(--display);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-l);border:1px solid var(--accent);border-radius:20px;padding:3px 10px;}
-  .detail-scroll{padding:16px 14px calc(28px + env(safe-area-inset-bottom));}
+  .detail-scroll{padding:16px 14px 24px;}
   .title-row h2{font-size:23px;}
   .top-grid{grid-template-columns:1fr;}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -392,6 +397,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <span class="sheet-mode" id="sheetMode">Buying</span>
     </div>
     <div class="detail-scroll" id="detailScroll"></div>
+    <div class="sheet-foot"><button type="button" class="foot-btn" id="footBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Back to search</button></div>
   </section>
 </div>
 
@@ -785,9 +791,19 @@ function selectItem(item){
 }
 
 /* ── Mobile sheet ── */
-function openSheet(){detailEl.classList.add('open');document.documentElement.classList.add('sheet-open');}
-function closeSheet(){detailEl.classList.remove('open');document.documentElement.classList.remove('sheet-open');}
+/* Opening an item adds a history entry, so the phone's back button or back swipe returns to the list */
+function openSheet(){
+  if(!detailEl.classList.contains('open'))history.pushState({sheet:true},'');
+  detailEl.classList.add('open');document.documentElement.classList.add('sheet-open');
+}
+function hideSheet(){detailEl.classList.remove('open');document.documentElement.classList.remove('sheet-open');}
+function closeSheet(){
+  if(!detailEl.classList.contains('open'))return;
+  if(history.state&&history.state.sheet)history.back();else hideSheet();
+}
+window.addEventListener('popstate',hideSheet);
 el('closeSheet').addEventListener('click',closeSheet);
+el('footBack').addEventListener('click',closeSheet);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheet();el('currency').open=false;}});
 document.addEventListener('click',e=>{if(!e.target.closest('#currency'))el('currency').open=false;});
 
